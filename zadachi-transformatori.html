@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи: Трансформаторы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 18px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .tasks-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+        
+        .task-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .task-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        
+        .task-question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .task-answer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .answer-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .check-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .check-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .solution-btn {
+            background: transparent;
+            border: none;
+            color: #3498db;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .solution-btn:hover {
+            text-decoration: underline;
+        }
+        
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4fc;
+            border-radius: 6px;
+            border-left: 3px solid #3498db;
+            display: none;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        
+        .results-icon {
+            font-size: 64px;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .score-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .score-text {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .tasks-container {
+                padding: 20px;
+            }
+            
+            .task-question {
+                font-size: 16px;
+            }
+            
+            .task-answer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .check-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div class="logo">Электро<span>Техника</span></div>
+                <div class="subject">Задачи по электротехнике</div>
+                <nav id="mainNav">
+                    <a href="index.html" class="nav-btn">Главная</a>
+                    <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
+                    <a href="tests.html" class="nav-btn active">Тесты</a>
+                    <a href="#" class="nav-btn">Приложения</a>
+                    <a href="#" class="nav-btn">Видео</a>
+                    <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                    <a href="#" class="nav-btn">Литература</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Исправленная кнопка "Назад" - теперь ведет на tests.html -->
+        <a href="tests.html" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к тестам</a>
+        
+        <div class="tasks-container">
+            <h2 class="task-title">Задачи по трансформаторам</h2>
+            
+            <!-- Задача 1 -->
+            <div class="task-item" id="task1">
+                <div class="task-question">
+                    1. Найти число витков вторичной обмотки трансформатора, если при максимальном магнитном потоке в магнитопроводе 0,001 Вб и частоте тока в сети 50 Гц в обмотке наводится ЭДС, равная 220 В.
+                </div>
+                <div class="task-answer">
+                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+                    <button class="check-btn" onclick="checkAnswer(1)"><i class="fas fa-check"></i> Проверить</button>
+                </div>
+                <div class="result" id="result1"></div>
+                <button class="solution-btn" onclick="toggleSolution(1)"><i class="fas fa-lightbulb"></i> Показать решение</button>
+                <div class="solution" id="solution1">
+                    <p><strong>Решение:</strong></p>
+                    <p>Формула для ЭДС: E = 4.44 * f * Ф * N</p>
+                    <p>Отсюда N = E / (4.44 * f * Ф)</p>
+                    <p>N = 220 / (4.44 * 50 * 0.001) = 220 / 0.222 = 990 витков</p>
+                    <p><strong>Ответ: 990 витков</strong></p>
+                </div>
+            </div>
+            
+            <!-- Задача 2 -->
+            <div class="task-item" id="task2">
+                <div class="task-question">
+                    2. Определить коэффициент трансформации однофазного трансформатора, если амплитуда магнитной индукции в нем 0,8 Тл; сечение магнитопровода 11,5 см³; витков вторичной обмотки 18. Трансформатор включен в сеть напряжением 220 В и частотой 50 Гц.
+                </div>
+                <div class="task-answer">
+                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+                    <button class="check-btn" onclick="checkAnswer(2)"><i class="fas fa-check"></i> Проверить</button>
+                </div>
+                <div class="result" id="result2"></div>
+                <button class="solution-btn" onclick="toggleSolution(2)"><i class="fas fa-lightbulb"></i> Показать решение</button>
+                <div class="solution" id="solution2">
+                    <p><strong>Решение:</strong></p>
+                    <p>Сначала найдем число витков первичной обмотки:</p>
+                    <p>N₁ = U₁ / (4.44 * f * B * S)</p>
+                    <p>N₁ = 220 / (4.44 * 50 * 0.8 * 11.5*10⁻⁶) = 220 / (4.44 * 50 * 0.8 * 0.0000115) ≈ 1078 витков</p>
+                    <p>Коэффициент трансформации: k = N₁ / N₂ = 1078 / 18 ≈ 60</p>
+                    <p><strong>Ответ: 60</strong></p>
+                </div>
+            </div>
+            
+            <!-- Задача 3 -->
+            <div class="task-item" id="task3">
+                <div class="task-question">
+                    3. Трансформатор с номинальной мощностью 10 кВА имеет номинальное вторичное напряжение 400 В. Найти полезную мощность, если при коэффициенте мощности 0,86 вторичный ток составил 24 А. Потерями в трансформаторе пренебречь.
+                </div>
+                <div class="task-answer">
+                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+                    <button class="check-btn" onclick="checkAnswer(3)"><i class="fas fa-check"></i> Проверить</button>
+                </div>
+                <div class="result" id="result3"></div>
+                <button class="solution-btn" onclick="toggleSolution(3)"><i class="fas fa-lightbulb"></i> Показать решение</button>
+                <div class="solution" id="solution3">
+                    <p><strong>Решение:</strong></p>
+                    <p>Полезная мощность P = U * I * cosφ</p>
+                    <p>P = 400 * 24 * 0.86 = 8256 Вт = 8,256 кВт</p>
+                    <p><strong>Ответ: 8,256 кВт</strong></p>
+                </div>
+            </div>
+            
+            <!-- Задача 4 -->
+            <div class="task-item" id="task4">
+                <div class="task-question">
+                    4. Число витков первичной обмотки 100, вторичной 500. Определить напряжение холостого хода вторичной обмотки, если трансформатор включен в сеть напряжением 220 В. Потерями в трансформаторе пренебречь.
+                </div>
+                <div class="task-answer">
+                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+                    <button class="check-btn" onclick="checkAnswer(4)"><i class="fas fa-check"></i> Проверить</button>
+                </div>
+                <div class="result" id="result4"></div>
+                <button class="solution-btn" onclick="toggleSolution(4)"><i class="fas fa-lightbulb"></i> Показать решение</button>
+                <div class="solution" id="solution4">
+                    <p><strong>Решение:</strong></p>
+                    <p>Коэффициент трансформации k = N₁ / N₂ = 100 / 500 = 0.2</p>
+                    <p>Напряжение вторичной обмотки U₂ = U₁ / k = 220 / 0.2 = 1100 В</p>
+                    <p><strong>Ответ: 1100 В</strong></p>
+                </div>
+            </div>
+            
+            <!-- Задача 5 -->
+            <div class="task-item" id="task5">
+                <div class="task-question">
+                    5. Определить КПД трехфазного трансформатора номинальной мощностью 630 кВА, работающего с номинальной нагрузкой при коэффициенте мощности потребителя 0,85. Потери в стали 1,56 кВт, потери в обмотках 12,2 кВт.
+                </div>
+                <div class="task-answer">
+                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+                    <button class="check-btn" onclick="checkAnswer(5)"><i class="fas fa-check"></i> Проверить</button>
+                </div>
+                <div class="result" id="result5"></div>
+                <button class="solution-btn" onclick="toggleSolution(5)"><i class="fas fa-lightbulb"></i> Показать решение</button>
+                <div class="solution" id="solution5">
+                    <p><strong>Решение:</strong></p>
+                    <p>Полезная мощность P₂ = S * cosφ = 630 * 0.85 = 535.5 кВт</p>
+                    <p>Суммарные потери P_потерь = 1.56 + 12.2 = 13.76 кВт</p>
+                    <p>КПД = P₂ / (P₂ + P_потерь) * 100% = 535.5 / (535.5 + 13.76) * 100% ≈ 97.5%</p>
+                    <p><strong>Ответ: 97.5 %</strong></p>
+                </div>
+            </div>
+            
+            <!-- Остальные задачи можно добавить аналогично -->
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="checkAllAnswers()">
+                    <i class="fas fa-check-double"></i> Проверить все ответы
+                </button>
+                <button class="btn btn-primary" onclick="showResults()">
+                    <i class="fas fa-chart-bar"></i> Показать результаты
+                </button>
+            </div>
+        </div>
+        
+        <!-- Результаты -->
+        <div class="tasks-container results-container" id="resultsContainer">
+            <div class="results-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="score">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-text" id="scoreText">правильных ответов из 10</div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="resetAnswers()">
+                    <i class="fas fa-redo"></i> Начать заново
+                </button>
+                <!-- Исправленная кнопка - теперь ведет на tests.html -->
+                <a href="tests.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i> К списку тестов
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Правильные ответы
+        const correctAnswers = {
+            1: "990",
+            2: "60",
+            3: "8,256кВт",
+            4: "1100 В",
+            5: "97,5 %",
+            6: "1, 73 и 220 В",
+            7: "62,474А",
+            8: "0,075Ом",
+            9: "0,6",
+            10: "0,94"
+        };
+        
+        let userAnswers = {};
+        let score = 0;
+        
+        // Проверка ответа
+        function checkAnswer(taskNumber) {
+            const input = document.querySelector(`#task${taskNumber} .answer-input`);
+            const result = document.getElementById(`result${taskNumber}`);
+            const userAnswer = input.value.trim();
+            
+            userAnswers[taskNumber] = userAnswer;
+            
+            if (userAnswer.toLowerCase() === correctAnswers[taskNumber].toLowerCase()) {
+                result.textContent = "Правильно!";
+                result.className = "result correct";
+                result.style.display = "block";
+            } else {
+                result.textContent = `Неверно. Правильный ответ: ${correctAnswers[taskNumber]}`;
+                result.className = "result incorrect";
+                result.style.display = "block";
+            }
+        }
+        
+        // Показать/скрыть решение
+        function toggleSolution(taskNumber) {
+            const solution = document.getElementById(`solution${taskNumber}`);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+        
+        // Проверить все ответы
+        function checkAllAnswers() {
+            for (let i = 1; i <= 10; i++) {
+                if (document.querySelector(`#task${i} .answer-input`)) {
+                    checkAnswer(i);
+                }
+            }
+        }
+        
+        // Показать результаты
+        function showResults() {
+            score = 0;
+            for (let i = 1; i <= 10; i++) {
+                if (userAnswers[i] && userAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+                    score++;
+                }
+            }
+            
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('scoreText').textContent = `правильных ответов из 10`;
+            
+            document.querySelector('.tasks-container').style.display = 'none';
+            document.getElementById('resultsContainer').style.display = 'block';
+        }
+        
+        // Сбросить ответы
+        function resetAnswers() {
+            userAnswers = {};
+            score = 0;
+            
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            const results = document.querySelectorAll('.result');
+            results.forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            const solutions = document.querySelectorAll('.solution');
+            solutions.forEach(solution => {
+                solution.style.display = 'none';
+            });
+            
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.querySelector('.tasks-container').style.display = 'block';
+        }
+        
+        // Мобильное меню
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

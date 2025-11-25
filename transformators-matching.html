@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трансформаторы: Установить соответствие</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 18px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+        
+        .task-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .task-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .match-item {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+        
+        .match-item:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .match-item.selected {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .match-item.correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .match-item.incorrect {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .match-number {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .match-item.selected .match-number {
+            color: white;
+        }
+        
+        .match-letter {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #e67e22;
+        }
+        
+        .match-item.selected .match-letter {
+            color: white;
+        }
+        
+        .connections-container {
+            margin: 30px 0;
+            min-height: 200px;
+            position: relative;
+        }
+        
+        .connection-line {
+            stroke: #3498db;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        .connection-line.correct {
+            stroke: #27ae60;
+        }
+        
+        .connection-line.incorrect {
+            stroke: #e74c3c;
+        }
+        
+        .check-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 15px;
+        }
+        
+        .check-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .reset-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: none;
+            text-align: center;
+        }
+        
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .test-container {
+                padding: 20px;
+            }
+            
+            .matching-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div class="logo">Электро<span>Техника</span></div>
+                <div class="subject">Тесты по электротехнике</div>
+                <nav id="mainNav">
+                    <a href="index.html" class="nav-btn">Главная</a>
+                    <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
+                    <a href="tests.html" class="nav-btn active">Тесты</a>
+                    <a href="#" class="nav-btn">Приложения</a>
+                    <a href="#" class="nav-btn">Видео</a>
+                    <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                    <a href="#" class="nav-btn">Литература</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="tests.html" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к тестам</a>
+        
+        <div class="test-container">
+            <h2 class="task-title">ТРАНСФОРМАТОРЫ</h2>
+            <div class="task-description">Задание. Установить соответствие</div>
+            
+            <div class="matching-container">
+                <div class="left-column" id="leftColumn">
+                    <!-- Левая колонка будет заполнена через JavaScript -->
+                </div>
+                
+                <div class="right-column" id="rightColumn">
+                    <!-- Правая колонка будет заполнена через JavaScript -->
+                </div>
+            </div>
+            
+            <div class="connections-container">
+                <svg id="connectionsSvg" width="100%" height="200"></svg>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="check-btn" onclick="checkMatching()">
+                    <i class="fas fa-check"></i> Проверить соответствие
+                </button>
+                <button class="reset-btn" onclick="resetMatching()">
+                    <i class="fas fa-redo"></i> Сбросить
+                </button>
+            </div>
+            
+            <div class="result" id="result"></div>
+            
+            <div class="navigation-buttons">
+                <a href="transformatori-zadachi.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Предыдущее задание
+                </a>
+                <a href="tests.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i> К списку тестов
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные для соответствия
+        const matchingData = {
+            leftItems: [
+                { id: 1, text: "ЭДС самоиндукции трансформатора" },
+                { id: 2, text: "ЭДС взаимоиндукции трансформатора" },
+                { id: 3, text: "Коэффициент трансформации однофазного трансформатора" },
+                { id: 4, text: "КПД трансформатора" },
+                { id: 5, text: "Полезная мощность трансформатора" },
+                { id: 6, text: "Потери мощности в меди трансформатора" },
+                { id: 7, text: "Номинальная мощность трансформатора" },
+                { id: 8, text: "Коэффициент трансформации трехфазного трансформатора при соединении фаз обмоток по схеме Ү/∆" },
+                { id: 9, text: "Коэффициент трансформации трехфазного трансформатора при соединении фаз обмоток по схеме ∆/Ү" }
+            ],
+            rightItems: [
+                { id: 'А', text: "Е₂=4.44W₂ fФₜ" },
+                { id: 'Б', text: "S=I₁н U₁н" },
+                { id: 'В', text: "ⴄ=Р₂/(Р₂+Рₘ+Рₛₜ)" },
+                { id: 'Г', text: "k=U₁/U₂=(√3Uф₁)/Uф₂=(√3W₁)/W₂" },
+                { id: 'Д', text: "k=U₁/U₂=Uф₁/(√3Uф₂)=W₁/(√3W₂)" },
+                { id: 'Е', text: "Е₁=4.44W₁ fФₜ" },
+                { id: 'Ж', text: "k=Е₁/Е₂=W₁/W₂=U₁/U₂" },
+                { id: 'З', text: "Рₘ=R₁ I₁²+ R₂ I₂²" },
+                { id: 'И', text: "Р₂=I₂ U₂ cos φ₂" }
+            ],
+            correctMatches: {
+                1: 'Е',
+                2: 'А', 
+                3: 'Ж',
+                4: 'В',
+                5: 'И',
+                6: 'З',
+                7: 'Б',
+                8: 'Г',
+                9: 'Д'
+            }
+        };
+
+        let selectedLeftItem = null;
+        let selectedRightItem = null;
+        let userMatches = {};
+        let svg = null;
+
+        // Инициализация страницы
+        function initPage() {
+            renderLeftColumn();
+            renderRightColumn();
+            initSvg();
+            loadUserProgress();
+        }
+
+        // Отрисовка левой колонки
+        function renderLeftColumn() {
+            const leftColumn = document.getElementById('leftColumn');
+            leftColumn.innerHTML = '';
+            
+            matchingData.leftItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.id = `left-${item.id}`;
+                div.innerHTML = `<span class="match-number">${item.id}.</span> ${item.text}`;
+                div.addEventListener('click', () => selectLeftItem(item.id));
+                leftColumn.appendChild(div);
+            });
+        }
+
+        // Отрисовка правой колонки
+        function renderRightColumn() {
+            const rightColumn = document.getElementById('rightColumn');
+            rightColumn.innerHTML = '';
+            
+            matchingData.rightItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.id = `right-${item.id}`;
+                div.innerHTML = `<span class="match-letter">${item.id}.</span> ${item.text}`;
+                div.addEventListener('click', () => selectRightItem(item.id));
+                rightColumn.appendChild(div);
+            });
+        }
+
+        // Инициализация SVG для линий
+        function initSvg() {
+            const svgContainer = document.getElementById('connectionsSvg');
+            svgContainer.innerHTML = '';
+            svg = svgContainer;
+        }
+
+        // Выбор элемента слева
+        function selectLeftItem(itemId) {
+            // Сброс предыдущего выбора слева
+            if (selectedLeftItem) {
+                document.getElementById(`left-${selectedLeftItem}`).classList.remove('selected');
+            }
+            
+            selectedLeftItem = itemId;
+            document.getElementById(`left-${itemId}`).classList.add('selected');
+            
+            // Если уже выбран элемент справа, создаем соединение
+            if (selectedRightItem) {
+                createMatch(selectedLeftItem, selectedRightItem);
+            }
+        }
+
+        // Выбор элемента справа
+        function selectRightItem(itemId) {
+            // Сброс предыдущего выбора справа
+            if (selectedRightItem) {
+                document.getElementById(`right-${selectedRightItem}`).classList.remove('selected');
+            }
+            
+            selectedRightItem = itemId;
+            document.getElementById(`right-${itemId}`).classList.add('selected');
+            
+            // Если уже выбран элемент слева, создаем соединение
+            if (selectedLeftItem) {
+                createMatch(selectedLeftItem, selectedRightItem);
+            }
+        }
+
+        // Создание соответствия
+        function createMatch(leftId, rightId) {
+            userMatches[leftId] = rightId;
+            
+            // Визуализация соединения
+            drawConnection(leftId, rightId);
+            
+            // Сброс выбора
+            selectedLeftItem = null;
+            selectedRightItem = null;
+            document.querySelectorAll('.match-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            saveUserProgress();
+        }
+
+        // Отрисовка линии соединения
+        function drawConnection(leftId, rightId) {
+            const leftElement = document.getElementById(`left-${leftId}`);
+            const rightElement = document.getElementById(`right-${rightId}`);
+            
+            if (!leftElement || !rightElement) return;
+            
+            const leftRect = leftElement.getBoundingClientRect();
+            const rightRect = rightElement.getBoundingClientRect();
+            const svgRect = svg.getBoundingClientRect();
+            
+            const startX = leftRect.right - svgRect.left;
+            const startY = leftRect.top + leftRect.height / 2 - svgRect.top;
+            const endX = rightRect.left - svgRect.left;
+            const endY = rightRect.top + rightRect.height / 2 - svgRect.top;
+            
+            // Создание кривой Безье для плавной линии
+            const controlX1 = startX + (endX - startX) * 0.3;
+            const controlX2 = startX + (endX - startX) * 0.7;
+            
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M ${startX} ${startY} C ${controlX1} ${startY} ${controlX2} ${endY} ${endX} ${endY}`);
+            path.setAttribute('class', 'connection-line');
+            path.setAttribute('data-left', leftId);
+            path.setAttribute('data-right', rightId);
+            
+            svg.appendChild(path);
+        }
+
+        // Проверка соответствий
+        function checkMatching() {
+            const result = document.getElementById('result');
+            let correctCount = 0;
+            const total = Object.keys(matchingData.correctMatches).length;
+            
+            // Проверка каждого соответствия
+            Object.keys(userMatches).forEach(leftId => {
+                const userRight = userMatches[leftId];
+                const correctRight = matchingData.correctMatches[leftId];
+                
+                const leftElement = document.getElementById(`left-${leftId}`);
+                const rightElement = document.getElementById(`right-${userRight}`);
+                const connection = document.querySelector(`.connection-line[data-left="${leftId}"][data-right="${userRight}"]`);
+                
+                if (userRight === correctRight) {
+                    // Правильное соответствие
+                    leftElement.classList.add('correct');
+                    rightElement.classList.add('correct');
+                    if (connection) connection.classList.add('correct');
+                    correctCount++;
+                } else {
+                    // Неправильное соответствие
+                    leftElement.classList.add('incorrect');
+                    rightElement.classList.add('incorrect');
+                    if (connection) connection.classList.add('incorrect');
+                }
+            });
+            
+            // Показ результата
+            if (correctCount === total) {
+                result.textContent = `Поздравляем! Все соответствия установлены правильно! (${correctCount}/${total})`;
+                result.className = 'result correct';
+            } else {
+                result.textContent = `Установлено ${correctCount} правильных соответствий из ${total}. Попробуйте еще раз!`;
+                result.className = 'result incorrect';
+            }
+            
+            result.style.display = 'block';
+        }
+
+        // Сброс всех соответствий
+        function resetMatching() {
+            selectedLeftItem = null;
+            selectedRightItem = null;
+            userMatches = {};
+            
+            // Сброс визуального состояния
+            document.querySelectorAll('.match-item').forEach(item => {
+                item.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Очистка линий
+            svg.innerHTML = '';
+            
+            // Сброс результата
+            document.getElementById('result').style.display = 'none';
+            
+            saveUserProgress();
+        }
+
+        // Сохранение прогресса
+        function saveUserProgress() {
+            localStorage.setItem('transformersMatchingProgress', JSON.stringify(userMatches));
+        }
+
+        // Загрузка прогресса
+        function loadUserProgress() {
+            const savedProgress = localStorage.getItem('transformersMatchingProgress');
+            if (savedProgress) {
+                userMatches = JSON.parse(savedProgress);
+                
+                // Восстановление соединений
+                Object.keys(userMatches).forEach(leftId => {
+                    drawConnection(leftId, userMatches[leftId]);
+                });
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initPage);
+
+        // Мобильное меню
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
