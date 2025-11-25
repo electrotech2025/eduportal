@@ -200,41 +200,6 @@
             background-color: #2980b9;
             transform: translateY(-3px);
         }
-        
-        .in-development {
-            position: relative;
-        }
-        
-        .in-development::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(2px);
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-        }
-        
-        .in-development::before {
-            content: "В разработке";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            z-index: 3;
-            font-size: 18px;
-        }
 
         /* Медиа-запросы для мобильной версии */
         @media (max-width: 900px) {
@@ -386,42 +351,55 @@
                 <p>Практические задачи по расчету параметров генераторов: ЭДС, токов, мощностей и характеристик генераторов.</p>
                 <a href="generators-task2.html" class="test-link"></a>
             </div>
-            
-            <!-- Остальные тесты в разработке -->
-            <div class="test-card in-development">
+
+            <!-- Тест 6: Трансформаторы: задачи -->
+            <div class="test-card">
                 <div class="test-icon">
-                    <i class="fas fa-plug"></i>
+                    <i class="fas fa-car-battery"></i>
                 </div>
-                <h3>Электрические цепи</h3>
-                <p>Основные законы электротехники, анализ цепей постоянного тока, методы расчета параметров цепей.</p>
-                <a href="#" class="test-link"></a>
+                <h3>Трансформаторы: задачи</h3>
+                <p>Практические задачи по расчету параметров трансформаторов, КПД и электрических характеристик.</p>
+                <a href="zadachi-transformatori.html" class="test-link"></a>
             </div>
             
-            <div class="test-card in-development">
+            <!-- Тест 7: Трансформаторы: дополни утверждение -->
+            <div class="test-card">
                 <div class="test-icon">
-                    <i class="fas fa-tachometer-alt"></i>
+                    <i class="fas fa-car-battery"></i>
                 </div>
-                <h3>Электрические измерения</h3>
-                <p>Тест по методам и приборам для измерения электрических величин, погрешностям и классам точности.</p>
-                <a href="#" class="test-link"></a>
+                <h3>Трансформаторы: дополни утверждение</h3>
+                <p>Тест на заполнение пропусков в утверждениях о принципах работы и устройстве трансформаторов.</p>
+                <a href="transformators-completion.html" class="test-link"></a>
             </div>
             
-            <div class="test-card in-development">
+            <!-- Тест 8: Трансформаторы: установить соответствие -->
+            <div class="test-card">
                 <div class="test-icon">
-                    <i class="fas fa-solar-panel"></i>
+                    <i class="fas fa-car-battery"></i>
                 </div>
-                <h3>Источники питания</h3>
-                <p>Вопросы по различным типам источников питания, их характеристикам и областям применения.</p>
-                <a href="#" class="test-link"></a>
+                <h3>Трансформаторы: установить соответствие</h3>
+                <p>Установите соответствие между терминами, определениями и характеристиками трансформаторов.</p>
+                <a href="transformators-matching.html" class="test-link"></a>
             </div>
             
-            <div class="test-card in-development">
+            <!-- Тест 9: Трансформаторы: выбрать ответ -->
+            <div class="test-card">
                 <div class="test-icon">
-                    <i class="fas fa-magnet"></i>
+                    <i class="fas fa-car-battery"></i>
                 </div>
-                <h3>Магнитные цепи</h3>
-                <p>Тест по основам магнитных цепей, электромагнетизму, ферромагнитным материалам и их свойствам.</p>
-                <a href="#" class="test-link"></a>
+                <h3>Трансформаторы: выбрать ответ</h3>
+                <p>Тест с выбором правильного ответа из нескольких вариантов по теории трансформаторов.</p>
+                <a href="transformators-test.html" class="test-link"></a>
+            </div>
+            
+            <!-- Тест 10: Трансформаторы: теория -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-car-battery"></i>
+                </div>
+                <h3>Трансформаторы: теория</h3>
+                <p>Теоретические вопросы по принципам работы, конструкциям и применению трансформаторов.</p>
+                <a href="transformators-theory.html" class="test-link"></a>
             </div>
         </div>
     </div>
@@ -430,14 +408,6 @@
         // Мобильное меню
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
-        });
-
-        // Блокируем клик по карточкам "В разработке"
-        document.querySelectorAll('.in-development .test-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Этот тест находится в разработке и будет доступен в ближайшее время');
-            });
         });
 
         // Обработчик для логотипа (возврат на главную)
