@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздел 3: Трансформаторы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 16px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            text-align: center;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .back-btn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(to right, #2980b9, #2573a7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-questions-btn {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+        }
+        
+        .test-questions-btn:hover {
+            background: linear-gradient(to right, #27ae60, #219955);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .pdf-files-container {
+            margin-top: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            min-height: 60vh;
+        }
+        
+        .pdf-header {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .pdf-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .pdf-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .pdf-count {
+            color: #3498db;
+            font-weight: 600;
+            font-size: 14px;
+            background: #e3f2fd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .pdf-files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+        
+        .pdf-file-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid #3498db;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pdf-file-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pdf-file-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pdf-file-card:hover:before {
+            opacity: 1;
+        }
+        
+        .pdf-icon {
+            font-size: 42px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .pdf-file-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+        
+        .pdf-file-info {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+        
+        .pdf-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+        
+        .pdf-btn {
+            flex: 1;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .view-pdf {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .view-pdf:hover {
+            background: linear-gradient(to right, #2980b9, #2573a7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .download-pdf {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .download-pdf:hover {
+            background: linear-gradient(to right, #27ae60, #219955);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .no-pdf-message {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+        
+        .footer-note {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            background: #f9f9f9;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        /* Категории файлов */
+        .pdf-category {
+            font-size: 14px;
+            color: #e74c3c;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .pdf-files-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .pdf-header {
+                padding: 20px;
+            }
+            
+            .pdf-title {
+                font-size: 24px;
+            }
+            
+            .pdf-actions {
+                flex-direction: column;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Электро<span>Техника</span></div>
+            <div class="subject">Раздел 3: Трансформаторы</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="navigation-buttons">
+            <a href="prosl-razdely.html" class="nav-button back-btn">
+                <i class="fas fa-arrow-left"></i> Назад к разделам
+            </a>
+            <a href="#pdfFiles" class="nav-button test-questions-btn">
+                <i class="fas fa-question-circle"></i> Задания по трансформаторам
+            </a>
+        </div>
+        
+        <div class="pdf-files-container" id="pdfFiles">
+            <div class="pdf-header">
+                <h2 class="pdf-title">Трансформаторы: Задания и упражнения</h2>
+                <p class="pdf-subtitle">Все доступные PDF файлы по теме трансформаторов</p>
+                <div class="pdf-count" id="pdfCount">Загрузка...</div>
+            </div>
+            <div class="pdf-files-grid" id="pdfFilesGrid">
+                <!-- PDF файлы будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // PDF файлы из папки trans
+            const pdfFiles = [
+                {
+                    path: 'trans/Трансформаторы дополнить утверждения.pdf',
+                    name: 'Трансформаторы: дополнить утверждения',
+                    description: 'Задание на заполнение пропусков в утверждениях о трансформаторах',
+                    category: 'Упражнение'
+                },
+                {
+                    path: 'trans/Трансформаторы решить задачу.pdf',
+                    name: 'Трансформаторы: решить задачу',
+                    description: 'Практические задачи по расчету параметров трансформаторов',
+                    category: 'Задачи'
+                },
+                {
+                    path: 'trans/Трансформаторы выбрать ответ.pdf',
+                    name: 'Трансформаторы: выбрать ответ',
+                    description: 'Тестовые задания с выбором правильного ответа',
+                    category: 'Тест'
+                },
+                {
+                    path: 'trans/Трансформаторы установить соответствие.pdf',
+                    name: 'Трансформаторы: установить соответствие',
+                    description: 'Задание на установление соответствий между понятиями',
+                    category: 'Упражнение'
+                }
+            ];
+            
+            // Функция для обновления счетчика файлов
+            function updatePDFCount() {
+                const pdfCountElement = document.getElementById('pdfCount');
+                if (pdfCountElement) {
+                    pdfCountElement.textContent = `${pdfFiles.length} PDF файлов доступно`;
+                }
+            }
+            
+            // Отображение PDF файлов
+            function displayPDFFiles() {
+                const pdfFilesGrid = document.getElementById('pdfFilesGrid');
+                
+                if (!pdfFilesGrid) return;
+                
+                pdfFilesGrid.innerHTML = '';
+                
+                if (pdfFiles.length === 0) {
+                    pdfFilesGrid.innerHTML = `
+                        <div class="no-pdf-message">
+                            <i class="fas fa-file-pdf" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
+                            <h3>PDF файлы не найдены</h3>
+                            <p>В папке trans нет доступных PDF файлов</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                pdfFiles.forEach(pdfFile => {
+                    const pdfCard = document.createElement('div');
+                    pdfCard.className = 'pdf-file-card';
+                    pdfCard.innerHTML = `
+                        <div class="pdf-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        ${pdfFile.category ? `<div class="pdf-category">${pdfFile.category}</div>` : ''}
+                        <div class="pdf-file-name">${pdfFile.name}</div>
+                        <div class="pdf-file-info">${pdfFile.description}</div>
+                        <div class="pdf-actions">
+                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
+                                <i class="fas fa-eye"></i> Просмотр
+                            </a>
+                            <a href="${pdfFile.path}" download="${pdfFile.name}.pdf" class="pdf-btn download-pdf">
+                                <i class="fas fa-download"></i> Скачать
+                            </a>
+                        </div>
+                    `;
+                    pdfFilesGrid.appendChild(pdfCard);
+                });
+                
+                // Добавляем нижнюю заметку
+                const footerNote = document.createElement('div');
+                footerNote.className = 'footer-note';
+                footerNote.innerHTML = `
+                    <p><i class="fas fa-info-circle"></i> Все файлы находятся в папке trans/</p>
+                    <p><small>Для корректного отображения PDF файлов убедитесь, что браузер поддерживает просмотр PDF</small></p>
+                `;
+                pdfFilesGrid.parentNode.appendChild(footerNote);
+            }
+            
+            // Инициализация
+            updatePDFCount();
+            displayPDFFiles();
+            
+            // Обработчик для кнопки "Назад к разделам"
+            const backButton = document.querySelector('.back-btn');
+            if (backButton) {
+                backButton.addEventListener('click', function(e) {
+                    if (!this.getAttribute('href')) {
+                        e.preventDefault();
+                        window.history.back();
+                    }
+                });
+            }
+            
+            // Плавная прокрутка к PDF файлам при нажатии на кнопку
+            const pdfLink = document.querySelector('a[href="#pdfFiles"]');
+            if (pdfLink) {
+                pdfLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('pdfFiles').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
