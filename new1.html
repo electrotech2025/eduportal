@@ -117,6 +117,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
             overflow: hidden;
+            min-height: 60vh;
         }
         
         .pdf-header {
@@ -167,11 +168,29 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
+            overflow: hidden;
         }
         
         .pdf-file-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pdf-file-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pdf-file-card:hover:before {
+            opacity: 1;
         }
         
         .pdf-icon {
@@ -186,6 +205,7 @@
             font-weight: 700;
             color: #2c3e50;
             margin-bottom: 15px;
+            word-break: break-word;
             line-height: 1.4;
         }
         
@@ -242,13 +262,23 @@
             box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
         }
         
+        .no-pdf-message {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+        
         .footer-note {
             text-align: center;
             padding: 20px;
             color: #666;
             font-size: 14px;
             border-top: 1px solid #eee;
+            margin-top: 20px;
             background: #f9f9f9;
+            border-radius: 0 0 15px 15px;
         }
         
         @media (max-width: 768px) {
@@ -307,107 +337,116 @@
         <div class="pdf-files-container" id="pdfFiles">
             <div class="pdf-header">
                 <h2 class="pdf-title">Вопросы для тестирования</h2>
-                <p class="pdf-subtitle">PDF файлы по разделу "Трансформаторы"</p>
-                <div class="pdf-count">4 PDF файла</div>
+                <p class="pdf-subtitle">Все доступные PDF файлы по теме</p>
+                <div class="pdf-count" id="pdfCount">Загрузка...</div>
             </div>
-            
-            <div class="pdf-files-grid">
-                <!-- Файл 1: Правильное название из вашей папки -->
-                <div class="pdf-file-card">
-                    <div class="pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="pdf-file-name">Двигатели постоянного тока</div>
-                    <div class="pdf-file-info">Теория и принципы работы двигателей постоянного тока. Тест с выбором правильного ответа.</div>
-                    <div class="pdf-actions">
-                        <a href="razdelpdf/Двигатели постояного тока.pdf" target="_blank" class="pdf-btn view-pdf">
-                            <i class="fas fa-eye"></i> Просмотр
-                        </a>
-                        <a href="razdelpdf/Двигатели постояного тока.pdf" download="Двигатели_постоянного_тока.pdf" class="pdf-btn download-pdf">
-                            <i class="fas fa-download"></i> Скачать
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Файл 2: Правильное название из вашей папки -->
-                <div class="pdf-file-card">
-                    <div class="pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="pdf-file-name">Двигатели постоянного тока: задачи</div>
-                    <div class="pdf-file-info">Практические задачи по двигателям постоянного тока с решениями.</div>
-                    <div class="pdf-actions">
-                        <a href="razdelpdf/Двигатели_постоянного_ток_азадачи.pdf" target="_blank" class="pdf-btn view-pdf">
-                            <i class="fas fa-eye"></i> Просмотр
-                        </a>
-                        <a href="razdelpdf/Двигатели_постоянного_ток_азадачи.pdf" download="Двигатели_постоянного_тока_задачи.pdf" class="pdf-btn download-pdf">
-                            <i class="fas fa-download"></i> Скачать
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Файл 3: Правильное название из вашей папки -->
-                <div class="pdf-file-card">
-                    <div class="pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="pdf-file-name">Машины переменного тока</div>
-                    <div class="pdf-file-info">Задачи по машинам переменного тока с решениями.</div>
-                    <div class="pdf-actions">
-                        <a href="razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf" target="_blank" class="pdf-btn view-pdf">
-                            <i class="fas fa-eye"></i> Просмотр
-                        </a>
-                        <a href="razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf" download="Машины_переменного_тока.pdf" class="pdf-btn download-pdf">
-                            <i class="fas fa-download"></i> Скачать
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Файл 4: Правильное название из вашей папки -->
-                <div class="pdf-file-card">
-                    <div class="pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="pdf-file-name">Электродвигатели переменного тока</div>
-                    <div class="pdf-file-info">Тест с выбором правильного ответа по электродвигателям переменного тока.</div>
-                    <div class="pdf-actions">
-                        <a href="razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf" target="_blank" class="pdf-btn view-pdf">
-                            <i class="fas fa-eye"></i> Просмотр
-                        </a>
-                        <a href="razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf" download="Электродвигатели_переменного_тока.pdf" class="pdf-btn download-pdf">
-                            <i class="fas fa-download"></i> Скачать
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-note">
-                <p><i class="fas fa-check-circle" style="color: #27ae60;"></i> Все PDF файлы загружены из папки <strong>razdelpdf/</strong></p>
-                <p style="margin-top: 5px; font-size: 13px;">
-                    Файлы теперь откроются без ошибки 404
-                </p>
+            <div class="pdf-files-grid" id="pdfFilesGrid">
+                <!-- PDF файлы будут добавлены через JavaScript -->
             </div>
         </div>
     </div>
 
     <script>
-        // Простая проверка что файлы доступны
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('PDF файлы из папки razdelpdf:');
-            console.log('1. razdelpdf/Двигатели постояного тока.pdf');
-            console.log('2. razdelpdf/Двигатели_постоянного_ток_азадачи.pdf');
-            console.log('3. razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf');
-            console.log('4. razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf');
+            // Ваши PDF файлы из папки razdelpdf с добавлением нового файла
+            const pdfFiles = [
+                {
+                    path: 'razdelpdf/Двигатели постоянного тока.pdf',
+                    name: 'Двигатели постоянного тока',
+                    description: 'Теория и принципы работы двигателей постоянного тока'
+                },
+                {
+                    path: 'razdelpdf/Двигатели_постоянного_ток_азадачи.pdf',
+                    name: 'Двигатели постоянного тока: задачи',
+                    description: 'Практические задачи по двигателям постоянного тока'
+                },
+                {
+                    path: 'razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf',
+                    name: 'Машины переменного тока',
+                    description: 'Изучение машин переменного тока и их характеристик'
+                },
+                {
+                    path: 'razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf',
+                    name: 'Электродвигатели переменного тока',
+                    description: 'Типы и применение электродвигателей переменного тока'
+                }
+            ];
             
-            // Логируем клики для отладки
-            document.querySelectorAll('.pdf-btn').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    console.log('Открываем файл:', this.href);
+            // Функция для обновления счетчика файлов
+            function updatePDFCount() {
+                const pdfCountElement = document.getElementById('pdfCount');
+                if (pdfCountElement) {
+                    pdfCountElement.textContent = `${pdfFiles.length} PDF файлов доступно`;
+                }
+            }
+            
+            // Отображение PDF файлов
+            function displayPDFFiles() {
+                const pdfFilesGrid = document.getElementById('pdfFilesGrid');
+                
+                if (!pdfFilesGrid) return;
+                
+                pdfFilesGrid.innerHTML = '';
+                
+                if (pdfFiles.length === 0) {
+                    pdfFilesGrid.innerHTML = `
+                        <div class="no-pdf-message">
+                            <i class="fas fa-file-pdf" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
+                            <h3>PDF файлы не найдены</h3>
+                            <p>В папке razdelpdf нет доступных PDF файлов</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                pdfFiles.forEach(pdfFile => {
+                    const pdfCard = document.createElement('div');
+                    pdfCard.className = 'pdf-file-card';
+                    pdfCard.innerHTML = `
+                        <div class="pdf-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="pdf-file-name">${pdfFile.name}</div>
+                        <div class="pdf-file-info">${pdfFile.description}</div>
+                        <div class="pdf-actions">
+                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
+                                <i class="fas fa-eye"></i> Просмотр
+                            </a>
+                            <a href="${pdfFile.path}" download="${pdfFile.name}.pdf" class="pdf-btn download-pdf">
+                                <i class="fas fa-download"></i> Скачать
+                            </a>
+                        </div>
+                    `;
+                    pdfFilesGrid.appendChild(pdfCard);
                 });
-            });
+                
+                // Добавляем нижнюю заметку
+                const footerNote = document.createElement('div');
+                footerNote.className = 'footer-note';
+                footerNote.innerHTML = `
+                    <p><i class="fas fa-info-circle"></i> Все файлы находятся в папке razdelpdf/</p>
+                `;
+                pdfFilesGrid.parentNode.appendChild(footerNote);
+            }
+            
+            // Инициализация
+            updatePDFCount();
+            displayPDFFiles();
+            
+            // Обработчик для кнопки "Назад к разделам"
+            const backButton = document.querySelector('.back-btn');
+            if (backButton) {
+                backButton.addEventListener('click', function(e) {
+                    if (!this.getAttribute('href')) {
+                        e.preventDefault();
+                        window.history.back();
+                    }
+                });
+            }
         });
     </script>
 </body>
 </html>
+
 
 
