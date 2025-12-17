@@ -270,6 +270,25 @@
             grid-column: 1 / -1;
         }
         
+        .file-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .file-available {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .file-missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
         .footer-note {
             text-align: center;
             padding: 20px;
@@ -337,8 +356,8 @@
         <div class="pdf-files-container" id="pdfFiles">
             <div class="pdf-header">
                 <h2 class="pdf-title">Вопросы для тестирования</h2>
-                <p class="pdf-subtitle">Все доступные PDF файлы по теме</p>
-                <div class="pdf-count" id="pdfCount">Загрузка...</div>
+                <p class="pdf-subtitle">PDF файлы из папки razdelpdf</p>
+                <div class="pdf-count" id="pdfCount">Проверка файлов...</div>
             </div>
             <div class="pdf-files-grid" id="pdfFilesGrid">
                 <!-- PDF файлы будут добавлены через JavaScript -->
@@ -348,40 +367,67 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ваши PDF файлы из папки razdelpdf с добавлением нового файла
+            // ПУТИ К PDF ФАЙЛАМ - папка razdelpdf (согласно GitHub)
             const pdfFiles = [
                 {
                     path: 'razdelpdf/Двигатели постоянного тока.pdf',
                     name: 'Двигатели постоянного тока',
-                    description: 'Теория и принципы работы двигателей постоянного тока'
+                    description: 'Теория и принципы работы двигателей постоянного тока',
+                    fileName: 'Двигатели постоянного тока.pdf'
                 },
                 {
                     path: 'razdelpdf/Двигатели_постоянного_ток_азадачи.pdf',
                     name: 'Двигатели постоянного тока: задачи',
-                    description: 'Практические задачи по двигателям постоянного тока'
+                    description: 'Практические задачи по двигателям постоянного тока',
+                    fileName: 'Двигатели_постоянного_ток_азадачи.pdf'
                 },
                 {
                     path: 'razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf',
                     name: 'Машины переменного тока',
-                    description: 'Изучение машин переменного тока и их характеристик'
+                    description: 'Изучение машин переменного тока и их характеристик',
+                    fileName: 'МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf'
                 },
                 {
                     path: 'razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf',
                     name: 'Электродвигатели переменного тока',
-                    description: 'Типы и применение электродвигателей переменного тока'
+                    description: 'Типы и применение электродвигателей переменного тока',
+                    fileName: 'ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf'
                 }
             ];
             
+            // Функция для проверки доступности файлов
+            async function checkFileExists(url) {
+                try {
+                    const response = await fetch(url, { method: 'HEAD' });
+                    return response.ok;
+                } catch (error) {
+                    console.warn(`Файл не найден: ${url}`);
+                    return false;
+                }
+            }
+            
             // Функция для обновления счетчика файлов
-            function updatePDFCount() {
+            function updatePDFCount(availableCount, totalCount) {
                 const pdfCountElement = document.getElementById('pdfCount');
                 if (pdfCountElement) {
-                    pdfCountElement.textContent = `${pdfFiles.length} PDF файлов доступно`;
+                    if (availableCount === 0) {
+                        pdfCountElement.textContent = 'Файлы не найдены в папке razdelpdf';
+                        pdfCountElement.style.background = '#f8d7da';
+                        pdfCountElement.style.color = '#721c24';
+                    } else if (availableCount === totalCount) {
+                        pdfCountElement.textContent = `${availableCount} PDF файлов доступно`;
+                        pdfCountElement.style.background = '#d4edda';
+                        pdfCountElement.style.color = '#155724';
+                    } else {
+                        pdfCountElement.textContent = `${availableCount} из ${totalCount} файлов доступно`;
+                        pdfCountElement.style.background = '#fff3cd';
+                        pdfCountElement.style.color = '#856404';
+                    }
                 }
             }
             
             // Отображение PDF файлов
-            function displayPDFFiles() {
+            async function displayPDFFiles() {
                 const pdfFilesGrid = document.getElementById('pdfFilesGrid');
                 
                 if (!pdfFilesGrid) return;
@@ -392,57 +438,112 @@
                     pdfFilesGrid.innerHTML = `
                         <div class="no-pdf-message">
                             <i class="fas fa-file-pdf" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
-                            <h3>PDF файлы не найдены</h3>
-                            <p>В папке razdelpdf нет доступных PDF файлов</p>
+                            <h3>PDF файлы не настроены</h3>
+                            <p>Нет списка PDF файлов для отображения</p>
                         </div>
                     `;
+                    updatePDFCount(0, 0);
                     return;
                 }
                 
-                pdfFiles.forEach(pdfFile => {
+                let availableCount = 0;
+                
+                // Проверяем каждый файл перед отображением
+                for (const pdfFile of pdfFiles) {
+                    const fileExists = await checkFileExists(pdfFile.path);
+                    
                     const pdfCard = document.createElement('div');
                     pdfCard.className = 'pdf-file-card';
-                    pdfCard.innerHTML = `
-                        <div class="pdf-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="pdf-file-name">${pdfFile.name}</div>
-                        <div class="pdf-file-info">${pdfFile.description}</div>
-                        <div class="pdf-actions">
-                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
-                                <i class="fas fa-eye"></i> Просмотр
-                            </a>
-                            <a href="${pdfFile.path}" download="${pdfFile.name}.pdf" class="pdf-btn download-pdf">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                        </div>
-                    `;
+                    
+                    if (fileExists) {
+                        availableCount++;
+                        pdfCard.innerHTML = `
+                            <div class="pdf-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="pdf-file-name">
+                                ${pdfFile.name}
+                                <span class="file-status file-available">✓ Доступен</span>
+                            </div>
+                            <div class="pdf-file-info">${pdfFile.description}</div>
+                            <div class="pdf-actions">
+                                <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
+                                    <i class="fas fa-eye"></i> Просмотр
+                                </a>
+                                <a href="${pdfFile.path}" download="${pdfFile.fileName}" class="pdf-btn download-pdf">
+                                    <i class="fas fa-download"></i> Скачать
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        pdfCard.innerHTML = `
+                            <div class="pdf-icon">
+                                <i class="fas fa-file-exclamation" style="color: #ffc107;"></i>
+                            </div>
+                            <div class="pdf-file-name">
+                                ${pdfFile.name}
+                                <span class="file-status file-missing">✗ Отсутствует</span>
+                            </div>
+                            <div class="pdf-file-info">${pdfFile.description}</div>
+                            <div class="pdf-file-info" style="color: #e74c3c; font-size: 14px;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Файл не найден: ${pdfFile.fileName}
+                            </div>
+                            <div class="pdf-actions">
+                                <button class="pdf-btn view-pdf" disabled style="background: #95a5a6; cursor: not-allowed;">
+                                    <i class="fas fa-eye"></i> Недоступен
+                                </button>
+                                <button class="pdf-btn download-pdf" disabled style="background: #95a5a6; cursor: not-allowed;">
+                                    <i class="fas fa-download"></i> Недоступен
+                                </button>
+                            </div>
+                        `;
+                    }
+                    
                     pdfFilesGrid.appendChild(pdfCard);
-                });
+                }
+                
+                // Обновляем счетчик
+                updatePDFCount(availableCount, pdfFiles.length);
                 
                 // Добавляем нижнюю заметку
                 const footerNote = document.createElement('div');
                 footerNote.className = 'footer-note';
-                footerNote.innerHTML = `
-                    <p><i class="fas fa-info-circle"></i> Все файлы находятся в папке razdelpdf/</p>
-                `;
+                
+                if (availableCount === 0) {
+                    footerNote.innerHTML = `
+                        <p style="color: #e74c3c;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>ВНИМАНИЕ:</strong> Ни один PDF файл не найден в папке razdelpdf/
+                        </p>
+                        <p>Проверьте:</p>
+                        <ul style="text-align: left; max-width: 500px; margin: 10px auto; font-size: 13px;">
+                            <li>Папка <strong>razdelpdf</strong> существует в репозитории GitHub</li>
+                            <li>Файлы загружены в эту папку</li>
+                            <li>Названия файлов совпадают с указанными выше</li>
+                        </ul>
+                    `;
+                } else if (availableCount < pdfFiles.length) {
+                    footerNote.innerHTML = `
+                        <p><i class="fas fa-info-circle"></i> Найдено ${availableCount} из ${pdfFiles.length} файлов</p>
+                        <p style="font-size: 13px; margin-top: 5px;">
+                            Некоторые файлы отсутствуют в папке razdelpdf/
+                        </p>
+                    `;
+                } else {
+                    footerNote.innerHTML = `
+                        <p><i class="fas fa-check-circle" style="color: #27ae60;"></i> Все файлы доступны</p>
+                        <p style="font-size: 13px; margin-top: 5px;">
+                            Файлы находятся в папке: <strong>razdelpdf/</strong>
+                        </p>
+                    `;
+                }
+                
                 pdfFilesGrid.parentNode.appendChild(footerNote);
             }
             
             // Инициализация
-            updatePDFCount();
             displayPDFFiles();
-            
-            // Обработчик для кнопки "Назад к разделам"
-            const backButton = document.querySelector('.back-btn');
-            if (backButton) {
-                backButton.addEventListener('click', function(e) {
-                    if (!this.getAttribute('href')) {
-                        e.preventDefault();
-                        window.history.back();
-                    }
-                });
-            }
         });
     </script>
 </body>
