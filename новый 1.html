@@ -117,7 +117,6 @@
             border-radius: 15px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            min-height: 60vh;
         }
         
         .pdf-header {
@@ -168,29 +167,11 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            position: relative;
-            overflow: hidden;
         }
         
         .pdf-file-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .pdf-file-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .pdf-file-card:hover:before {
-            opacity: 1;
         }
         
         .pdf-icon {
@@ -205,7 +186,6 @@
             font-weight: 700;
             color: #2c3e50;
             margin-bottom: 15px;
-            word-break: break-word;
             line-height: 1.4;
         }
         
@@ -262,42 +242,13 @@
             box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
         }
         
-        .no-pdf-message {
-            text-align: center;
-            padding: 60px;
-            color: #666;
-            font-style: italic;
-            grid-column: 1 / -1;
-        }
-        
-        .file-status {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        
-        .file-available {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .file-missing {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
         .footer-note {
             text-align: center;
             padding: 20px;
             color: #666;
             font-size: 14px;
             border-top: 1px solid #eee;
-            margin-top: 20px;
             background: #f9f9f9;
-            border-radius: 0 0 15px 15px;
         }
         
         @media (max-width: 768px) {
@@ -356,195 +307,115 @@
         <div class="pdf-files-container" id="pdfFiles">
             <div class="pdf-header">
                 <h2 class="pdf-title">Вопросы для тестирования</h2>
-                <p class="pdf-subtitle">PDF файлы из папки razdelpdf</p>
-                <div class="pdf-count" id="pdfCount">Проверка файлов...</div>
+                <p class="pdf-subtitle">PDF файлы по разделу "Трансформаторы"</p>
+                <div class="pdf-count">4 PDF файла</div>
             </div>
-            <div class="pdf-files-grid" id="pdfFilesGrid">
-                <!-- PDF файлы будут добавлены через JavaScript -->
+            
+            <div class="pdf-files-grid">
+                <!-- Файл 1 -->
+                <div class="pdf-file-card">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-file-name">Двигатели постоянного тока</div>
+                    <div class="pdf-file-info">Теория и принципы работы двигателей постоянного тока</div>
+                    <div class="pdf-actions">
+                        <a href="razdelpdf/Двигатели постоянного тока.pdf" target="_blank" class="pdf-btn view-pdf">
+                            <i class="fas fa-eye"></i> Просмотр
+                        </a>
+                        <a href="razdelpdf/Двигатели постоянного тока.pdf" download="Двигатели постоянного тока.pdf" class="pdf-btn download-pdf">
+                            <i class="fas fa-download"></i> Скачать
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Файл 2 -->
+                <div class="pdf-file-card">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-file-name">Двигатели постоянного тока: задачи</div>
+                    <div class="pdf-file-info">Практические задачи по двигателям постоянного тока</div>
+                    <div class="pdf-actions">
+                        <a href="razdelpdf/Двигатели_постоянного_ток_азадачи.pdf" target="_blank" class="pdf-btn view-pdf">
+                            <i class="fas fa-eye"></i> Просмотр
+                        </a>
+                        <a href="razdelpdf/Двигатели_постоянного_ток_азадачи.pdf" download="Двигатели_постоянного_ток_азадачи.pdf" class="pdf-btn download-pdf">
+                            <i class="fas fa-download"></i> Скачать
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Файл 3 -->
+                <div class="pdf-file-card">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-file-name">Машины переменного тока</div>
+                    <div class="pdf-file-info">Изучение машин переменного тока и их характеристик</div>
+                    <div class="pdf-actions">
+                        <a href="razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf" target="_blank" class="pdf-btn view-pdf">
+                            <i class="fas fa-eye"></i> Просмотр
+                        </a>
+                        <a href="razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf" download="МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf" class="pdf-btn download-pdf">
+                            <i class="fas fa-download"></i> Скачать
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Файл 4 -->
+                <div class="pdf-file-card">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-file-name">Электродвигатели переменного тока</div>
+                    <div class="pdf-file-info">Типы и применение электродвигателей переменного тока</div>
+                    <div class="pdf-actions">
+                        <a href="razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf" target="_blank" class="pdf-btn view-pdf">
+                            <i class="fas fa-eye"></i> Просмотр
+                        </a>
+                        <a href="razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf" download="ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf" class="pdf-btn download-pdf">
+                            <i class="fas fa-download"></i> Скачать
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-note">
+                <p><i class="fas fa-info-circle"></i> Все PDF файлы находятся в папке <strong>razdelpdf/</strong></p>
+                <p style="margin-top: 5px; font-size: 13px;">
+                    Если файлы не открываются, проверьте их наличие на сервере
+                </p>
             </div>
         </div>
     </div>
 
     <script>
+        // Простая проверка на случай если файлов нет
         document.addEventListener('DOMContentLoaded', function() {
-            // ПУТИ К PDF ФАЙЛАМ - папка razdelpdf (согласно GitHub)
-            const pdfFiles = [
-                {
-                    path: 'razdelpdf/Двигатели постоянного тока.pdf',
-                    name: 'Двигатели постоянного тока',
-                    description: 'Теория и принципы работы двигателей постоянного тока',
-                    fileName: 'Двигатели постоянного тока.pdf'
-                },
-                {
-                    path: 'razdelpdf/Двигатели_постоянного_ток_азадачи.pdf',
-                    name: 'Двигатели постоянного тока: задачи',
-                    description: 'Практические задачи по двигателям постоянного тока',
-                    fileName: 'Двигатели_постоянного_ток_азадачи.pdf'
-                },
-                {
-                    path: 'razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf',
-                    name: 'Машины переменного тока',
-                    description: 'Изучение машин переменного тока и их характеристик',
-                    fileName: 'МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf'
-                },
-                {
-                    path: 'razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf',
-                    name: 'Электродвигатели переменного тока',
-                    description: 'Типы и применение электродвигателей переменного тока',
-                    fileName: 'ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf'
-                }
-            ];
+            // Проверяем первый файл чтобы понять, доступна ли папка
+            const testFile = 'razdelpdf/Двигатели постоянного тока.pdf';
             
-            // Функция для проверки доступности файлов
-            async function checkFileExists(url) {
-                try {
-                    const response = await fetch(url, { method: 'HEAD' });
-                    return response.ok;
-                } catch (error) {
-                    console.warn(`Файл не найден: ${url}`);
-                    return false;
-                }
-            }
-            
-            // Функция для обновления счетчика файлов
-            function updatePDFCount(availableCount, totalCount) {
-                const pdfCountElement = document.getElementById('pdfCount');
-                if (pdfCountElement) {
-                    if (availableCount === 0) {
-                        pdfCountElement.textContent = 'Файлы не найдены в папке razdelpdf';
-                        pdfCountElement.style.background = '#f8d7da';
-                        pdfCountElement.style.color = '#721c24';
-                    } else if (availableCount === totalCount) {
-                        pdfCountElement.textContent = `${availableCount} PDF файлов доступно`;
-                        pdfCountElement.style.background = '#d4edda';
-                        pdfCountElement.style.color = '#155724';
-                    } else {
-                        pdfCountElement.textContent = `${availableCount} из ${totalCount} файлов доступно`;
-                        pdfCountElement.style.background = '#fff3cd';
-                        pdfCountElement.style.color = '#856404';
+            fetch(testFile, { method: 'HEAD' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('Папка razdelpdf не найдена или пуста');
                     }
-                }
-            }
-            
-            // Отображение PDF файлов
-            async function displayPDFFiles() {
-                const pdfFilesGrid = document.getElementById('pdfFilesGrid');
+                })
+                .catch(error => {
+                    console.warn('Ошибка доступа к файлам:', error);
+                });
                 
-                if (!pdfFilesGrid) return;
-                
-                pdfFilesGrid.innerHTML = '';
-                
-                if (pdfFiles.length === 0) {
-                    pdfFilesGrid.innerHTML = `
-                        <div class="no-pdf-message">
-                            <i class="fas fa-file-pdf" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
-                            <h3>PDF файлы не настроены</h3>
-                            <p>Нет списка PDF файлов для отображения</p>
-                        </div>
-                    `;
-                    updatePDFCount(0, 0);
-                    return;
-                }
-                
-                let availableCount = 0;
-                
-                // Проверяем каждый файл перед отображением
-                for (const pdfFile of pdfFiles) {
-                    const fileExists = await checkFileExists(pdfFile.path);
-                    
-                    const pdfCard = document.createElement('div');
-                    pdfCard.className = 'pdf-file-card';
-                    
-                    if (fileExists) {
-                        availableCount++;
-                        pdfCard.innerHTML = `
-                            <div class="pdf-icon">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="pdf-file-name">
-                                ${pdfFile.name}
-                                <span class="file-status file-available">✓ Доступен</span>
-                            </div>
-                            <div class="pdf-file-info">${pdfFile.description}</div>
-                            <div class="pdf-actions">
-                                <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
-                                    <i class="fas fa-eye"></i> Просмотр
-                                </a>
-                                <a href="${pdfFile.path}" download="${pdfFile.fileName}" class="pdf-btn download-pdf">
-                                    <i class="fas fa-download"></i> Скачать
-                                </a>
-                            </div>
-                        `;
-                    } else {
-                        pdfCard.innerHTML = `
-                            <div class="pdf-icon">
-                                <i class="fas fa-file-exclamation" style="color: #ffc107;"></i>
-                            </div>
-                            <div class="pdf-file-name">
-                                ${pdfFile.name}
-                                <span class="file-status file-missing">✗ Отсутствует</span>
-                            </div>
-                            <div class="pdf-file-info">${pdfFile.description}</div>
-                            <div class="pdf-file-info" style="color: #e74c3c; font-size: 14px;">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Файл не найден: ${pdfFile.fileName}
-                            </div>
-                            <div class="pdf-actions">
-                                <button class="pdf-btn view-pdf" disabled style="background: #95a5a6; cursor: not-allowed;">
-                                    <i class="fas fa-eye"></i> Недоступен
-                                </button>
-                                <button class="pdf-btn download-pdf" disabled style="background: #95a5a6; cursor: not-allowed;">
-                                    <i class="fas fa-download"></i> Недоступен
-                                </button>
-                            </div>
-                        `;
-                    }
-                    
-                    pdfFilesGrid.appendChild(pdfCard);
-                }
-                
-                // Обновляем счетчик
-                updatePDFCount(availableCount, pdfFiles.length);
-                
-                // Добавляем нижнюю заметку
-                const footerNote = document.createElement('div');
-                footerNote.className = 'footer-note';
-                
-                if (availableCount === 0) {
-                    footerNote.innerHTML = `
-                        <p style="color: #e74c3c;">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <strong>ВНИМАНИЕ:</strong> Ни один PDF файл не найден в папке razdelpdf/
-                        </p>
-                        <p>Проверьте:</p>
-                        <ul style="text-align: left; max-width: 500px; margin: 10px auto; font-size: 13px;">
-                            <li>Папка <strong>razdelpdf</strong> существует в репозитории GitHub</li>
-                            <li>Файлы загружены в эту папку</li>
-                            <li>Названия файлов совпадают с указанными выше</li>
-                        </ul>
-                    `;
-                } else if (availableCount < pdfFiles.length) {
-                    footerNote.innerHTML = `
-                        <p><i class="fas fa-info-circle"></i> Найдено ${availableCount} из ${pdfFiles.length} файлов</p>
-                        <p style="font-size: 13px; margin-top: 5px;">
-                            Некоторые файлы отсутствуют в папке razdelpdf/
-                        </p>
-                    `;
-                } else {
-                    footerNote.innerHTML = `
-                        <p><i class="fas fa-check-circle" style="color: #27ae60;"></i> Все файлы доступны</p>
-                        <p style="font-size: 13px; margin-top: 5px;">
-                            Файлы находятся в папке: <strong>razdelpdf/</strong>
-                        </p>
-                    `;
-                }
-                
-                pdfFilesGrid.parentNode.appendChild(footerNote);
-            }
-            
-            // Инициализация
-            displayPDFFiles();
+            // Простая обработка ошибок для ссылок
+            document.querySelectorAll('.pdf-btn').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Если файл не существует, браузер сам покажет ошибку
+                    // Мы можем только логировать
+                    console.log('Попытка открыть:', this.href);
+                });
+            });
         });
     </script>
 </body>
 </html>
+
