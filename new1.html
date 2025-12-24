@@ -118,6 +118,17 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             min-height: 60vh;
+            display: none;
+        }
+        
+        .pdf-files-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .pdf-header {
@@ -262,6 +273,29 @@
             box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
         }
         
+        .open-all-btn {
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px auto;
+            text-decoration: none;
+        }
+        
+        .open-all-btn:hover {
+            background: linear-gradient(to right, #8e44ad, #7d3c98);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+        }
+        
         .no-pdf-message {
             text-align: center;
             padding: 60px;
@@ -279,6 +313,22 @@
             margin-top: 20px;
             background: #f9f9f9;
             border-radius: 0 0 15px 15px;
+        }
+        
+        .popup-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+            text-align: center;
+            display: none;
+        }
+        
+        .popup-warning.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
         
         @media (max-width: 768px) {
@@ -313,6 +363,11 @@
                 justify-content: center;
                 padding: 15px;
             }
+            
+            .open-all-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -329,9 +384,15 @@
             <a href="prosl-razdely.html" class="nav-button back-btn">
                 <i class="fas fa-arrow-left"></i> Назад к разделам
             </a>
-            <a href="#pdfFiles" class="nav-button test-questions-btn">
+            <button class="nav-button test-questions-btn" id="openAllTestsBtn">
                 <i class="fas fa-question-circle"></i> Вопросы к тестам
-            </a>
+            </button>
+        </div>
+        
+        <div class="popup-warning" id="popupWarning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Важно:</strong> Браузер может блокировать всплывающие окна. 
+            Нажмите на ссылки ниже или разрешите всплывающие окна для этого сайта.
         </div>
         
         <div class="pdf-files-container" id="pdfFiles">
@@ -339,6 +400,9 @@
                 <h2 class="pdf-title">Вопросы для тестирования</h2>
                 <p class="pdf-subtitle">Все доступные PDF файлы по теме</p>
                 <div class="pdf-count" id="pdfCount">Загрузка...</div>
+                <button class="open-all-btn" id="openAllPDFsBtn">
+                    <i class="fas fa-external-link-alt"></i> Открыть все PDF в новых вкладках
+                </button>
             </div>
             <div class="pdf-files-grid" id="pdfFilesGrid">
                 <!-- PDF файлы будут добавлены через JavaScript -->
@@ -348,10 +412,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ваши PDF файлы из папки razdelpdf с добавлением нового файла
+            // Точные названия файлов с опечатками (как вы указали)
             const pdfFiles = [
                 {
-                    path: 'razdelpdf/Двигатели постоянного тока.pdf',
+                    path: 'razdelpdf/Двигатели постояного тока.pdf',
                     name: 'Двигатели постоянного тока',
                     description: 'Теория и принципы работы двигателей постоянного тока'
                 },
@@ -409,7 +473,7 @@
                         <div class="pdf-file-name">${pdfFile.name}</div>
                         <div class="pdf-file-info">${pdfFile.description}</div>
                         <div class="pdf-actions">
-                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf">
+                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf" data-pdf-path="${pdfFile.path}">
                                 <i class="fas fa-eye"></i> Просмотр
                             </a>
                             <a href="${pdfFile.path}" download="${pdfFile.name}.pdf" class="pdf-btn download-pdf">
@@ -429,9 +493,79 @@
                 pdfFilesGrid.parentNode.appendChild(footerNote);
             }
             
+            // Функция для открытия ВСЕХ PDF файлов в новых вкладках
+            function openAllPDFs() {
+                if (pdfFiles.length === 0) {
+                    alert('Нет доступных PDF файлов для открытия');
+                    return;
+                }
+                
+                // Показываем предупреждение о всплывающих окнах
+                const warning = document.getElementById('popupWarning');
+                if (warning) {
+                    warning.classList.add('show');
+                }
+                
+                // Открываем первый файл сразу
+                window.open(pdfFiles[0].path, '_blank');
+                
+                // Остальные файлы открываем с задержкой
+                let openedCount = 1;
+                for (let i = 1; i < pdfFiles.length; i++) {
+                    setTimeout(() => {
+                        const newWindow = window.open(pdfFiles[i].path, '_blank');
+                        openedCount++;
+                        
+                        // Если последний файл открыт, показываем сообщение
+                        if (openedCount === pdfFiles.length) {
+                            setTimeout(() => {
+                                alert(`Открыто ${openedCount} из ${pdfFiles.length} PDF файлов. Если некоторые не открылись, нажмите на ссылки в списке ниже.`);
+                            }, 1000);
+                        }
+                    }, 1000 * i); // Задержка 1 секунда между открытием
+                }
+            }
+            
+            // Функция для показа контейнера с PDF файлами
+            function showPDFFiles() {
+                const pdfContainer = document.getElementById('pdfFiles');
+                if (pdfContainer) {
+                    pdfContainer.classList.add('show');
+                    
+                    // Прокручиваем к контейнеру
+                    pdfContainer.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            
             // Инициализация
             updatePDFCount();
             displayPDFFiles();
+            
+            // Обработчик для кнопки "Вопросы к тестам"
+            const openAllTestsBtn = document.getElementById('openAllTestsBtn');
+            if (openAllTestsBtn) {
+                openAllTestsBtn.addEventListener('click', function() {
+                    showPDFFiles(); // Показываем контейнер
+                    
+                    // Сначала спрашиваем пользователя
+                    if (confirm(`Открыть все ${pdfFiles.length} PDF файлов в новых вкладках?`)) {
+                        openAllPDFs(); // Открываем все PDF
+                    }
+                });
+            }
+            
+            // Обработчик для кнопки "Открыть все PDF в новых вкладках"
+            const openAllPDFsBtn = document.getElementById('openAllPDFsBtn');
+            if (openAllPDFsBtn) {
+                openAllPDFsBtn.addEventListener('click', function() {
+                    if (confirm(`Открыть все ${pdfFiles.length} PDF файлов в новых вкладках?`)) {
+                        openAllPDFs();
+                    }
+                });
+            }
             
             // Обработчик для кнопки "Назад к разделам"
             const backButton = document.querySelector('.back-btn');
@@ -443,6 +577,40 @@
                     }
                 });
             }
+            
+            // Добавляем обработчики для ссылок "Просмотр" для ручного открытия
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.view-pdf')) {
+                    const link = e.target.closest('.view-pdf');
+                    const pdfPath = link.getAttribute('href');
+                    
+                    // Открываем в новой вкладке
+                    window.open(pdfPath, '_blank');
+                }
+            });
+            
+            // Проверяем доступность файлов
+            async function checkPDFAvailability() {
+                const unavailableFiles = [];
+                
+                for (const pdfFile of pdfFiles) {
+                    try {
+                        const response = await fetch(pdfFile.path, { method: 'HEAD' });
+                        if (!response.ok) {
+                            unavailableFiles.push(pdfFile.name);
+                        }
+                    } catch (error) {
+                        unavailableFiles.push(pdfFile.name);
+                    }
+                }
+                
+                if (unavailableFiles.length > 0) {
+                    console.warn('Недоступные файлы:', unavailableFiles);
+                }
+            }
+            
+            // Запускаем проверку
+            setTimeout(checkPDFAvailability, 1000);
         });
     </script>
 </body>
