@@ -147,57 +147,59 @@
         .question-text {
             font-size: 20px;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             color: #2c3e50;
             text-align: center;
             line-height: 1.4;
         }
         
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+        .input-note {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background-color: #fff8e1;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
         }
         
-        .option {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 18px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
+        .answer-input-container {
+            margin: 25px 0;
+            text-align: center;
         }
         
-        .option:hover {
-            background: #e9ecef;
+        .answer-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .answer-input:focus {
+            outline: none;
             border-color: #3498db;
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
-        .option.selected {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-        
-        .option.correct {
-            background: #27ae60;
-            color: white;
-            border-color: #27ae60;
-        }
-        
-        .option.incorrect {
-            background: #e74c3c;
-            color: white;
-            border-color: #e74c3c;
+        .formula-hint {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-align: center;
         }
         
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
             gap: 15px;
+            margin-top: 20px;
         }
         
         .btn {
@@ -344,9 +346,9 @@
                 font-size: 18px;
             }
             
-            .option {
-                padding: 15px;
-                font-size: 15px;
+            .answer-input {
+                font-size: 16px;
+                padding: 12px;
             }
             
             .navigation-buttons {
@@ -398,11 +400,24 @@
                 <div class="progress-fill" id="progress"></div>
             </div>
             
+            <!-- Важное предупреждение -->
+            <div class="input-note">
+                <i class="fas fa-exclamation-circle"></i>
+                <strong>Важно:</strong> Вводите только формулы без единиц измерения. Например: "E = C<sub>E</sub>nФ"
+            </div>
+            
             <!-- Текст вопроса -->
             <div class="question-text" id="questionText"></div>
             
-            <!-- Варианты ответов -->
-            <div class="options-container" id="optionsContainer"></div>
+            <!-- Поле для ввода ответа -->
+            <div class="answer-input-container">
+                <input type="text" class="answer-input" id="answerInput" 
+                       placeholder="Введите формулу ответа..." 
+                       autocomplete="off">
+                <div class="formula-hint">
+                    Используйте символы *, /, +, -, <sub>...</sub> для нижних индексов
+                </div>
+            </div>
             
             <!-- Кнопки навигации -->
             <div class="navigation-buttons">
@@ -446,7 +461,7 @@
     </div>
 
     <script>
-        // Вопросы из вашего кода
+        // Все те же 10 вопросов
         const allQuestions = [
             {
                 question: "Ток якоря в генераторах с параллельным возбуждением",
@@ -500,24 +515,9 @@
             }
         ];
 
-        // Неправильные ответы из вашего кода
-        const wrongAnswers = [
-            "E = U + R<sub>я</sub>·I<sub>я</sub>",
-            "E = f(I<sub>в</sub>), I<sub>н</sub> = 0", 
-            "I<sub>я</sub> = I<sub>в</sub> = I<sub>н</sub>",
-            "I<sub>в</sub> = f(I<sub>н</sub>), U = const",
-            "I = E<sub>ост</sub>/R<sub>в</sub>",
-            "I<sub>я</sub> = I<sub>н</sub> + I<sub>в</sub>", 
-            "U = f(I<sub>п</sub>), R<sub>в</sub> = const",
-            "e = Blv",
-            "I<sub>н</sub> = (E - R<sub>я</sub>I<sub>я</sub>)/R<sub>н</sub>",
-            "E = C<sub>E</sub>nФ"
-        ];
-
         let questions = [];
         let currentQuestion = 0;
         let userAnswers = [];
-        let questionOptions = []; // Храним варианты ответов для каждого вопроса
         let score = 0;
         let attemptHistory = [];
 
@@ -543,38 +543,11 @@
             }
         }
 
-        // Создание случайных вариантов ответов для вопроса
-        function createQuestionOptions(question) {
-            let options = [question.correctAnswer];
-            
-            // Добавляем 3 случайных неправильных ответа
-            const availableWrongAnswers = wrongAnswers.filter(ans => ans !== question.correctAnswer);
-            const selectedWrongAnswers = [];
-            
-            for (let i = 0; i < 3 && availableWrongAnswers.length > 0; i++) {
-                const randomIndex = Math.floor(Math.random() * availableWrongAnswers.length);
-                selectedWrongAnswers.push(availableWrongAnswers[randomIndex]);
-                availableWrongAnswers.splice(randomIndex, 1);
-            }
-            
-            options = [...options, ...selectedWrongAnswers];
-            
-            // Перемешиваем варианты и возвращаем
-            return options.sort(() => Math.random() - 0.5);
-        }
-
         // Инициализация теста
         function initTest() {
             loadHistory();
             questions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
-            userAnswers = new Array(questions.length).fill(null);
-            questionOptions = []; // Очищаем предыдущие варианты
-            
-            // Создаем варианты ответов для каждого вопроса
-            questions.forEach(question => {
-                questionOptions.push(createQuestionOptions(question));
-            });
-            
+            userAnswers = new Array(questions.length).fill('');
             currentQuestion = 0;
             score = 0;
             
@@ -586,39 +559,21 @@
         // Показать текущий вопрос
         function showQuestion() {
             const question = questions[currentQuestion];
-            const options = questionOptions[currentQuestion];
             
             document.getElementById('questionCounter').textContent = 
                 `Вопрос ${currentQuestion + 1} из ${questions.length}`;
             document.getElementById('questionText').innerHTML = question.question;
             
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
+            // Устанавливаем сохраненный ответ пользователя
+            document.getElementById('answerInput').value = userAnswers[currentQuestion] || '';
             
-            // Создаем элементы вариантов ответов
-            options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[currentQuestion] === option) {
-                    optionElement.classList.add('selected');
-                }
-                optionElement.innerHTML = option;
-                optionElement.onclick = () => selectOption(option);
-                optionsContainer.appendChild(optionElement);
-            });
+            // Фокус на поле ввода
+            document.getElementById('answerInput').focus();
         }
 
-        // Выбор варианта ответа
-        function selectOption(selectedOption) {
-            userAnswers[currentQuestion] = selectedOption;
-            // Просто обновляем выделение, не пересоздавая варианты
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => {
-                option.classList.remove('selected');
-                if (option.innerHTML === selectedOption) {
-                    option.classList.add('selected');
-                }
-            });
+        // Сохранить ответ при вводе
+        function saveAnswer() {
+            userAnswers[currentQuestion] = document.getElementById('answerInput').value.trim();
         }
 
         // Обновление прогресс-бара
@@ -642,6 +597,7 @@
 
         // Следующий вопрос
         function nextQuestion() {
+            saveAnswer();
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
                 showQuestion();
@@ -652,6 +608,7 @@
 
         // Предыдущий вопрос
         function prevQuestion() {
+            saveAnswer();
             if (currentQuestion > 0) {
                 currentQuestion--;
                 showQuestion();
@@ -660,20 +617,59 @@
             }
         }
 
+        // Нормализация формулы для сравнения
+        function normalizeFormula(formula) {
+            if (!formula) return '';
+            // Удаляем лишние пробелы, приводим к нижнему регистру
+            return formula
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/⋅/g, '*')
+                .replace(/·/g, '*')
+                .replace(/×/g, '*')
+                .replace(/–/g, '-')
+                .replace(/[()]/g, '')
+                .replace(/<sub>/g, '')
+                .replace(/<\/sub>/g, '');
+        }
+
+        // Проверка ответа
+        function checkAnswer(userAnswer, correctAnswer) {
+            // Нормализуем оба ответа
+            const normalizedUser = normalizeFormula(userAnswer);
+            const normalizedCorrect = normalizeFormula(correctAnswer);
+            
+            // Сравниваем нормализованные строки
+            return normalizedUser === normalizedCorrect;
+        }
+
         // Завершение теста
         function finishTest() {
+            saveAnswer(); // Сохраняем ответ на последний вопрос
+            
             score = 0;
+            const results = [];
+            
             questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correctAnswer) {
+                const isCorrect = checkAnswer(userAnswers[index], question.correctAnswer);
+                if (isCorrect) {
                     score++;
                 }
+                results.push({
+                    question: question.question,
+                    userAnswer: userAnswers[index],
+                    correctAnswer: question.correctAnswer,
+                    isCorrect: isCorrect,
+                    explanation: question.explanation
+                });
             });
             
             // Сохраняем результат
             const attempt = {
                 date: new Date().toLocaleString('ru-RU'),
                 score: score,
-                total: questions.length
+                total: questions.length,
+                results: results
             };
             
             attemptHistory.push(attempt);
@@ -714,6 +710,24 @@
             document.querySelector('.test-container').style.display = 'block';
             initTest();
         }
+
+        // Сохраняем ответ при изменении поля ввода
+        document.getElementById('answerInput').addEventListener('input', saveAnswer);
+        
+        // Разрешаем навигацию с помощью клавиатуры
+        document.getElementById('answerInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                if (currentQuestion === questions.length - 1) {
+                    finishTest();
+                } else {
+                    nextQuestion();
+                }
+            } else if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                prevQuestion();
+            } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
+                nextQuestion();
+            }
+        });
 
         // Запуск теста при загрузке страницы
         document.addEventListener('DOMContentLoaded', initTest);
