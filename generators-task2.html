@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест: Генераторы постоянного тока - Задачи</title>
+    <title>Тест: Задачи по генераторам постоянного тока</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -147,7 +147,7 @@
         .question-text {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             color: #2c3e50;
             line-height: 1.4;
             background: #f8f9fa;
@@ -156,51 +156,53 @@
             border-left: 4px solid #3498db;
         }
         
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+        .input-note {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background-color: #fff8e1;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
         }
         
-        .option {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 18px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .answer-input-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .answer-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
             font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0 auto;
+            display: block;
         }
         
-        .option:hover {
-            background: #e9ecef;
+        .answer-input:focus {
+            outline: none;
             border-color: #3498db;
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
-        .option.selected {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-        
-        .option.correct {
-            background: #27ae60;
-            color: white;
-            border-color: #27ae60;
-        }
-        
-        .option.incorrect {
-            background: #e74c3c;
-            color: white;
-            border-color: #e74c3c;
+        .formula-hint {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-align: center;
         }
         
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
             gap: 15px;
+            margin-top: 20px;
         }
         
         .btn {
@@ -333,6 +335,55 @@
             transform: translateY(-3px);
         }
         
+        /* Обзор ответов */
+        .answers-review {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .answers-title {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .answer-review-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .answer-review-correct {
+            border-left-color: #27ae60;
+        }
+        
+        .answer-review-incorrect {
+            border-left-color: #e74c3c;
+        }
+        
+        .answer-question {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .answer-user {
+            color: #7f8c8d;
+            margin-bottom: 3px;
+        }
+        
+        .answer-correct {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 width: 95%;
@@ -348,9 +399,10 @@
                 padding: 15px;
             }
             
-            .option {
-                padding: 15px;
+            .answer-input {
                 font-size: 15px;
+                padding: 12px;
+                max-width: 100%;
             }
             
             .navigation-buttons {
@@ -396,16 +448,29 @@
 
         <div class="test-container">
             <!-- Прогресс бар -->
-            <div class="question-counter" id="questionCounter">Задача 1 из 10</div>
+            <div class="question-counter" id="questionCounter">Вопрос 1 из 10</div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progress"></div>
             </div>
             
-            <!-- Текст задачи -->
+            <!-- Важное предупреждение -->
+            <div class="input-note">
+                <i class="fas fa-exclamation-circle"></i>
+                <strong>Важно:</strong> Вводите ответы с единицами измерения (например: "5,5 кВт" или "230 В")
+            </div>
+            
+            <!-- Текст вопроса -->
             <div class="question-text" id="questionText"></div>
             
-            <!-- Варианты ответов -->
-            <div class="options-container" id="optionsContainer"></div>
+            <!-- Поле для ввода ответа -->
+            <div class="answer-input-container">
+                <input type="text" class="answer-input" id="answerInput" 
+                       placeholder="Введите ответ с единицами измерения..." 
+                       autocomplete="off">
+                <div class="formula-hint">
+                    Разделитель десятичных дробей - запятая или точка
+                </div>
+            </div>
             
             <!-- Кнопки навигации -->
             <div class="navigation-buttons">
@@ -431,6 +496,13 @@
                 <div class="score-text" id="scoreText">правильных ответов из 10</div>
             </div>
 
+            <!-- Обзор ответов -->
+            <div class="answers-review" id="answersReview">
+                <div class="answers-title">Обзор ваших ответов</div>
+                <div id="answersList"></div>
+            </div>
+
+            <!-- История попыток -->
             <div class="history-container" id="resultsHistory" style="display: none;">
                 <div class="history-title">История ваших попыток</div>
                 <div id="historyList"></div>
@@ -448,7 +520,7 @@
     </div>
 
     <script>
-        // Задачи по генераторам постоянного тока
+        // Практические задачи по генераторам постоянного тока
         const allQuestions = [
             {
                 question: "1. Найти полезную мощность генератора, если при напряжении на выводах 110 В ток нагрузки равен 50 А.",
@@ -492,7 +564,7 @@
             },
             {
                 question: "9. Напряжение на зажимах генератора параллельного возбуждения 120 В. Сопротивление внешней цепи 4 Ом, сопротивление якоря 0,25 Ом, сопротивление обмотки возбуждения 60 Ом. Определить мощность первичного двигателя, который вращает генератор, если КПД генератора 80%.",
-                correctAnswer: "5,12 кВт",
+                correctAnswer: "5,1 кВт",
                 explanation: "Iн = U/Rн = 120/4 = 30 А; Iв = U/Rв = 120/60 = 2 А; Iя = Iн + Iв = 32 А; P2 = U × Iя + Iв² × Rв = 120 × 32 + 4 × 60 = 3840 + 240 = 4080 Вт; P1 = P2/η = 4080/0,8 = 5100 Вт = 5,1 кВт"
             },
             {
@@ -502,30 +574,69 @@
             }
         ];
 
-        // Неправильные ответы
-        const wrongAnswers = [
-            "4,8 кВт", "6,2 кВт", "5,8 кВт",
-            "СЕ = 10,5; Е = 210 В", "СЕ = 12; Е = 240 В", "СЕ = 11; Е = 220 В",
-            "310 В", "335 В", "340 В",
-            "5 Ом", "6 Ом", "4,8 Ом",
-            "4,2 А", "4,8 А", "5 А",
-            "10 кВт", "12 кВт", "9 кВт",
-            "600 об/мин", "680 об/мин", "620 об/мин",
-            "130 В", "138 В", "132 В",
-            "4,8 кВт", "5,4 кВт", "4,5 кВт",
-            "0,75", "0,85", "0,78"
-        ];
-
         let questions = [];
         let currentQuestion = 0;
         let userAnswers = [];
-        let questionOptions = [];
         let score = 0;
         let attemptHistory = [];
 
+        // Нормализация числовых значений
+        function normalizeNumber(str) {
+            if (!str) return '';
+            // Заменяем запятые на точки для чисел
+            return str.toString().replace(',', '.').trim();
+        }
+
+        // Сравнение ответов (более гибкое для числовых значений)
+        function compareAnswers(userAnswer, correctAnswer) {
+            if (!userAnswer) return false;
+            
+            const user = normalizeNumber(userAnswer.toLowerCase());
+            const correct = normalizeNumber(correctAnswer.toLowerCase());
+            
+            // Если ответы полностью совпадают
+            if (user === correct) return true;
+            
+            // Извлекаем числовые значения
+            const userNumbers = user.match(/[-+]?\d*\.?\d+/g);
+            const correctNumbers = correct.match(/[-+]?\d*\.?\d+/g);
+            
+            if (!userNumbers || !correctNumbers) return false;
+            
+            // Проверяем, что количество чисел совпадает
+            if (userNumbers.length !== correctNumbers.length) return false;
+            
+            // Проверяем каждое число с допустимой погрешностью 1%
+            for (let i = 0; i < userNumbers.length; i++) {
+                const userNum = parseFloat(userNumbers[i]);
+                const correctNum = parseFloat(correctNumbers[i]);
+                
+                if (isNaN(userNum) || isNaN(correctNum)) continue;
+                
+                // Допустимая погрешность 1%
+                const tolerance = Math.abs(correctNum * 0.01);
+                if (Math.abs(userNum - correctNum) > tolerance) {
+                    return false;
+                }
+            }
+            
+            // Проверяем единицы измерения
+            const userWithoutNumbers = user.replace(/[-+]?\d*\.?\d+/g, '').trim();
+            const correctWithoutNumbers = correct.replace(/[-+]?\d*\.?\d+/g, '').trim();
+            
+            // Разрешаем разные формы записи единиц (кВт = Квт, Ом = ом и т.д.)
+            const normalizedUserUnits = userWithoutNumbers.toLowerCase();
+            const normalizedCorrectUnits = correctWithoutNumbers.toLowerCase();
+            
+            // Проверяем, что остатки строк похожи
+            return normalizedUserUnits.includes(normalizedCorrectUnits) || 
+                   normalizedCorrectUnits.includes(normalizedUserUnits) ||
+                   normalizedUserUnits === normalizedCorrectUnits;
+        }
+
         // Загрузка истории
         function loadHistory() {
-            const savedHistory = localStorage.getItem('generatorsTasksHistory');
+            const savedHistory = localStorage.getItem('generatorProblemsHistory');
             if (savedHistory) {
                 attemptHistory = JSON.parse(savedHistory);
                 updateHistoryDisplay();
@@ -533,7 +644,7 @@
         }
 
         function saveHistory() {
-            localStorage.setItem('generatorsTasksHistory', JSON.stringify(attemptHistory));
+            localStorage.setItem('generatorProblemsHistory', JSON.stringify(attemptHistory));
         }
 
         function updateHistoryDisplay() {
@@ -545,38 +656,11 @@
             }
         }
 
-        // Создание случайных вариантов ответов для задачи
-        function createQuestionOptions(question) {
-            let options = [question.correctAnswer];
-            
-            // Добавляем 3 случайных неправильных ответа
-            const availableWrongAnswers = [...wrongAnswers];
-            const selectedWrongAnswers = [];
-            
-            for (let i = 0; i < 3 && availableWrongAnswers.length > 0; i++) {
-                const randomIndex = Math.floor(Math.random() * availableWrongAnswers.length);
-                selectedWrongAnswers.push(availableWrongAnswers[randomIndex]);
-                availableWrongAnswers.splice(randomIndex, 1);
-            }
-            
-            options = [...options, ...selectedWrongAnswers];
-            
-            // Перемешиваем варианты и возвращаем
-            return options.sort(() => Math.random() - 0.5);
-        }
-
         // Инициализация теста
         function initTest() {
             loadHistory();
-            questions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
-            userAnswers = new Array(questions.length).fill(null);
-            questionOptions = [];
-            
-            // Создаем варианты ответов для каждой задачи
-            questions.forEach(question => {
-                questionOptions.push(createQuestionOptions(question));
-            });
-            
+            questions = [...allQuestions];
+            userAnswers = new Array(questions.length).fill('');
             currentQuestion = 0;
             score = 0;
             
@@ -585,42 +669,24 @@
             updateNavigation();
         }
 
-        // Показать текущую задачу
+        // Показать текущий вопрос
         function showQuestion() {
             const question = questions[currentQuestion];
-            const options = questionOptions[currentQuestion];
             
             document.getElementById('questionCounter').textContent = 
-                `Задача ${currentQuestion + 1} из ${questions.length}`;
+                `Вопрос ${currentQuestion + 1} из ${questions.length}`;
             document.getElementById('questionText').innerHTML = question.question;
             
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
+            // Устанавливаем сохраненный ответ пользователя
+            document.getElementById('answerInput').value = userAnswers[currentQuestion] || '';
             
-            // Создаем элементы вариантов ответов
-            options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[currentQuestion] === option) {
-                    optionElement.classList.add('selected');
-                }
-                optionElement.innerHTML = option;
-                optionElement.onclick = () => selectOption(option);
-                optionsContainer.appendChild(optionElement);
-            });
+            // Фокус на поле ввода
+            document.getElementById('answerInput').focus();
         }
 
-        // Выбор варианта ответа
-        function selectOption(selectedOption) {
-            userAnswers[currentQuestion] = selectedOption;
-            // Обновляем выделение
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => {
-                option.classList.remove('selected');
-                if (option.innerHTML === selectedOption) {
-                    option.classList.add('selected');
-                }
-            });
+        // Сохранить ответ при вводе
+        function saveAnswer() {
+            userAnswers[currentQuestion] = document.getElementById('answerInput').value.trim();
         }
 
         // Обновление прогресс-бара
@@ -642,8 +708,9 @@
             }
         }
 
-        // Следующая задача
+        // Следующий вопрос
         function nextQuestion() {
+            saveAnswer();
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
                 showQuestion();
@@ -652,8 +719,9 @@
             }
         }
 
-        // Предыдущая задача
+        // Предыдущий вопрос
         function prevQuestion() {
+            saveAnswer();
             if (currentQuestion > 0) {
                 currentQuestion--;
                 showQuestion();
@@ -664,18 +732,31 @@
 
         // Завершение теста
         function finishTest() {
+            saveAnswer(); // Сохраняем ответ на последний вопрос
+            
             score = 0;
+            const results = [];
+            
             questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correctAnswer) {
+                const isCorrect = compareAnswers(userAnswers[index], question.correctAnswer);
+                if (isCorrect) {
                     score++;
                 }
+                results.push({
+                    question: question.question,
+                    userAnswer: userAnswers[index],
+                    correctAnswer: question.correctAnswer,
+                    isCorrect: isCorrect,
+                    explanation: question.explanation
+                });
             });
             
             // Сохраняем результат
             const attempt = {
                 date: new Date().toLocaleString('ru-RU'),
                 score: score,
-                total: questions.length
+                total: questions.length,
+                results: results
             };
             
             attemptHistory.push(attempt);
@@ -685,9 +766,41 @@
             document.getElementById('scoreText').textContent = 
                 `правильных ответов из ${questions.length}`;
             
+            // Показываем обзор ответов
+            showAnswersReview(results);
+            
             document.querySelector('.test-container').style.display = 'none';
             document.getElementById('resultsContainer').style.display = 'block';
             showResultsHistory();
+        }
+
+        // Показать обзор ответов
+        function showAnswersReview(results) {
+            const answersList = document.getElementById('answersList');
+            answersList.innerHTML = '';
+            
+            results.forEach((result, index) => {
+                const answerItem = document.createElement('div');
+                answerItem.className = 'answer-review-item';
+                
+                if (result.isCorrect) {
+                    answerItem.classList.add('answer-review-correct');
+                } else {
+                    answerItem.classList.add('answer-review-incorrect');
+                }
+                
+                const userAnswer = result.userAnswer || 'Ответ не дан';
+                const correctAnswer = result.correctAnswer;
+                
+                answerItem.innerHTML = `
+                    <div class="answer-question">${result.question}</div>
+                    <div class="answer-user">Ваш ответ: <strong>${userAnswer}</strong></div>
+                    <div class="answer-correct">Правильный ответ: <strong>${correctAnswer}</strong></div>
+                    ${result.explanation ? `<div class="answer-explanation" style="font-size: 14px; color: #666; margin-top: 5px;">Решение: ${result.explanation}</div>` : ''}
+                `;
+                
+                answersList.appendChild(answerItem);
+            });
         }
 
         function showResultsHistory() {
@@ -716,6 +829,24 @@
             document.querySelector('.test-container').style.display = 'block';
             initTest();
         }
+
+        // Сохраняем ответ при изменении поля ввода
+        document.getElementById('answerInput').addEventListener('input', saveAnswer);
+        
+        // Разрешаем навигацию с помощью клавиатуры
+        document.getElementById('answerInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                if (currentQuestion === questions.length - 1) {
+                    finishTest();
+                } else {
+                    nextQuestion();
+                }
+            } else if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                prevQuestion();
+            } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
+                nextQuestion();
+            }
+        });
 
         // Запуск теста при загрузке страницы
         document.addEventListener('DOMContentLoaded', initTest);
