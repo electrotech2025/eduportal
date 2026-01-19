@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задачи: Трансформаторы</title>
+    <title>Тест: Трансформаторы</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -111,7 +111,7 @@
             top: 10px;
         }
         
-        .tasks-container {
+        .test-container {
             background: white;
             border-radius: 12px;
             padding: 30px;
@@ -119,123 +119,87 @@
             margin-bottom: 25px;
         }
         
-        .task-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #2c3e50;
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .question-counter {
             text-align: center;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
         
-        .task-item {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 8px;
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-        }
-        
-        .task-question {
-            font-size: 18px;
+        .question-text {
+            font-size: 20px;
             font-weight: 600;
             margin-bottom: 15px;
             color: #2c3e50;
+            text-align: center;
+            line-height: 1.4;
         }
         
-        .task-answer {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: 15px;
+        .input-note {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background-color: #fff8e1;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .answer-input-container {
+            margin: 25px 0;
+            text-align: center;
         }
         
         .answer-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
             border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            margin: 0 auto;
+            display: block;
         }
         
         .answer-input:focus {
-            border-color: #3498db;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
-        .check-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .check-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            display: none;
-        }
-        
-        .result.correct {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .result.incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .solution-btn {
-            background: transparent;
-            border: none;
-            color: #3498db;
+        .formula-hint {
             font-size: 14px;
-            cursor: pointer;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .solution-btn:hover {
-            text-decoration: underline;
-        }
-        
-        .solution {
-            margin-top: 15px;
-            padding: 15px;
-            background: #e8f4fc;
-            border-radius: 6px;
-            border-left: 3px solid #3498db;
-            display: none;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-align: center;
         }
         
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .btn {
@@ -257,7 +221,7 @@
             color: white;
         }
         
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: #2980b9;
             transform: translateY(-2px);
         }
@@ -272,10 +236,16 @@
             transform: translateY(-2px);
         }
         
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         .results-container {
+            display: none;
             text-align: center;
             padding: 30px;
-            display: none;
         }
         
         .results-icon {
@@ -298,6 +268,96 @@
         .score-text {
             font-size: 18px;
             color: #7f8c8d;
+        }
+        
+        .answers-review {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .answers-title {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .answer-review-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .answer-review-correct {
+            border-left-color: #27ae60;
+        }
+        
+        .answer-review-incorrect {
+            border-left-color: #e74c3c;
+        }
+        
+        .answer-question {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .answer-user {
+            color: #7f8c8d;
+            margin-bottom: 3px;
+        }
+        
+        .answer-correct {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .history-info {
+            background: #fff3cd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .history-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .history-title {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .history-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .history-date {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .history-score {
+            color: #27ae60;
+            font-weight: 600;
         }
         
         .back-btn {
@@ -326,22 +386,17 @@
                 padding: 15px;
             }
             
-            .tasks-container {
+            .test-container {
                 padding: 20px;
             }
             
-            .task-question {
+            .question-text {
+                font-size: 18px;
+            }
+            
+            .answer-input {
                 font-size: 16px;
-            }
-            
-            .task-answer {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .check-btn {
-                width: 100%;
-                justify-content: center;
+                padding: 12px;
             }
             
             .navigation-buttons {
@@ -361,7 +416,7 @@
             <div class="header-content">
                 <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
                 <div class="logo">Электро<span>Техника</span></div>
-                <div class="subject">Задачи по электротехнике</div>
+                <div class="subject">Тесты по электротехнике</div>
                 <nav id="mainNav">
                     <a href="index.html" class="nav-btn">Главная</a>
                     <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
@@ -376,125 +431,57 @@
     </header>
 
     <div class="container">
-        <!-- Исправленная кнопка "Назад" - теперь ведет на tests.html -->
         <a href="tests.html" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к тестам</a>
         
-        <div class="tasks-container">
-            <h2 class="task-title">Задачи по трансформаторам</h2>
+        <div class="history-info" id="historyInfo" style="display: none;">
+            <i class="fas fa-history"></i> 
+            <strong>История попыток:</strong> 
+            <span id="attemptsCount">0</span> попыток, 
+            лучший результат: <span id="bestScore">0</span>/10
+        </div>
+
+        <div class="test-container">
+            <!-- Прогресс бар -->
+            <div class="question-counter" id="questionCounter">Вопрос 1 из 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
             
-            <!-- Задача 1 -->
-            <div class="task-item" id="task1">
-                <div class="task-question">
-                    1. Найти число витков вторичной обмотки трансформатора, если при максимальном магнитном потоке в магнитопроводе 0,001 Вб и частоте тока в сети 50 Гц в обмотке наводится ЭДС, равная 220 В.
-                </div>
-                <div class="task-answer">
-                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
-                    <button class="check-btn" onclick="checkAnswer(1)"><i class="fas fa-check"></i> Проверить</button>
-                </div>
-                <div class="result" id="result1"></div>
-                <button class="solution-btn" onclick="toggleSolution(1)"><i class="fas fa-lightbulb"></i> Показать решение</button>
-                <div class="solution" id="solution1">
-                    <p><strong>Решение:</strong></p>
-                    <p>Формула для ЭДС: E = 4.44 * f * Ф * N</p>
-                    <p>Отсюда N = E / (4.44 * f * Ф)</p>
-                    <p>N = 220 / (4.44 * 50 * 0.001) = 220 / 0.222 = 990 витков</p>
-                    <p><strong>Ответ: 990 витков</strong></p>
+            <!-- Важное предупреждение -->
+            <div class="input-note">
+                <i class="fas fa-exclamation-circle"></i>
+                <strong>Важно:</strong> Вводите только формулы без единиц измерения. Например: "U<sub>1</sub>/U<sub>2</sub> = N<sub>1</sub>/N<sub>2</sub>"
+            </div>
+            
+            <!-- Текст вопроса -->
+            <div class="question-text" id="questionText"></div>
+            
+            <!-- Поле для ввода ответа -->
+            <div class="answer-input-container">
+                <input type="text" class="answer-input" id="answerInput" 
+                       placeholder="Введите формулу ответа..." 
+                       autocomplete="off">
+                <div class="formula-hint">
+                    Используйте символы *, /, +, -, <sub>...</sub> для нижних индексов, √ для корня
                 </div>
             </div>
             
-            <!-- Задача 2 -->
-            <div class="task-item" id="task2">
-                <div class="task-question">
-                    2. Определить коэффициент трансформации однофазного трансформатора, если амплитуда магнитной индукции в нем 0,8 Тл; сечение магнитопровода 11,5 см³; витков вторичной обмотки 18. Трансформатор включен в сеть напряжением 220 В и частотой 50 Гц.
-                </div>
-                <div class="task-answer">
-                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
-                    <button class="check-btn" onclick="checkAnswer(2)"><i class="fas fa-check"></i> Проверить</button>
-                </div>
-                <div class="result" id="result2"></div>
-                <button class="solution-btn" onclick="toggleSolution(2)"><i class="fas fa-lightbulb"></i> Показать решение</button>
-                <div class="solution" id="solution2">
-                    <p><strong>Решение:</strong></p>
-                    <p>Сначала найдем число витков первичной обмотки:</p>
-                    <p>N₁ = U₁ / (4.44 * f * B * S)</p>
-                    <p>N₁ = 220 / (4.44 * 50 * 0.8 * 11.5*10⁻⁶) = 220 / (4.44 * 50 * 0.8 * 0.0000115) ≈ 1078 витков</p>
-                    <p>Коэффициент трансформации: k = N₁ / N₂ = 1078 / 18 ≈ 60</p>
-                    <p><strong>Ответ: 60</strong></p>
-                </div>
-            </div>
-            
-            <!-- Задача 3 -->
-            <div class="task-item" id="task3">
-                <div class="task-question">
-                    3. Трансформатор с номинальной мощностью 10 кВА имеет номинальное вторичное напряжение 400 В. Найти полезную мощность, если при коэффициенте мощности 0,86 вторичный ток составил 24 А. Потерями в трансформаторе пренебречь.
-                </div>
-                <div class="task-answer">
-                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
-                    <button class="check-btn" onclick="checkAnswer(3)"><i class="fas fa-check"></i> Проверить</button>
-                </div>
-                <div class="result" id="result3"></div>
-                <button class="solution-btn" onclick="toggleSolution(3)"><i class="fas fa-lightbulb"></i> Показать решение</button>
-                <div class="solution" id="solution3">
-                    <p><strong>Решение:</strong></p>
-                    <p>Полезная мощность P = U * I * cosφ</p>
-                    <p>P = 400 * 24 * 0.86 = 8256 Вт = 8,256 кВт</p>
-                    <p><strong>Ответ: 8,256 кВт</strong></p>
-                </div>
-            </div>
-            
-            <!-- Задача 4 -->
-            <div class="task-item" id="task4">
-                <div class="task-question">
-                    4. Число витков первичной обмотки 100, вторичной 500. Определить напряжение холостого хода вторичной обмотки, если трансформатор включен в сеть напряжением 220 В. Потерями в трансформаторе пренебречь.
-                </div>
-                <div class="task-answer">
-                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
-                    <button class="check-btn" onclick="checkAnswer(4)"><i class="fas fa-check"></i> Проверить</button>
-                </div>
-                <div class="result" id="result4"></div>
-                <button class="solution-btn" onclick="toggleSolution(4)"><i class="fas fa-lightbulb"></i> Показать решение</button>
-                <div class="solution" id="solution4">
-                    <p><strong>Решение:</strong></p>
-                    <p>Коэффициент трансформации k = N₁ / N₂ = 100 / 500 = 0.2</p>
-                    <p>Напряжение вторичной обмотки U₂ = U₁ / k = 220 / 0.2 = 1100 В</p>
-                    <p><strong>Ответ: 1100 В</strong></p>
-                </div>
-            </div>
-            
-            <!-- Задача 5 -->
-            <div class="task-item" id="task5">
-                <div class="task-question">
-                    5. Определить КПД трехфазного трансформатора номинальной мощностью 630 кВА, работающего с номинальной нагрузкой при коэффициенте мощности потребителя 0,85. Потери в стали 1,56 кВт, потери в обмотках 12,2 кВт.
-                </div>
-                <div class="task-answer">
-                    <input type="text" class="answer-input" placeholder="Введите ваш ответ">
-                    <button class="check-btn" onclick="checkAnswer(5)"><i class="fas fa-check"></i> Проверить</button>
-                </div>
-                <div class="result" id="result5"></div>
-                <button class="solution-btn" onclick="toggleSolution(5)"><i class="fas fa-lightbulb"></i> Показать решение</button>
-                <div class="solution" id="solution5">
-                    <p><strong>Решение:</strong></p>
-                    <p>Полезная мощность P₂ = S * cosφ = 630 * 0.85 = 535.5 кВт</p>
-                    <p>Суммарные потери P_потерь = 1.56 + 12.2 = 13.76 кВт</p>
-                    <p>КПД = P₂ / (P₂ + P_потерь) * 100% = 535.5 / (535.5 + 13.76) * 100% ≈ 97.5%</p>
-                    <p><strong>Ответ: 97.5 %</strong></p>
-                </div>
-            </div>
-            
-            <!-- Остальные задачи можно добавить аналогично -->
-            
+            <!-- Кнопки навигации -->
             <div class="navigation-buttons">
-                <button class="btn btn-secondary" onclick="checkAllAnswers()">
-                    <i class="fas fa-check-double"></i> Проверить все ответы
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>
+                    <i class="fas fa-arrow-left"></i> Назад
                 </button>
-                <button class="btn btn-primary" onclick="showResults()">
-                    <i class="fas fa-chart-bar"></i> Показать результаты
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+                    Далее <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-primary" id="finishBtn" onclick="finishTest()" style="display: none;">
+                    Завершить тест
                 </button>
             </div>
         </div>
         
         <!-- Результаты -->
-        <div class="tasks-container results-container" id="resultsContainer">
+        <div class="test-container results-container" id="resultsContainer">
             <div class="results-icon">
                 <i class="fas fa-trophy"></i>
             </div>
@@ -502,12 +489,23 @@
                 <div class="score-value" id="finalScore">0</div>
                 <div class="score-text" id="scoreText">правильных ответов из 10</div>
             </div>
+
+            <!-- Обзор ответов -->
+            <div class="answers-review" id="answersReview">
+                <div class="answers-title">Обзор ваших ответов</div>
+                <div id="answersList"></div>
+            </div>
+
+            <!-- История попыток -->
+            <div class="history-container" id="resultsHistory" style="display: none;">
+                <div class="history-title">История ваших попыток</div>
+                <div id="historyList"></div>
+            </div>
             
             <div class="navigation-buttons">
-                <button class="btn btn-secondary" onclick="resetAnswers()">
-                    <i class="fas fa-redo"></i> Начать заново
+                <button class="btn btn-secondary" onclick="restartTest()">
+                    <i class="fas fa-redo"></i> Пройти еще раз
                 </button>
-                <!-- Исправленная кнопка - теперь ведет на tests.html -->
                 <a href="tests.html" class="btn btn-primary">
                     <i class="fas fa-list"></i> К списку тестов
                 </a>
@@ -516,101 +514,347 @@
     </div>
 
     <script>
-        // Правильные ответы
-        const correctAnswers = {
-            1: "990",
-            2: "60",
-            3: "8,256кВт",
-            4: "1100 В",
-            5: "97,5 %",
-            6: "1, 73 и 220 В",
-            7: "62,474А",
-            8: "0,075Ом",
-            9: "0,6",
-            10: "0,94"
-        };
-        
-        let userAnswers = {};
+        // Вопросы по трансформаторам (формулы)
+        const allQuestions = [
+            {
+                question: "Формула для ЭДС трансформатора при заданном магнитном потоке и частоте",
+                correctAnswer: "E = 4,44·f·Ф·N",
+                explanation: "Основная формула ЭДС трансформатора: E = 4,44 × f × Ф × N, где f - частота, Ф - магнитный поток, N - число витков."
+            },
+            {
+                question: "Коэффициент трансформации через отношение напряжений",
+                correctAnswer: "k = U<sub>1</sub>/U<sub>2</sub>",
+                explanation: "Коэффициент трансформации определяется как отношение напряжений первичной и вторичной обмоток."
+            },
+            {
+                question: "Коэффициент трансформации через отношение чисел витков",
+                correctAnswer: "k = N<sub>1</sub>/N<sub>2</sub>",
+                explanation: "Коэффициент трансформации также равен отношению чисел витков первичной и вторичной обмоток."
+            },
+            {
+                question: "Ток холостого хода трансформатора",
+                correctAnswer: "I<sub>0</sub> = √(I<sub>μ</sub>² + I<sub>а</sub>²)",
+                explanation: "Ток холостого хода состоит из намагничивающей (Iμ) и активной (Iа) составляющих."
+            },
+            {
+                question: "Мощность трансформатора через напряжение и ток",
+                correctAnswer: "S = U·I",
+                explanation: "Полная мощность трансформатора равна произведению напряжения и тока (для однофазного)."
+            },
+            {
+                question: "Полезная мощность трансформатора с учетом коэффициента мощности",
+                correctAnswer: "P = U·I·cosφ",
+                explanation: "Активная (полезная) мощность равна полной мощности, умноженной на коэффициент мощности cosφ."
+            },
+            {
+                question: "КПД трансформатора",
+                correctAnswer: "η = P<sub>2</sub>/P<sub>1</sub>",
+                explanation: "Коэффициент полезного действия равен отношению полезной мощности P₂ к потребляемой мощности P₁."
+            },
+            {
+                question: "Напряжение короткого замыкания трансформатора",
+                correctAnswer: "U<sub>к</sub> = I<sub>н</sub>·Z<sub>к</sub>",
+                explanation: "Напряжение короткого замыкания равно произведению номинального тока на полное сопротивление короткого замыкания."
+            },
+            {
+                question: "Сопротивление короткого замыкания трансформатора",
+                correctAnswer: "Z<sub>к</sub> = √(R<sub>к</sub>² + X<sub>к</sub>²)",
+                explanation: "Полное сопротивление короткого замыкания состоит из активной (Rк) и реактивной (Xк) составляющих."
+            },
+            {
+                question: "Потери в стали трансформатора",
+                correctAnswer: "P<sub>ст</sub> = P<sub>гист</sub> + P<sub>вт</sub>",
+                explanation: "Потери в стали состоят из потерь на гистерезис (Pгист) и вихревые токи (Pвт)."
+            }
+        ];
+
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let isAnswered = [];
+        let isCorrect = [];
         let score = 0;
-        
-        // Проверка ответа
-        function checkAnswer(taskNumber) {
-            const input = document.querySelector(`#task${taskNumber} .answer-input`);
-            const result = document.getElementById(`result${taskNumber}`);
-            const userAnswer = input.value.trim();
+        let attemptHistory = [];
+
+        // Загрузка истории
+        function loadHistory() {
+            const savedHistory = localStorage.getItem('transformersTestHistory');
+            if (savedHistory) {
+                attemptHistory = JSON.parse(savedHistory);
+                updateHistoryDisplay();
+            }
+        }
+
+        function saveHistory() {
+            localStorage.setItem('transformersTestHistory', JSON.stringify(attemptHistory));
+        }
+
+        function updateHistoryDisplay() {
+            if (attemptHistory.length > 0) {
+                document.getElementById('historyInfo').style.display = 'block';
+                document.getElementById('attemptsCount').textContent = attemptHistory.length;
+                const bestScore = Math.max(...attemptHistory.map(attempt => attempt.score));
+                document.getElementById('bestScore').textContent = bestScore;
+            }
+        }
+
+        // Инициализация теста
+        function initTest() {
+            loadHistory();
+            questions = [...allQuestions];
+            userAnswers = new Array(questions.length).fill('');
+            isAnswered = new Array(questions.length).fill(false);
+            isCorrect = new Array(questions.length).fill(false);
             
-            userAnswers[taskNumber] = userAnswer;
-            
-            if (userAnswer.toLowerCase() === correctAnswers[taskNumber].toLowerCase()) {
-                result.textContent = "Правильно!";
-                result.className = "result correct";
-                result.style.display = "block";
-            } else {
-                result.textContent = `Неверно. Правильный ответ: ${correctAnswers[taskNumber]}`;
-                result.className = "result incorrect";
-                result.style.display = "block";
-            }
-        }
-        
-        // Показать/скрыть решение
-        function toggleSolution(taskNumber) {
-            const solution = document.getElementById(`solution${taskNumber}`);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-            } else {
-                solution.style.display = "block";
-            }
-        }
-        
-        // Проверить все ответы
-        function checkAllAnswers() {
-            for (let i = 1; i <= 10; i++) {
-                if (document.querySelector(`#task${i} .answer-input`)) {
-                    checkAnswer(i);
-                }
-            }
-        }
-        
-        // Показать результаты
-        function showResults() {
+            currentQuestion = 0;
             score = 0;
-            for (let i = 1; i <= 10; i++) {
-                if (userAnswers[i] && userAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
-                    score++;
+            
+            showQuestion();
+            updateProgress();
+            updateNavigation();
+        }
+
+        // Показать текущий вопрос
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionCounter').textContent = 
+                `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+            document.getElementById('questionText').innerHTML = question.question;
+            
+            const answerInput = document.getElementById('answerInput');
+            
+            answerInput.value = userAnswers[currentQuestion];
+            
+            if (isAnswered[currentQuestion]) {
+                answerInput.disabled = true;
+                answerInput.style.background = isCorrect[currentQuestion] ? '#d4edda' : '#f8d7da';
+                answerInput.style.borderColor = isCorrect[currentQuestion] ? '#28a745' : '#dc3545';
+            } else {
+                answerInput.disabled = false;
+                answerInput.style.background = 'white';
+                answerInput.style.borderColor = '#ddd';
+            }
+            
+            answerInput.focus();
+        }
+
+        // Сохранить ответ при вводе
+        function saveAnswer() {
+            const answerInput = document.getElementById('answerInput');
+            userAnswers[currentQuestion] = answerInput.value.trim();
+        }
+
+        // Нормализация формулы для сравнения
+        function normalizeFormula(formula) {
+            if (!formula) return '';
+            
+            return formula
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/,/g, '.')
+                .replace(/⋅/g, '*')
+                .replace(/·/g, '*')
+                .replace(/×/g, '*')
+                .replace(/–/g, '-')
+                .replace(/[()]/g, '')
+                .replace(/<sub>/g, '')
+                .replace(/<\/sub>/g, '')
+                .replace(/²/g, '^2')
+                .replace(/³/g, '^3')
+                .replace(/√/g, 'sqrt');
+        }
+
+        // Проверка ответа
+        function checkAnswer() {
+            const answerInput = document.getElementById('answerInput');
+            
+            if (answerInput.value.trim() === '') {
+                alert('Пожалуйста, введите ответ перед проверкой.');
+                return;
+            }
+            
+            saveAnswer();
+            
+            const userAnswer = normalizeFormula(answerInput.value);
+            const correctAnswer = normalizeFormula(questions[currentQuestion].correctAnswer);
+            
+            let isAnswerCorrect = userAnswer === correctAnswer;
+            
+            // Также проверяем альтернативные варианты написания
+            if (!isAnswerCorrect) {
+                // Проверяем варианты с точкой и запятой
+                const userWithDot = userAnswer.replace(/\./g, ',');
+                const correctWithComma = correctAnswer.replace(/,/g, '.');
+                
+                if (userWithDot === correctAnswer || userAnswer === correctWithComma) {
+                    isAnswerCorrect = true;
                 }
             }
+            
+            isAnswered[currentQuestion] = true;
+            isCorrect[currentQuestion] = isAnswerCorrect;
+            
+            answerInput.disabled = true;
+            answerInput.style.background = isAnswerCorrect ? '#d4edda' : '#f8d7da';
+            answerInput.style.borderColor = isAnswerCorrect ? '#28a745' : '#dc3545';
+            
+            // Переходим к следующему вопросу или показываем кнопку завершения
+            if (currentQuestion === questions.length - 1) {
+                updateNavigation();
+            } else {
+                setTimeout(() => {
+                    nextQuestion();
+                }, 800);
+            }
+        }
+
+        // Обновление прогресс-бара
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        // Обновление кнопок навигации
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('finishBtn').style.display = 'flex';
+                
+                const allAnswered = isAnswered.every(answer => answer === true);
+                document.getElementById('finishBtn').disabled = !allAnswered;
+            } else {
+                document.getElementById('nextBtn').style.display = 'flex';
+                document.getElementById('finishBtn').style.display = 'none';
+            }
+        }
+
+        // Следующий вопрос
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Предыдущий вопрос
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Завершение теста
+        function finishTest() {
+            score = isCorrect.filter(correct => correct === true).length;
+            
+            // Сохраняем результат
+            const attempt = {
+                date: new Date().toLocaleString('ru-RU'),
+                score: score,
+                total: questions.length
+            };
+            
+            attemptHistory.push(attempt);
+            saveHistory();
             
             document.getElementById('finalScore').textContent = score;
-            document.getElementById('scoreText').textContent = `правильных ответов из 10`;
+            document.getElementById('scoreText').textContent = 
+                `правильных ответов из ${questions.length}`;
             
-            document.querySelector('.tasks-container').style.display = 'none';
+            // Показываем обзор ответов
+            showAnswersReview();
+            
+            document.querySelector('.test-container').style.display = 'none';
             document.getElementById('resultsContainer').style.display = 'block';
+            showResultsHistory();
         }
-        
-        // Сбросить ответы
-        function resetAnswers() {
-            userAnswers = {};
-            score = 0;
+
+        // Показать обзор ответов
+        function showAnswersReview() {
+            const answersList = document.getElementById('answersList');
+            answersList.innerHTML = '';
             
-            const inputs = document.querySelectorAll('.answer-input');
-            inputs.forEach(input => {
-                input.value = '';
+            questions.forEach((question, index) => {
+                const answerItem = document.createElement('div');
+                answerItem.className = 'answer-review-item';
+                
+                if (isCorrect[index]) {
+                    answerItem.classList.add('answer-review-correct');
+                } else {
+                    answerItem.classList.add('answer-review-incorrect');
+                }
+                
+                const userAnswer = userAnswers[index] || 'Ответ не дан';
+                const correctAnswer = question.correctAnswer;
+                
+                answerItem.innerHTML = `
+                    <div class="answer-question">${question.question}</div>
+                    <div class="answer-user">Ваш ответ: ${userAnswer}</div>
+                    <div class="answer-correct">Правильный ответ: ${correctAnswer}</div>
+                    <div class="answer-explanation" style="font-size: 14px; color: #666; margin-top: 5px;">${question.explanation}</div>
+                `;
+                
+                answersList.appendChild(answerItem);
             });
+        }
+
+        function showResultsHistory() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
             
-            const results = document.querySelectorAll('.result');
-            results.forEach(result => {
-                result.style.display = 'none';
-            });
-            
-            const solutions = document.querySelectorAll('.solution');
-            solutions.forEach(solution => {
-                solution.style.display = 'none';
-            });
-            
+            if (attemptHistory.length > 0) {
+                document.getElementById('resultsHistory').style.display = 'block';
+                const recentAttempts = attemptHistory.slice(-5).reverse();
+                
+                recentAttempts.forEach((attempt, index) => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                        <div class="history-date">${attempt.date}</div>
+                        <div class="history-score">Результат: ${attempt.score}/${attempt.total}</div>
+                    `;
+                    historyList.appendChild(historyItem);
+                });
+            }
+        }
+
+        // Начать тест заново
+        function restartTest() {
             document.getElementById('resultsContainer').style.display = 'none';
-            document.querySelector('.tasks-container').style.display = 'block';
+            document.querySelector('.test-container').style.display = 'block';
+            initTest();
         }
-        
+
+        // Обработка нажатия Enter в поле ввода
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !this.disabled) {
+                checkAnswer();
+            }
+        });
+
+        // Сохраняем ответ при изменении
+        document.getElementById('answerInput').addEventListener('input', saveAnswer);
+
+        // Разрешаем навигацию с помощью клавиатуры
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                prevQuestion();
+            } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
+                nextQuestion();
+            }
+        });
+
+        // Запуск теста при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initTest);
+
         // Мобильное меню
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('active');
