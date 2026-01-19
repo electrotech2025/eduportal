@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формулы электротехники - Приложения</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 18px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .section-subtitle {
+            color: #3498db;
+            font-size: 24px;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .section-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* Стили для формул */
+        .formula-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .formula-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .formula-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .formula-icon {
+            color: #3498db;
+            font-size: 24px;
+        }
+        
+        .formula {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        
+        .formula-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .variables {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .variables h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .variables ul {
+            list-style: none;
+        }
+        
+        .variables li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #ced4da;
+        }
+        
+        .variables li:last-child {
+            border-bottom: none;
+        }
+        
+        .note-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .calculator-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0dcaf0;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .calculator-box h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            margin: 10px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .calc-btn {
+            background-color: #0dcaf0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn:hover {
+            background-color: #0bb5d9;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        @media (max-width: 900px) {
+            nav {
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: 90px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                margin-bottom: 5px;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            
+            .header-content {
+                padding-bottom: 15px;
+            }
+            
+            .formula-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 26px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .formula-card {
+                padding: 20px;
+            }
+            
+            .section-content {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 28px;
+                padding-right: 40px;
+            }
+            
+            .subject {
+                font-size: 16px;
+                padding-right: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
+            <div class="subject">Электронный учебно-методический комплекс</div>
+            <nav id="mainNav">
+                <a href="index.html" class="nav-btn">Главная</a>
+                <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
+                <a href="tests.html" class="nav-btn">Тесты</a>
+                <a href="apps.html" class="nav-btn active">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
+                <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                <a href="literature.html" class="nav-btn">Литература</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="section-content">
+            <h1 class="section-title">Основные формулы электротехники</h1>
+            <p>Справочник основных формул по электротехнике для расчетов асинхронных двигателей и трансформаторов.</p>
+            
+            <div class="note-box">
+                <i class="fas fa-lightbulb"></i> <strong>Примечание:</strong> Все формулы представлены в международной системе единиц (СИ). Для практических расчетов убедитесь в правильности единиц измерения.
+            </div>
+            
+            <!-- Раздел: Трансформаторы -->
+            <h2 class="section-subtitle">Однофазный трансформатор</h2>
+            
+            <div class="formula-container">
+                <!-- Коэффициент трансформации -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-exchange-alt formula-icon"></i> Коэффициент трансформации (k)</h3>
+                    <div class="formula">
+                        k = ω₁/ω₂ = U₁/U₂ = I₂/I₁
+                    </div>
+                    <p class="formula-description">
+                        Коэффициент трансформации показывает отношение числа витков, напряжений и токов первичной и вторичной обмоток.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>ω₁, ω₂ — число витков первичной и вторичной обмоток</li>
+                            <li>U₁, U₂ — первичное и вторичное напряжения, В</li>
+                            <li>I₁, I₂ — первичный и вторичный токи, А</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Мощность трансформатора -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-bolt formula-icon"></i> Активная мощность</h3>
+                    <div class="formula">
+                        P = U · I · cosφ
+                    </div>
+                    <p class="formula-description">
+                        Активная мощность, потребляемая или отдаваемая трансформатором.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>P — активная мощность, Вт</li>
+                            <li>U — напряжение, В</li>
+                            <li>I — ток, А</li>
+                            <li>cosφ — коэффициент мощности</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- КПД трансформатора -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-tachometer-alt formula-icon"></i> Коэффициент полезного действия (КПД)</h3>
+                    <div class="formula">
+                        η = (P₂ / P₁) × 100%
+                    </div>
+                    <p class="formula-description">
+                        Отношение полезной мощности на выходе к потребляемой мощности на входе.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>η — КПД, %</li>
+                            <li>P₁ — мощность на входе, Вт</li>
+                            <li>P₂ — мощность на выходе, Вт</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Потери в меди -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-fire formula-icon"></i> Потери в меди</h3>
+                    <div class="formula">
+                        P<sub>Cu</sub> = I² · R
+                    </div>
+                    <p class="formula-description">
+                        Потери мощности в обмотках трансформатора из-за их активного сопротивления.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>P<sub>Cu</sub> — потери в меди, Вт</li>
+                            <li>I — ток в обмотке, А</li>
+                            <li>R — сопротивление обмотки, Ом</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Калькулятор для трансформатора -->
+            <div class="calculator-box">
+                <h4><i class="fas fa-calculator"></i> Калькулятор коэффициента трансформации</h4>
+                <div class="input-group">
+                    <label for="primaryVoltage">Первичное напряжение U₁ (В):</label>
+                    <input type="number" id="primaryVoltage" placeholder="Например: 220">
+                </div>
+                <div class="input-group">
+                    <label for="secondaryVoltage">Вторичное напряжение U₂ (В):</label>
+                    <input type="number" id="secondaryVoltage" placeholder="Например: 12">
+                </div>
+                <button class="calc-btn" onclick="calculateTransformer()">Рассчитать коэффициент трансформации</button>
+                <div class="result" id="transformerResult"></div>
+            </div>
+            
+            <!-- Раздел: Асинхронный двигатель -->
+            <h2 class="section-subtitle">Асинхронный двигатель</h2>
+            
+            <div class="formula-container">
+                <!-- Синхронная скорость -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-tachometer-alt formula-icon"></i> Синхронная скорость (n₁)</h3>
+                    <div class="formula">
+                        n₁ = (60 · f) / p
+                    </div>
+                    <p class="formula-description">
+                        Скорость вращения магнитного поля в статоре.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>n₁ — синхронная скорость, об/мин</li>
+                            <li>f — частота питающей сети, Гц</li>
+                            <li>p — число пар полюсов статора</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Скольжение -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-sliders-h formula-icon"></i> Скольжение (s)</h3>
+                    <div class="formula">
+                        s = (n₁ - n₂) / n₁
+                    </div>
+                    <p class="formula-description">
+                        Относительная разность скоростей магнитного поля и ротора.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>s — скольжение, %</li>
+                            <li>n₁ — синхронная скорость, об/мин</li>
+                            <li>n₂ — скорость ротора, об/мин</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Скорость ротора -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-cog formula-icon"></i> Скорость ротора (n₂)</h3>
+                    <div class="formula">
+                        n₂ = n₁ · (1 - s)
+                    </div>
+                    <p class="formula-description">
+                        Фактическая скорость вращения вала двигателя.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>n₂ — скорость ротора, об/мин</li>
+                            <li>n₁ — синхронная скорость, об/мин</li>
+                            <li>s — скольжение</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Мощность двигателя -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-bolt formula-icon"></i> Потребляемая мощность (P₁)</h3>
+                    <div class="formula">
+                        P₁ = √3 · U · I · cosφ
+                    </div>
+                    <p class="formula-description">
+                        Активная мощность, потребляемая трехфазным асинхронным двигателем.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>P₁ — потребляемая мощность, Вт</li>
+                            <li>U — линейное напряжение, В</li>
+                            <li>I — линейный ток, А</li>
+                            <li>cosφ — коэффициент мощности</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Номинальный ток -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-bolt formula-icon"></i> Номинальный ток (Iн)</h3>
+                    <div class="formula">
+                        Iн = (1000 · Pн) / (Uн · cosφ · √η)
+                    </div>
+                    <p class="formula-description">
+                        Ток, потребляемый двигателем при номинальной нагрузке.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>Iн — номинальный ток, А</li>
+                            <li>Pн — номинальная мощность, кВт</li>
+                            <li>Uн — номинальное напряжение, В</li>
+                            <li>cosφ — коэффициент мощности</li>
+                            <li>η — КПД двигателя</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Формула Клосса -->
+                <div class="formula-card">
+                    <h3><i class="fas fa-chart-line formula-icon"></i> Формула Клосса</h3>
+                    <div class="formula">
+                        M = M<sub>к</sub> · [2 / (s/s<sub>к</sub> + s<sub>к</sub>/s)]
+                    </div>
+                    <p class="formula-description">
+                        Зависимость электромагнитного момента от скольжения.
+                    </p>
+                    <div class="variables">
+                        <h4>Обозначения:</h4>
+                        <ul>
+                            <li>M — электромагнитный момент, Н·м</li>
+                            <li>M<sub>к</sub> — критический (максимальный) момент, Н·м</li>
+                            <li>s — текущее скольжение</li>
+                            <li>s<sub>к</sub> — критическое скольжение</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Калькулятор для асинхронного двигателя -->
+            <div class="calculator-box">
+                <h4><i class="fas fa-calculator"></i> Калькулятор синхронной скорости</h4>
+                <div class="input-group">
+                    <label for="frequency">Частота сети f (Гц):</label>
+                    <input type="number" id="frequency" value="50" placeholder="Например: 50">
+                </div>
+                <div class="input-group">
+                    <label for="polePairs">Число пар полюсов p:</label>
+                    <input type="number" id="polePairs" placeholder="Например: 2">
+                </div>
+                <button class="calc-btn" onclick="calculateSyncSpeed()">Рассчитать синхронную скорость</button>
+                <div class="result" id="syncSpeedResult"></div>
+            </div>
+            
+            <div class="note-box">
+                <i class="fas fa-info-circle"></i> <strong>Важно:</strong> При работе с формулами учитывайте, что КПД и коэффициент мощности зависят от нагрузки и типа двигателя/трансформатора. Номинальные значения указаны в паспортных данных оборудования.
+            </div>
+            
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Назад на главную
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Электронный учебно-методический комплекс по электротехнике</p>
+            <p>Формулы и расчеты для учебных целей</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Функционал мобильного меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
+            
+            // Обработчик для кнопки мобильного меню
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // Обработчик для логотипа (возврат на главную)
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Закрытие меню при клике вне его области
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+        
+        // Функции калькуляторов
+        function calculateTransformer() {
+            const U1 = parseFloat(document.getElementById('primaryVoltage').value);
+            const U2 = parseFloat(document.getElementById('secondaryVoltage').value);
+            
+            if (isNaN(U1) || isNaN(U2) || U2 === 0) {
+                alert('Пожалуйста, введите корректные значения напряжений (U2 не должно быть равно 0)');
+                return;
+            }
+            
+            const k = U1 / U2;
+            const result = document.getElementById('transformerResult');
+            result.innerHTML = `Коэффициент трансформации k = ${k.toFixed(2)}<br>`;
+            result.innerHTML += `Если U₁ = ${U1} В и U₂ = ${U2} В, то:<br>`;
+            result.innerHTML += `k = U₁/U₂ = ${U1}/${U2} = ${k.toFixed(2)}`;
+            result.style.display = 'block';
+        }
+        
+        function calculateSyncSpeed() {
+            const f = parseFloat(document.getElementById('frequency').value);
+            const p = parseFloat(document.getElementById('polePairs').value);
+            
+            if (isNaN(f) || isNaN(p) || p <= 0) {
+                alert('Пожалуйста, введите корректные значения (число пар полюсов должно быть больше 0)');
+                return;
+            }
+            
+            const n1 = (60 * f) / p;
+            const result = document.getElementById('syncSpeedResult');
+            result.innerHTML = `Синхронная скорость n₁ = ${n1.toFixed(0)} об/мин<br>`;
+            result.innerHTML += `При f = ${f} Гц и p = ${p} пар полюсов:<br>`;
+            result.innerHTML += `n₁ = (60 × ${f}) / ${p} = ${n1.toFixed(0)} об/мин`;
+            result.style.display = 'block';
+            
+            // Добавляем информацию о типичных значениях
+            if (p === 1) result.innerHTML += '<br>(2 полюса)';
+            else if (p === 2) result.innerHTML += '<br>(4 полюса)';
+            else if (p === 3) result.innerHTML += '<br>(6 полюсов)';
+            else if (p === 4) result.innerHTML += '<br>(8 полюсов)';
+        }
+        
+        // Автоматический расчет при загрузке для примера
+        window.onload = function() {
+            // Устанавливаем примерные значения для демонстрации
+            document.getElementById('primaryVoltage').value = 220;
+            document.getElementById('secondaryVoltage').value = 12;
+            document.getElementById('frequency').value = 50;
+            document.getElementById('polePairs').value = 2;
+        };
+    </script>
+</body>
+</html>
