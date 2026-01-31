@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Машины переменного тока - задачи</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 25px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 18px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .question-counter {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            line-height: 1.5;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .formula-hint {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .input-note {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background-color: #fff8e1;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .answer-input-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .answer-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .units-select {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .results-icon {
+            font-size: 64px;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .score-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .score-text {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        
+        .history-info {
+            background: #fff3cd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .answers-container {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .answer-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #ddd;
+        }
+        
+        .answer-item.correct {
+            border-left-color: #27ae60;
+            background: #d4edda;
+        }
+        
+        .answer-item.incorrect {
+            border-left-color: #e74c3c;
+            background: #f8d7da;
+        }
+        
+        .answer-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .answer-user {
+            color: #e74c3c;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .answer-correct {
+            color: #27ae60;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .answer-explanation {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 8px;
+            font-style: italic;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .test-container {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .answer-input {
+                font-size: 16px;
+                padding: 12px;
+                max-width: 100%;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .answers-container {
+                padding: 10px;
+            }
+        }
+        
+        .calculation-hint {
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .calculation-hint h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .calculation-hint p {
+            color: #34495e;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div class="logo" onclick="window.location.href='index.html'">Электро<span>Техника</span></div>
+                <div class="subject">Тесты по электротехнике</div>
+                <nav id="mainNav">
+                    <a href="index.html" class="nav-btn">Главная</a>
+                    <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
+                    <a href="tests.html" class="nav-btn active">Тесты</a>
+                    <a href="#" class="nav-btn">Приложения</a>
+                    <a href="#" class="nav-btn">Видео</a>
+                    <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                    <a href="#" class="nav-btn">Литература</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="tests.html" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к тестам</a>
+        
+        <div class="history-info" id="historyInfo" style="display: none;">
+            <i class="fas fa-history"></i> 
+            <strong>История попыток:</strong> 
+            <span id="attemptsCount">0</span> попыток, 
+            лучший результат: <span id="bestScore">0</span>/10
+        </div>
+
+        <div class="test-container">
+            <!-- Прогресс бар -->
+            <div class="question-counter" id="questionCounter">Вопрос 1 из 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <!-- Важное предупреждение -->
+            <div class="input-note">
+                <i class="fas fa-calculator"></i>
+                <strong>Внимание:</strong> Вводите только числовые ответы без единиц измерения (кроме указанных случаев). Используйте точку для десятичных дробей.
+            </div>
+            
+            <!-- Текст вопроса -->
+            <div class="question-text" id="questionText"></div>
+            
+            <!-- Подсказка по расчетам -->
+            <div class="calculation-hint" id="calculationHint"></div>
+            
+            <!-- Поле для ввода ответа -->
+            <div class="answer-input-container">
+                <input type="text" class="answer-input" id="answerInput" 
+                       placeholder="Введите числовой ответ..." 
+                       autocomplete="off"
+                       inputmode="decimal">
+                <div class="formula-hint" id="formulaHint"></div>
+            </div>
+            
+            <!-- Кнопки навигации -->
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>
+                    <i class="fas fa-arrow-left"></i> Назад
+                </button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+                    Далее <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-primary" id="finishBtn" onclick="finishTest()" style="display: none;">
+                    Завершить тест <i class="fas fa-flag-checkered"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Результаты -->
+        <div class="test-container results-container" id="resultsContainer">
+            <div class="results-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="score">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-text" id="scoreText">правильных ответов из 10</div>
+            </div>
+            
+            <!-- Контейнер с правильными ответами -->
+            <div class="answers-container" id="answersContainer"></div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="restartTest()">
+                    <i class="fas fa-redo"></i> Пройти еще раз
+                </button>
+                <a href="tests.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i> К списку тестов
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Вопросы и правильные ответы для теста "Машины переменного тока: решить задачу"
+        const allQuestions = [
+            {
+                question: "Какое число пар полюсов должен иметь асинхронный двигатель, если частота тока в сети 50 Гц, а частота вращения магнитного поля статора 600 об/мин?",
+                correctAnswer: "5",
+                formula: "p = 60f / n₁",
+                explanation: "Число пар полюсов: p = 60 × 50 / 600 = 5",
+                hint: "Используйте формулу: p = 60f / n₁, где f = 50 Гц, n₁ = 600 об/мин",
+                tolerance: 0
+            },
+            {
+                question: "Номинальная частота вращения ротора 735 об/мин. Чему равно скольжение ротора, если частота тока в сети 50 Гц?",
+                correctAnswer: "2",
+                formula: "s = (n₁ - n₂)/n₁ × 100%",
+                explanation: "Синхронная скорость: n₁ = 60×50/3 = 1000 об/мин. Скольжение: s = (1000-735)/1000 × 100% = 2%",
+                hint: "Для 50 Гц и 3 пар полюсов (6 полюсов) синхронная скорость 1000 об/мин",
+                tolerance: 0.1,
+                units: "%"
+            },
+            {
+                question: "На паспорте двигателя указано, что его скорость вращения равна 1410 об/мин. Вычислить величину скольжения.",
+                correctAnswer: "6",
+                formula: "s = (n₁ - n₂)/n₁ × 100%",
+                explanation: "Для 50 Гц и 2 пар полюсов (4 полюса) синхронная скорость 1500 об/мин. Скольжение: s = (1500-1410)/1500 × 100% = 6%",
+                hint: "Для 50 Гц синхронная скорость при 2 парах полюсов: 1500 об/мин",
+                tolerance: 0.1,
+                units: "%"
+            },
+            {
+                question: "Трехфазный синхронный двигатель, включенный в сеть напряжением 380 В, развивает мощность 75 кВт. КПД двигателя 92%, коэффициент мощности 0,8. Определить реактивный ток, потребляемый двигателем из сети.",
+                correctAnswer: "92.9",
+                formula: "Iр = Pн/(η√3Ucosφ) × sinφ",
+                explanation: "Потребляемая мощность: P₁ = 75/0,92 = 81,52 кВт. Полный ток: I = 81520/(√3×380×0,8) = 155 А. Реактивный ток: Iр = I×sinφ = 155×0,6 = 92,9 А",
+                hint: "sinφ = √(1 - cos²φ) = √(1 - 0,8²) = 0,6",
+                tolerance: 0.5,
+                units: "А"
+            },
+            {
+                question: "Трехфазный двигатель потребляет из сети мощность 45 кВА. Коэффициент мощности 0,89. Суммарная мощность потерь в двигателе 4 кВт. Определить КПД двигателя.",
+                correctAnswer: "90",
+                formula: "η = P₂/P₁ × 100%",
+                explanation: "Активная потребляемая мощность: P₁ = 45×0,89 = 40,05 кВт. Полезная мощность: P₂ = 40,05 - 4 = 36,05 кВт. КПД: η = 36,05/40,05 × 100% = 90%",
+                hint: "Активная мощность = Полная мощность × cosφ",
+                tolerance: 0.5,
+                units: "%"
+            },
+            {
+                question: "Трехфазный синхронный двигатель включен в сеть напряжением 660 В. Мощность на валу 25 кВт; линейный ток, потребляемый из сети, 60 А; КПД двигателя 0,9. Определить реактивную мощность, потребляемую двигателем из сети.",
+                correctAnswer: "62.5",
+                formula: "Q = √3UIр",
+                explanation: "Потребляемая активная мощность: P₁ = 25/0,9 = 27,78 кВт. Полная мощность: S = √3×660×60/1000 = 68,59 кВА. Реактивная мощность: Q = √(S² - P₁²) = √(68,59² - 27,78²) = 62,5 квар",
+                hint: "Q = √(S² - P²), где S = √3UI",
+                tolerance: 1,
+                units: "квар"
+            },
+            {
+                question: "Асинхронный электродвигатель с короткозамкнутым ротором имеет паспортные данные: Pном = 11 кВт, Uном=380 В, cosφ = 0,83, n₂=975 об/мин, η=0,855. Определить потребляемую мощность, номинальное скольжение, номинальный и пусковой токи.",
+                correctAnswer: "12.865",
+                formula: "P₁ = P₂/η, s = (n₁-n₂)/n₁, Iном = P₁/(√3Ucosφ), Iпуск = 7Iном",
+                explanation: "P₁ = 11/0,855 = 12,865 кВт. Для 50 Гц и 3 пар полюсов n₁=1000 об/мин. s=(1000-975)/1000=2,5%. Iном=12865/(√3×380×0,83)=23,6 А. Iпуск=7×23,6=165 А",
+                hint: "Потребляемая мощность: 12,865 кВт (введите это значение)",
+                tolerance: 0.01
+            },
+            {
+                question: "Асинхронный электродвигатель с короткозамкнутым ротором имеет паспортные данные: Pном=1,5 кВт, Uном=380 В, n₂=2725 об/мин, cosφ=0,65, η=0,74. Определить потребляемую мощность.",
+                correctAnswer: "2.027",
+                formula: "P₁ = P₂/η",
+                explanation: "P₁ = 1,5/0,74 = 2,027 кВт. Для 50 Гц и 1 пары полюсов n₁=3000 об/мин. s=(3000-2725)/3000=3%. Iном=2027/(√3×380×0,65)=4,74 А. Iпуск=7×4,74=33,18 А",
+                hint: "Потребляемая мощность: 2,027 кВт (введите это значение)",
+                tolerance: 0.01
+            },
+            {
+                question: "Трехфазный асинхронный двигатель 10 кВт с η=0,875, cosφ=0,88, n₂=1450 об/мин, 2 пары полюсов, U=380 В, f=50 Гц. Определить потребляемую мощность.",
+                correctAnswer: "11.4",
+                formula: "P₁ = P₂/η",
+                explanation: "P₁ = 10/0,875 = 11,4 кВт. n₁=60×50/2=1500 об/мин. s=(1500-1450)/1500=3,33%. Iном=11400/(√3×380×0,88)=19,7 А. M=9550×10/1450=6,7 кг·м",
+                hint: "Потребляемая мощность: 11,4 кВт (введите это значение)",
+                tolerance: 0.1
+            },
+            {
+                question: "Определить сопротивление реостата в цепи ротора асинхронного трехфазного двигателя с фазным ротором, чтобы снизить скорость с 960 до 800 об/мин. Сопротивление обмотки ротора 0,05 Ом. f=50 Гц, p=3.",
+                correctAnswer: "0.2",
+                formula: "Rдоб = R₂(s'/s - 1)",
+                explanation: "n₁=60×50/3=1000 об/мин. s=(1000-960)/1000=0,04. s'=(1000-800)/1000=0,2. Rдоб=0,05×(0,2/0,04 - 1)=0,05×4=0,2 Ом",
+                hint: "Используйте формулу для добавочного сопротивления в цепи ротора",
+                tolerance: 0.01,
+                units: "Ом"
+            }
+        ];
+
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+        let attemptHistory = [];
+
+        // Загрузка истории
+        function loadHistory() {
+            const savedHistory = localStorage.getItem('acMachinesTestHistory');
+            if (savedHistory) {
+                attemptHistory = JSON.parse(savedHistory);
+                updateHistoryDisplay();
+            }
+        }
+
+        function saveHistory() {
+            localStorage.setItem('acMachinesTestHistory', JSON.stringify(attemptHistory));
+        }
+
+        function updateHistoryDisplay() {
+            if (attemptHistory.length > 0) {
+                document.getElementById('historyInfo').style.display = 'block';
+                document.getElementById('attemptsCount').textContent = attemptHistory.length;
+                const bestScore = Math.max(...attemptHistory.map(attempt => attempt.score));
+                document.getElementById('bestScore').textContent = bestScore;
+            }
+        }
+
+        // Инициализация теста
+        function initTest() {
+            loadHistory();
+            questions = [...allQuestions];
+            userAnswers = new Array(questions.length).fill('');
+            currentQuestion = 0;
+            score = 0;
+            
+            showQuestion();
+            updateProgress();
+            updateNavigation();
+        }
+
+        // Показать текущий вопрос
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionCounter').textContent = 
+                `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+            document.getElementById('questionText').innerHTML = question.question;
+            
+            // Показываем подсказку с формулой
+            document.getElementById('calculationHint').innerHTML = `
+                <h4>Подсказка для расчета:</h4>
+                <p><strong>Формула:</strong> ${question.formula}</p>
+                <p><strong>Методика:</strong> ${question.hint}</p>
+            `;
+            
+            // Показываем единицы измерения если есть
+            if (question.units) {
+                document.getElementById('formulaHint').textContent = `Ответ в ${question.units}`;
+            } else {
+                document.getElementById('formulaHint').textContent = '';
+            }
+            
+            // Устанавливаем сохраненный ответ пользователя
+            document.getElementById('answerInput').value = userAnswers[currentQuestion] || '';
+            
+            // Фокус на поле ввода
+            document.getElementById('answerInput').focus();
+        }
+
+        // Сохранить ответ при вводе
+        function saveAnswer() {
+            userAnswers[currentQuestion] = document.getElementById('answerInput').value.trim();
+        }
+
+        // Обновление прогресс-бара
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        // Обновление кнопок навигации
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('finishBtn').style.display = 'flex';
+            } else {
+                document.getElementById('nextBtn').style.display = 'flex';
+                document.getElementById('finishBtn').style.display = 'none';
+            }
+        }
+
+        // Следующий вопрос
+        function nextQuestion() {
+            saveAnswer();
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Предыдущий вопрос
+        function prevQuestion() {
+            saveAnswer();
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Проверка числового ответа с допуском
+        function checkNumericAnswer(userAnswer, correctAnswer, tolerance) {
+            // Преобразуем в числа
+            const userNum = parseFloat(userAnswer.replace(',', '.'));
+            const correctNum = parseFloat(correctAnswer);
+            
+            if (isNaN(userNum)) return false;
+            
+            // Проверяем с учетом допуска
+            const difference = Math.abs(userNum - correctNum);
+            const allowedDifference = tolerance === 0 ? 0 : (correctNum * tolerance / 100) || tolerance;
+            
+            return difference <= allowedDifference;
+        }
+
+        // Завершение теста
+        function finishTest() {
+            saveAnswer(); // Сохраняем ответ на последний вопрос
+            
+            score = 0;
+            const results = [];
+            
+            questions.forEach((question, index) => {
+                const isCorrect = checkNumericAnswer(userAnswers[index], question.correctAnswer, question.tolerance);
+                if (isCorrect) {
+                    score++;
+                }
+                results.push({
+                    question: question.question,
+                    userAnswer: userAnswers[index] || "(нет ответа)",
+                    correctAnswer: question.correctAnswer + (question.units ? ` ${question.units}` : ''),
+                    isCorrect: isCorrect,
+                    explanation: question.explanation,
+                    formula: question.formula
+                });
+            });
+            
+            // Сохраняем результат
+            const attempt = {
+                date: new Date().toLocaleString('ru-RU'),
+                score: score,
+                total: questions.length,
+                results: results
+            };
+            
+            attemptHistory.push(attempt);
+            saveHistory();
+            
+            // Показываем результаты
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('scoreText').textContent = 
+                `правильных ответов из ${questions.length}`;
+            
+            // Показываем правильные ответы
+            showAnswers(results);
+            
+            // Показываем результаты
+            document.querySelector('.test-container').style.display = 'none';
+            document.getElementById('resultsContainer').style.display = 'block';
+        }
+
+        // Показать правильные ответы
+        function showAnswers(results) {
+            const answersContainer = document.getElementById('answersContainer');
+            answersContainer.innerHTML = '<h3>Подробные результаты:</h3>';
+            
+            results.forEach((result, index) => {
+                const answerItem = document.createElement('div');
+                answerItem.className = `answer-item ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                
+                answerItem.innerHTML = `
+                    <div class="answer-question">${index + 1}. ${result.question}</div>
+                    <div class="answer-user"><strong>Ваш ответ:</strong> ${result.userAnswer}</div>
+                    ${!result.isCorrect ? `<div class="answer-correct"><strong>Правильный ответ:</strong> ${result.correctAnswer}</div>` : ''}
+                    <div class="answer-explanation">
+                        <strong>Решение:</strong> ${result.explanation}<br>
+                        <strong>Формула:</strong> ${result.formula}
+                    </div>
+                `;
+                
+                answersContainer.appendChild(answerItem);
+            });
+        }
+
+        // Начать тест заново
+        function restartTest() {
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.querySelector('.test-container').style.display = 'block';
+            initTest();
+        }
+
+        // Сохраняем ответ при изменении поля ввода
+        document.getElementById('answerInput').addEventListener('input', saveAnswer);
+        
+        // Разрешаем навигацию с помощью клавиатуры
+        document.getElementById('answerInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                if (currentQuestion === questions.length - 1) {
+                    finishTest();
+                } else {
+                    nextQuestion();
+                }
+            } else if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                prevQuestion();
+            } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
+                nextQuestion();
+            }
+        });
+
+        // Запуск теста при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initTest);
+
+        // Мобильное меню
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике вне его области
+        document.addEventListener('click', function(event) {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth <= 768 && 
+                !event.target.closest('#mainNav') && 
+                !event.target.closest('#mobileMenuBtn') &&
+                mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
