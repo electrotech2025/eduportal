@@ -201,6 +201,14 @@
             transform: translateY(-3px);
         }
 
+        .category-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
         /* Медиа-запросы для мобильной версии */
         @media (max-width: 900px) {
             nav {
@@ -286,21 +294,67 @@
                     <a href="index.html" class="nav-btn">Главная</a>
                     <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
                     <a href="tests.html" class="nav-btn active">Тесты</a>
-                    <a href="#" class="nav-btn">Приложения</a>
-                    <a href="#" class="nav-btn">Видео</a>
+                    <a href="apps.html" class="nav-btn">Приложения</a>
+                    <a href="video.html" class="nav-btn">Видео</a>
                     <a href="glossary.html" class="nav-btn">Глоссарий</a>
-                    <a href="#" class="nav-btn">Литература</a>
+                    <a href="literature.html" class="nav-btn">Литература</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <div class="container">
-        <a href="prosl-razdely.html" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к разделам</a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> На главную</a>
         
         <h1 class="section-title">Тесты по электротехнике</h1>
         <p class="section-description">Проверьте свои знания с помощью наших интерактивных тестов</p>
         
+        <!-- Категория: Машины переменного тока -->
+        <h2 class="category-title">Машины переменного тока</h2>
+        <div class="tests-container">
+            <!-- Тест 1: Генераторы переменного тока (дополнить) -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3>Генераторы переменного тока: дополнить утверждение</h3>
+                <p>Тест на заполнение пропусков в утверждениях о принципах работы и характеристиках генераторов переменного тока.</p>
+                <a href="generators-ac-completion.html" class="test-link"></a>
+            </div>
+            
+            <!-- Тест 2: Машины переменного тока (задачи) -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Машины переменного тока: задачи</h3>
+                <p>Практические задачи по расчету параметров асинхронных и синхронных машин: скольжение, токи, мощности, КПД.</p>
+                <a href="ac-machines-tasks.html" class="test-link"></a>
+            </div>
+            
+            <!-- Тест 3: Электродвигатели переменного тока (выбор ответа) -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Электродвигатели переменного тока: выбрать ответ</h3>
+                <p>Тест с выбором правильного ответа из нескольких вариантов по теории электродвигателей переменного тока.</p>
+                <a href="ac-motors-test.html" class="test-link"></a>
+            </div>
+            
+            <!-- Тест 4: Генераторы переменного тока (соответствие) -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>Генераторы переменного тока: установить соответствие</h3>
+                <p>Установите соответствие между терминами, определениями и характеристиками генераторов переменного тока.</p>
+                <a href="ac-generators-matching.html" class="test-link"></a>
+            </div>
+        </div>
+        
+        <!-- Категория: Генераторы постоянного тока -->
+        <h2 class="category-title">Генераторы постоянного тока</h2>
         <div class="tests-container">
             <!-- Тест 1: Генераторы постоянного тока -->
             <div class="test-card">
@@ -310,26 +364,6 @@
                 <h3>Генераторы постоянного тока</h3>
                 <p>Проверьте свои знания о принципах работы, конструктивных особенностях и применении генераторов постоянного тока.</p>
                 <a href="test-generators-dc.html" class="test-link"></a>
-            </div>
-            
-            <!-- Тест 2: Электродвигатели постоянного тока (задачи) -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-cogs"></i>
-                </div>
-                <h3>Электродвигатели постоянного тока - Задачи</h3>
-                <p>Решение практических задач по расчету параметров электродвигателей: моментов, токов, скоростей и КПД.</p>
-                <a href="test-motors-dc.html" class="test-link"></a>
-            </div>
-            
-            <!-- Тест 3: Электродвигатели постоянного тока -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-car-battery"></i>
-                </div>
-                <h3>Электродвигатели постоянного тока</h3>
-                <p>Теоретические вопросы по устройству, принципам работы и характеристикам электродвигателей постоянного тока.</p>
-                <a href="test-motors-theory.html" class="test-link"></a>
             </div>
             
             <!-- Тест 4: Генераторы постоянного тока - дополните утверждения -->
@@ -351,7 +385,35 @@
                 <p>Практические задачи по расчету параметров генераторов: ЭДС, токов, мощностей и характеристик генераторов.</p>
                 <a href="generators-task2.html" class="test-link"></a>
             </div>
-
+        </div>
+        
+        <!-- Категория: Электродвигатели постоянного тока -->
+        <h2 class="category-title">Электродвигатели постоянного тока</h2>
+        <div class="tests-container">
+            <!-- Тест 2: Электродвигатели постоянного тока (задачи) -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Электродвигатели постоянного тока - Задачи</h3>
+                <p>Решение практических задач по расчету параметров электродвигателей: моментов, токов, скоростей и КПД.</p>
+                <a href="test-motors-dc.html" class="test-link"></a>
+            </div>
+            
+            <!-- Тест 3: Электродвигатели постоянного тока -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-car-battery"></i>
+                </div>
+                <h3>Электродвигатели постоянного тока</h3>
+                <p>Теоретические вопросы по устройству, принципам работы и характеристикам электродвигателей постоянного тока.</p>
+                <a href="test-motors-theory.html" class="test-link"></a>
+            </div>
+        </div>
+        
+        <!-- Категория: Трансформаторы -->
+        <h2 class="category-title">Трансформаторы</h2>
+        <div class="tests-container">
             <!-- Тест 6: Трансформаторы: задачи -->
             <div class="test-card">
                 <div class="test-icon">
