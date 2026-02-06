@@ -64,6 +64,15 @@
             opacity: 0.9;
         }
         
+        .college-info {
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
+        }
+        
         nav {
             width: 100%;
             display: flex;
@@ -149,6 +158,17 @@
             color: #7f8c8d;
             max-width: 800px;
             margin: 0 auto 30px;
+        }
+        
+        .college-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
         }
         
         .content-blocks {
@@ -336,6 +356,24 @@
             border-radius: 15px 15px 0 0;
         }
         
+        .college-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .college-footer h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+        
+        .college-footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        
         @media (max-width: 900px) {
             nav {
                 gap: 8px;
@@ -389,6 +427,18 @@
             .section-title {
                 font-size: 26px;
             }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .college-info {
+                font-size: 14px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -426,6 +476,11 @@
                 font-size: 16px;
                 padding-right: 40px;
             }
+            
+            .college-badge {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -435,6 +490,9 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
             <div class="subject">Электронный учебно-методический комплекс</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
             <nav id="mainNav">
                 <a href="index.html" class="nav-btn active">Главная</a>
                 <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
@@ -453,6 +511,9 @@
             <div class="hero">
                 <h1>Электротехника</h1>
                 <p>Комплексный электронный учебно-методический ресурс для изучения основ электротехники</p>
+                <div class="college-badge">
+                    УО «Солигорский государственный колледж»
+                </div>
                 <div style="margin-top: 20px;">
                     <p style="font-size: 16px; color: #3498db;">
                         <i class="fas fa-info-circle"></i> Нажмите на любую карточку ниже для перехода к материалам
@@ -565,36 +626,43 @@
                     </a>
                 </div>
             </div>
-        </section>
-        
-        <!-- Старые разделы (оставляем для обратной совместимости) -->
-        <section id="sections" class="section">
-            <!-- ... (остается без изменений) ... -->
-        </section>
-        
-        <section id="tests" class="section">
-            <!-- ... (остается без изменений) ... -->
-        </section>
-        
-        <section id="apps" class="section">
-            <!-- ... (остается без изменений) ... -->
-        </section>
-        
-        <section id="video" class="section">
-            <!-- ... (остается без изменений) ... -->
-        </section>
-        
-        <section id="literature" class="section">
-            <!-- ... (остается без изменений) ... -->
+            
+            <!-- Информация о колледже -->
+            <div class="section-content" style="margin-top: 40px; background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <div style="text-align: center;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">
+                        <i class="fas fa-university"></i> Учреждение образования «Солигорский государственный колледж»
+                    </h3>
+                    <p style="color: #5a6c7d; margin-bottom: 15px;">
+                        Профессиональное образование в области электротехники, энергетики и автоматизации
+                    </p>
+                    <div style="display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
+                        <span style="background: #3498db; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
+                            <i class="fas fa-graduation-cap"></i> Качественное образование
+                        </span>
+                        <span style="background: #2ecc71; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
+                            <i class="fas fa-bolt"></i> Электротехнические специальности
+                        </span>
+                        <span style="background: #e74c3c; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
+                            <i class="fas fa-users"></i> Подготовка специалистов
+                        </span>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     
     <footer>
         <div class="container">
             <p>© 2025 Электронный учебно-методический комплекс по электротехнике</p>
-            <p style="margin-top: 10px; font-size: 14px; opacity: 0.8;">
-                <i class="fas fa-link"></i> Все разделы доступны с главной страницы
-            </p>
+            
+            <div class="college-footer">
+                <h4>УО «Солигорский государственный колледж»</h4>
+                <p>Профессиональная подготовка специалистов в области электротехники и энергетики</p>
+                <p style="margin-top: 10px; font-size: 13px; opacity: 0.7;">
+                    <i class="fas fa-link"></i> Все разделы доступны с главной страницы
+                </p>
+            </div>
         </div>
     </footer>
     
