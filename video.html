@@ -6,6 +6,7 @@
     <title>Видеоматериалы - Электротехника</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Существующие стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -252,6 +253,22 @@
             border-radius: 15px;
         }
         
+        /* Новые категории цветов для видео */
+        .category-demo {
+            background: #ffeaa7;
+            color: #d35400;
+        }
+        
+        .category-dc {
+            background: #a29bfe;
+            color: #6c5ce7;
+        }
+        
+        .category-ac {
+            background: #55efc4;
+            color: #00b894;
+        }
+        
         /* Видео плеер */
         .video-player-modal {
             display: none;
@@ -325,7 +342,7 @@
             line-height: 1.5;
         }
         
-        /* Фильтры видео */
+        /* Фильтры видео - обновлены для новых категорий */
         .video-filters {
             display: flex;
             flex-wrap: wrap;
@@ -532,10 +549,13 @@
                 <p>Все видеофайлы хранятся в папке <strong>films</strong>. Убедитесь, что файлы сохранены с правильными именами.</p>
             </div>
             
-            <h2 class="section-title">Все видеоматериалы</h2>
+            <h2 class="section-title">Демонстрации экспериментов</h2>
             
             <div class="video-filters">
                 <button class="filter-btn active" data-filter="all">Все видео</button>
+                <button class="filter-btn" data-filter="demo">Демонстрации</button>
+                <button class="filter-btn" data-filter="dc">Постоянный ток</button>
+                <button class="filter-btn" data-filter="ac">Переменный ток</button>
                 <button class="filter-btn" data-filter="theory">Теория</button>
                 <button class="filter-btn" data-filter="law">Законы</button>
                 <button class="filter-btn" data-filter="motors">Двигатели</button>
@@ -543,8 +563,69 @@
             </div>
             
             <div class="video-grid" id="videoGrid">
-                <!-- Видео 1: 6.3 Переменный ток.mp4 -->
-                <div class="video-card" data-category="theory">
+                <!-- Новые демонстрационные видео -->
+                
+                <!-- Видео 1: Демонстрация постоянного электрического тока -->
+                <div class="video-card" data-category="demo dc">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-bolt"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Демонстрация постоянного электрического тока</h4>
+                        <p>Наглядная демонстрация явлений постоянного тока. Показ работы цепей постоянного тока с различными элементами.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-demo">Демонстрация</span>
+                            <span><i class="far fa-eye"></i> 1.8K просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Демонстрация постоянного электрического тока.mp4" data-title="Демонстрация постоянного электрического тока" data-description="Наглядная демонстрация явлений постоянного тока. Показ работы цепей постоянного тока с различными элементами: резисторами, светодиодами, электродвигателями. Визуализация направленного движения зарядов."></div>
+                </div>
+                
+                <!-- Видео 2: Электрическая цепь с индуктивностью и емкостью -->
+                <div class="video-card" data-category="demo theory">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-project-diagram"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Электрическая цепь с индуктивностью и емкостью</h4>
+                        <p>Демонстрация работы RLC-цепи. Показ переходных процессов, резонанса и фазовых сдвигов.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-demo">Демонстрация</span>
+                            <span><i class="far fa-eye"></i> 1.4K просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Электрическая цепь с индуктивностью и емкостью.mp4" data-title="Электрическая цепь с индуктивностью и емкостью" data-description="Демонстрация работы RLC-цепи. Показ переходных процессов, резонанса и фазовых сдвигов. Эксперименты с катушками индуктивности и конденсаторами в цепях постоянного и переменного тока."></div>
+                </div>
+                
+                <!-- Видео 3: Демонстрация переменного электрического тока -->
+                <div class="video-card" data-category="demo ac">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-wave-square"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Демонстрация переменного электрического тока</h4>
+                        <p>Визуализация синусоидального тока. Показ изменения направления и величины тока со временем.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-demo">Демонстрация</span>
+                            <span><i class="far fa-eye"></i> 2.1K просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Демонстрация переменного электрического тока.mp4" data-title="Демонстрация переменного электрического тока" data-description="Визуализация синусоидального тока. Показ изменения направления и величины тока со временем. Демонстрация работы устройств на переменном токе, сравнение с постоянным током. Осциллограммы различных форм сигнала."></div>
+                </div>
+                
+                <!-- Оригинальные видео -->
+                
+                <!-- Видео 4: 6.3 Переменный ток.mp4 -->
+                <div class="video-card" data-category="theory ac">
                     <div class="video-thumbnail">
                         <i class="fas fa-bolt"></i>
                         <div class="video-play-btn">
@@ -555,15 +636,15 @@
                         <h4>Переменный ток</h4>
                         <p>Основы теории переменного тока. Особенности и характеристики переменного электрического тока.</p>
                         <div class="video-meta">
-                            <span class="video-category">Теория</span>
+                            <span class="video-category category-ac">Переменный ток</span>
                             <span><i class="far fa-eye"></i> 1.2K просмотров</span>
                         </div>
                     </div>
                     <div class="video-link" data-video="films/6.3 Переменный ток.mp4" data-title="Переменный ток" data-description="Основы теории переменного тока. Особенности и характеристики переменного электрического тока. Принципы генерации и использования."></div>
                 </div>
                 
-                <!-- Видео 2: 6_7_Закон_Ома_для_цепи_переменного_тока.mp4 -->
-                <div class="video-card" data-category="law">
+                <!-- Видео 5: 6_7_Закон_Ома_для_цепи_переменного_тока.mp4 -->
+                <div class="video-card" data-category="law ac">
                     <div class="video-thumbnail">
                         <i class="fas fa-calculator"></i>
                         <div class="video-play-btn">
@@ -581,8 +662,8 @@
                     <div class="video-link" data-video="films/6_7_Закон_Ома_для_цепи_переменного_тока.mp4" data-title="Закон Ома для цепи переменного тока" data-description="Применение закона Ома в цепях переменного тока. Особенности расчета с учетом реактивных элементов. Практические примеры."></div>
                 </div>
                 
-                <!-- Видео 3: асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4 -->
-                <div class="video-card" data-category="motors">
+                <!-- Видео 6: асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4 -->
+                <div class="video-card" data-category="motors ac">
                     <div class="video-thumbnail">
                         <i class="fas fa-cogs"></i>
                         <div class="video-play-btn">
@@ -600,8 +681,8 @@
                     <div class="video-link" data-video="films/асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4" data-title="Асинхронный двигатель" data-description="Устройство и принцип работы асинхронного двигателя. Особенности конструкции и применения. Преимущества и недостатки."></div>
                 </div>
                 
-                <!-- Видео 4: Генератор переменного тока.mp4 -->
-                <div class="video-card" data-category="generators">
+                <!-- Видео 7: Генератор переменного тока.mp4 -->
+                <div class="video-card" data-category="generators ac">
                     <div class="video-thumbnail">
                         <i class="fas fa-car-battery"></i>
                         <div class="video-play-btn">
@@ -619,7 +700,7 @@
                     <div class="video-link" data-video="films/Генератор переменного тока.mp4" data-title="Генератор переменного тока" data-description="Принцип работы генератора переменного тока. Конструкция и особенности различных типов генераторов. Применение в промышленности."></div>
                 </div>
                 
-                <!-- Видео 5: Действие_магнитного_поля_на_проводник_с_током.mp4 -->
+                <!-- Видео 8: Действие_магнитного_поля_на_проводник_с_током.mp4 -->
                 <div class="video-card" data-category="theory">
                     <div class="video-thumbnail">
                         <i class="fas fa-magnet"></i>
@@ -638,8 +719,8 @@
                     <div class="video-link" data-video="films/Действие_магнитного_поля_на_проводник_с_током.mp4" data-title="Действие магнитного поля на проводник с током" data-description="Взаимодействие магнитного поля с проводником, по которому протекает электрический ток. Сила Ампера и ее практическое применение."></div>
                 </div>
                 
-                <!-- Видео 6: Закон Ома для участка цепи.mp4 -->
-                <div class="video-card" data-category="law">
+                <!-- Видео 9: Закон Ома для участка цепи.mp4 -->
+                <div class="video-card" data-category="law dc">
                     <div class="video-thumbnail">
                         <i class="fas fa-bolt"></i>
                         <div class="video-play-btn">
@@ -650,15 +731,15 @@
                         <h4>Закон Ома для участка цепи</h4>
                         <p>Основной закон электротехники. Связь между напряжением, током и сопротивлением на участке цепи.</p>
                         <div class="video-meta">
-                            <span class="video-category">Законы</span>
+                            <span class="video-category category-dc">Постоянный ток</span>
                             <span><i class="far fa-eye"></i> 3.1K просмотров</span>
                         </div>
                     </div>
                     <div class="video-link" data-video="films/Закон Ома для участка цепи.mp4" data-title="Закон Ома для участка цепи" data-description="Основной закон электротехники. Связь между напряжением, током и сопротивлением на участке цепи. Практические примеры применения."></div>
                 </div>
                 
-                <!-- Видео 7: Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4 -->
-                <div class="video-card" data-category="motors">
+                <!-- Видео 10: Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4 -->
+                <div class="video-card" data-category="motors ac">
                     <div class="video-thumbnail">
                         <i class="fas fa-tachometer-alt"></i>
                         <div class="video-play-btn">
@@ -676,8 +757,8 @@
                     <div class="video-link" data-video="films/Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4" data-title="Электродвигатели переменного тока: асинхронный и синхронный" data-description="Сравнение асинхронных и синхронных электродвигателей. Принципы работы и области применения. Преимущества каждого типа."></div>
                 </div>
                 
-                <!-- Видео 8: Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4 -->
-                <div class="video-card" data-category="motors">
+                <!-- Видео 11: Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4 -->
+                <div class="video-card" data-category="motors dc">
                     <div class="video-thumbnail">
                         <i class="fas fa-cog"></i>
                         <div class="video-play-btn">
@@ -688,7 +769,7 @@
                         <h4>Двигатель постоянного тока: устройство и принцип работы</h4>
                         <p>Устройство двигателя постоянного тока. Принцип работы и основные характеристики.</p>
                         <div class="video-meta">
-                            <span class="video-category">Двигатели</span>
+                            <span class="video-category category-dc">Постоянный ток</span>
                             <span><i class="far fa-eye"></i> 680 просмотров</span>
                         </div>
                     </div>
@@ -697,16 +778,19 @@
             </div>
             
             <div class="folder-info" style="margin-top: 30px;">
-                <h4><i class="fas fa-info-circle"></i> Список видеофайлов в папке films:</h4>
+                <h4><i class="fas fa-info-circle"></i> Список видеофайлов в папке films (11 файлов):</h4>
                 <p style="font-family: monospace; font-size: 13px; background: #f8f9fa; padding: 10px; border-radius: 5px;">
-                    1. 6.3 Переменный ток.mp4<br>
-                    2. 6_7_Закон_Ома_для_цепи_переменного_тока.mp4<br>
-                    3. асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4<br>
-                    4. Генератор переменного тока.mp4<br>
-                    5. Действие_магнитного_поля_на_проводник_с_током.mp4<br>
-                    6. Закон Ома для участка цепи.mp4<br>
-                    7. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4<br>
-                    8. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4
+                    1. Демонстрация постоянного электрического тока.mp4<br>
+                    2. Электрическая цепь с индуктивностью и емкостью.mp4<br>
+                    3. Демонстрация переменного электрического тока.mp4<br>
+                    4. 6.3 Переменный ток.mp4<br>
+                    5. 6_7_Закон_Ома_для_цепи_переменного_тока.mp4<br>
+                    6. асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4<br>
+                    7. Генератор переменного тока.mp4<br>
+                    8. Действие_магнитного_поля_на_проводник_с_током.mp4<br>
+                    9. Закон Ома для участка цепи.mp4<br>
+                    10. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4<br>
+                    11. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4
                 </p>
             </div>
         </div>
@@ -732,7 +816,7 @@
         <div class="container">
             <p>© 2025 Электронный учебно-методический комплекс по электротехнике</p>
             <p style="margin-top: 10px; font-size: 14px; opacity: 0.8;">
-                <i class="fas fa-video"></i> Всего видеофайлов: 8
+                <i class="fas fa-video"></i> Всего видеофайлов: 11
             </p>
         </div>
     </footer>
@@ -784,7 +868,7 @@
                 }
             });
             
-            // Фильтрация видео
+            // Фильтрация видео (обновленная логика для нескольких категорий)
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Обновляем активную кнопку фильтра
@@ -795,7 +879,9 @@
                     
                     // Показываем/скрываем видео в зависимости от фильтра
                     videoCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        
+                        if (filter === 'all' || categories.includes(filter)) {
                             card.style.display = 'block';
                         } else {
                             card.style.display = 'none';
@@ -859,15 +945,18 @@
             
             // Проверка наличия папки films
             function checkFilmsFolder() {
-                console.log("Для корректной работы создайте папку 'films' и добавьте в нее 8 видеофайлов:");
-                console.log("1. 6.3 Переменный ток.mp4");
-                console.log("2. 6_7_Закон_Ома_для_цепи_переменного_тока.mp4");
-                console.log("3. асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4");
-                console.log("4. Генератор переменного тока.mp4");
-                console.log("5. Действие_магнитного_поля_на_проводник_с_током.mp4");
-                console.log("6. Закон Ома для участка цепи.mp4");
-                console.log("7. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4");
-                console.log("8. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4");
+                console.log("Для корректной работы создайте папку 'films' и добавьте в нее 11 видеофайлов:");
+                console.log("1. Демонстрация постоянного электрического тока.mp4");
+                console.log("2. Электрическая цепь с индуктивностью и емкостью.mp4");
+                console.log("3. Демонстрация переменного электрического тока.mp4");
+                console.log("4. 6.3 Переменный ток.mp4");
+                console.log("5. 6_7_Закон_Ома_для_цепи_переменного_тока.mp4");
+                console.log("6. асинхронный_двигатель_без_ватермарки_by_jenkaido.mp4");
+                console.log("7. Генератор переменного тока.mp4");
+                console.log("8. Действие_магнитного_поля_на_проводник_с_током.mp4");
+                console.log("9. Закон Ома для участка цепи.mp4");
+                console.log("10. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4");
+                console.log("11. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4");
             }
             
             // Инициализация при загрузке
