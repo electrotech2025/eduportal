@@ -297,7 +297,8 @@
                     <a href="apps.html" class="nav-btn">Приложения</a>
                     <a href="video.html" class="nav-btn">Видео</a>
                     <a href="glossary.html" class="nav-btn">Глоссарий</a>
-                    <a href="literature.html" class="nav-btn">Литература</a>
+                    <!-- ИСПРАВЛЕНИЕ: literature.html → lit.html -->
+                    <a href="lit.html" class="nav-btn">Литература</a>
                 </nav>
             </div>
         </div>
@@ -467,31 +468,55 @@
     </div>
 
     <script>
-        // Мобильное меню
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
-        });
-
-        // Обработчик для логотипа (возврат на главную)
-        document.getElementById('mainLogo').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-
-        // Закрытие меню при клике вне его области
-        document.addEventListener('click', function(event) {
-            const mainNav = document.getElementById('mainNav');
+        // Функционал навигации
+        document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
+            const navButtons = document.querySelectorAll('.nav-btn');
             
-            if (window.innerWidth <= 768 && 
-                !event.target.closest('#mainNav') && 
-                !event.target.closest('#mobileMenuBtn') &&
-                mainNav.classList.contains('active')) {
-                mainNav.classList.remove('active');
-            }
+            // Обработчик для логотипа (возврат на главную)
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Обработчик для кнопки мобильного меню
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // Обработчики для кнопок навигации
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
+                    }
+                });
+            });
+            
+            // Закрытие меню при клике вне его области
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            // Подсветка активной кнопки навигации
+            const currentPage = window.location.pathname.split('/').pop();
+            navButtons.forEach(button => {
+                const buttonHref = button.getAttribute('href');
+                if (buttonHref === currentPage || (currentPage === '' && buttonHref === 'index.html')) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
 </html>
-
-
-
