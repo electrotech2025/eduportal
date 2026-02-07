@@ -328,10 +328,12 @@
                 <a href="index.html" class="nav-btn">Главная</a>
                 <a href="prosl-razdely.html" class="nav-btn active">Разделы</a>
                 <a href="tests.html" class="nav-btn">Тесты</a>
-                <a href="#" class="nav-btn">Приложения</a>
-                <a href="#" class="nav-btn">Видео</a>
+                <!-- ИСПРАВЛЕНИЕ: Заменил # на правильные ссылки -->
+                <a href="apps.html" class="nav-btn">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
                 <a href="glossary.html" class="nav-btn">Глоссарий</a>
-                <a href="#" class="nav-btn">Литература</a>
+                <!-- ИСПРАВЛЕНИЕ: literature.html → lit.html -->
+                <a href="lit.html" class="nav-btn">Литература</a>
             </nav>
         </div>
     </header>
@@ -400,6 +402,7 @@
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
             const mainLogo = document.getElementById('mainLogo');
+            const navButtons = document.querySelectorAll('.nav-btn');
             
             // Обработчики для карточек разделов
             document.querySelectorAll('.section-link').forEach(link => {
@@ -421,6 +424,17 @@
                 mainNav.classList.toggle('active');
             });
             
+            // Обработчики для кнопок навигации
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
+                    }
+                });
+            });
+            
             // Закрытие меню при клике вне его области
             document.addEventListener('click', function(event) {
                 if (window.innerWidth <= 768 && 
@@ -430,9 +444,21 @@
                     mainNav.classList.remove('active');
                 }
             });
+            
+            // Подсветка активной кнопки навигации
+            const currentPage = window.location.pathname.split('/').pop();
+            navButtons.forEach(button => {
+                const buttonHref = button.getAttribute('href');
+                if (buttonHref === currentPage || (currentPage === '' && buttonHref === 'index.html')) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
 </html>
+
 
 
