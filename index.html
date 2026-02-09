@@ -64,15 +64,6 @@
             opacity: 0.9;
         }
         
-        .college-info {
-            font-size: 16px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            opacity: 0.8;
-            color: #ecf0f1;
-        }
-        
         nav {
             width: 100%;
             display: flex;
@@ -368,12 +359,6 @@
             color: #ecf0f1;
         }
         
-        .college-footer p {
-            font-size: 14px;
-            opacity: 0.8;
-            line-height: 1.5;
-        }
-        
         @media (max-width: 900px) {
             nav {
                 gap: 8px;
@@ -435,10 +420,6 @@
             .hero p {
                 font-size: 18px;
             }
-            
-            .college-info {
-                font-size: 14px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -490,9 +471,6 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
             <div class="subject">Электронный учебно-методический комплекс</div>
-            <div class="college-info">
-                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
-            </div>
             <nav id="mainNav">
                 <a href="index.html" class="nav-btn active">Главная</a>
                 <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
@@ -500,7 +478,6 @@
                 <a href="apps.html" class="nav-btn">Приложения</a>
                 <a href="video.html" class="nav-btn">Видео</a>
                 <a href="glossary.html" class="nav-btn">Глоссарий</a>
-                <!-- ИЗМЕНЕНИЕ: literature.html → lit.html -->
                 <a href="lit.html" class="nav-btn">Литература</a>
             </nav>
         </div>
@@ -512,14 +489,6 @@
             <div class="hero">
                 <h1>Электротехника</h1>
                 <p>Комплексный электронный учебно-методический ресурс для изучения основ электротехники</p>
-                <div class="college-badge">
-                    УО «Солигорский государственный колледж»
-                </div>
-                <div style="margin-top: 20px;">
-                    <p style="font-size: 16px; color: #3498db;">
-                        <i class="fas fa-info-circle"></i> Нажмите на любую карточку ниже для перехода к материалам
-                    </p>
-                </div>
             </div>
             
             <div class="content-blocks">
@@ -589,7 +558,6 @@
                 </div>
                 
                 <!-- Литература -->
-                <!-- ИЗМЕНЕНИЕ: literature.html → lit.html -->
                 <div class="block" onclick="window.location.href='lit.html'">
                     <div class="block-icon">📕</div>
                     <div class="block-content">
@@ -628,29 +596,6 @@
                     </a>
                 </div>
             </div>
-            
-            <!-- Информация о колледже -->
-            <div class="section-content" style="margin-top: 40px; background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
-                <div style="text-align: center;">
-                    <h3 style="color: #2c3e50; margin-bottom: 15px;">
-                        <i class="fas fa-university"></i> Учреждение образования «Солигорский государственный колледж»
-                    </h3>
-                    <p style="color: #5a6c7d; margin-bottom: 15px;">
-                        Профессиональное образование в области электротехники, энергетики и автоматизации
-                    </p>
-                    <div style="display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;">
-                        <span style="background: #3498db; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
-                            <i class="fas fa-graduation-cap"></i> Качественное образование
-                        </span>
-                        <span style="background: #2ecc71; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
-                            <i class="fas fa-bolt"></i> Электротехнические специальности
-                        </span>
-                        <span style="background: #e74c3c; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px;">
-                            <i class="fas fa-users"></i> Подготовка специалистов
-                        </span>
-                    </div>
-                </div>
-            </div>
         </section>
     </div>
     
@@ -659,24 +604,18 @@
             <p>© 2025 Электронный учебно-методический комплекс по электротехнике</p>
             
             <div class="college-footer">
-                <h4>УО «Солигорский государственный колледж»</h4>
-                <p>Профессиональная подготовка специалистов в области электротехники и энергетики</p>
-                <p style="margin-top: 10px; font-size: 13px; opacity: 0.7;">
-                    <i class="fas fa-link"></i> Все разделы доступны с главной страницы
-                </p>
+                <h4>Солигорский государственный колледж</h4>
             </div>
         </div>
     </footer>
     
     <script>
-        // Функционал навигации
         document.addEventListener('DOMContentLoaded', function() {
             const navButtons = document.querySelectorAll('.nav-btn');
             const mainLogo = document.getElementById('mainLogo');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
             
-            // Обработчики для кнопок навигации
             navButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -687,17 +626,14 @@
                 });
             });
             
-            // Обработчик для логотипа (возврат на главную)
             mainLogo.addEventListener('click', function() {
                 window.location.href = 'index.html';
             });
             
-            // Обработчик для кнопки мобильного меню
             mobileMenuBtn.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
             });
             
-            // Закрытие меню при клике вне его области
             document.addEventListener('click', function(event) {
                 if (window.innerWidth <= 768 && 
                     !event.target.closest('#mainNav') && 
@@ -707,7 +643,6 @@
                 }
             });
             
-            // Подсветка активной кнопки навигации
             const currentPage = window.location.pathname.split('/').pop();
             navButtons.forEach(button => {
                 const buttonHref = button.getAttribute('href');
