@@ -17,12 +17,12 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
         }
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -43,6 +43,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
         
         .logo {
@@ -65,308 +66,436 @@
             text-align: center;
         }
         
-        .navigation-buttons {
-            display: flex;
-            gap: 15px;
-            margin: 15px 0 30px 0;
-            flex-wrap: wrap;
+        .college-info {
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
         }
         
-        .nav-button {
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: #3498db;
             color: white;
             border: none;
             padding: 12px 24px;
             border-radius: 8px;
+            margin: 15px 0 30px 0;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            flex: 1;
-            min-width: 200px;
-            justify-content: center;
-        }
-        
-        .back-btn {
-            background: linear-gradient(to right, #3498db, #2980b9);
+            -webkit-tap-highlight-color: transparent;
         }
         
         .back-btn:hover {
-            background: linear-gradient(to right, #2980b9, #2573a7);
+            background: #2980b9;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
-        .test-questions-btn {
-            background: linear-gradient(to right, #2ecc71, #27ae60);
-        }
-        
-        .test-questions-btn:hover {
-            background: linear-gradient(to right, #27ae60, #219955);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
-        }
-        
-        .pdf-files-container {
-            margin-top: 20px;
+        /* Контейнер для всех страниц */
+        .pages-container {
             background: white;
             border-radius: 15px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            min-height: 60vh;
-            display: none;
+            margin-bottom: 30px;
         }
         
-        .pdf-files-container.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .pdf-header {
-            padding: 30px;
+        .pages-header {
+            padding: 20px;
             background: #f8f9fa;
             border-bottom: 1px solid #e9ecef;
             text-align: center;
         }
         
-        .pdf-title {
-            font-size: 28px;
-            font-weight: 700;
+        .pages-title {
+            font-size: 24px;
+            font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         
-        .pdf-subtitle {
+        .pages-subtitle {
             color: #666;
             font-size: 16px;
-            margin-bottom: 10px;
         }
         
-        .pdf-count {
-            color: #3498db;
-            font-weight: 600;
-            font-size: 14px;
-            background: #e3f2fd;
-            padding: 5px 15px;
-            border-radius: 20px;
+        /* Область с страницами */
+        .pages-content {
+            padding: 0;
+        }
+        
+        .page-item {
+            padding: 30px;
+            border-bottom: 1px solid #f1f1f1;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .page-item:last-child {
+            border-bottom: none;
+        }
+        
+        .page-number {
             display: inline-block;
-            margin-top: 5px;
-        }
-        
-        .pdf-files-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            padding: 40px;
-        }
-        
-        .pdf-file-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-left: 5px solid #3498db;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pdf-file-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .pdf-file-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .pdf-file-card:hover:before {
-            opacity: 1;
-        }
-        
-        .pdf-icon {
-            font-size: 42px;
-            color: #e74c3c;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .pdf-file-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            word-break: break-word;
-            line-height: 1.4;
-        }
-        
-        .pdf-file-info {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 20px;
-            flex-grow: 1;
-            line-height: 1.5;
-        }
-        
-        .pdf-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: auto;
-        }
-        
-        .pdf-btn {
-            flex: 1;
-            padding: 12px 18px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
             font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .page-image {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
+            transition: transform 0.3s ease;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .page-image.zoomed {
+            transform: scale(1.8);
+            z-index: 10;
+            position: relative;
+            max-width: 90vw;
+        }
+        
+        /* Индикатор прогресса */
+        .progress-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        /* Кнопки управления масштабом */
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .zoom-btn {
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            font-size: 18px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
-        .view-pdf {
-            background: linear-gradient(to right, #3498db, #2980b9);
-            color: white;
+        .zoom-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
         }
         
-        .view-pdf:hover {
-            background: linear-gradient(to right, #2980b9, #2573a7);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        /* Оверлей для увеличенного изображения */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
         
-        .download-pdf {
-            background: linear-gradient(to right, #2ecc71, #27ae60);
-            color: white;
+        .overlay.active {
+            display: flex;
         }
         
-        .download-pdf:hover {
-            background: linear-gradient(to right, #27ae60, #219955);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        .overlay-img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
         }
         
-        .open-all-btn {
-            background: linear-gradient(to right, #9b59b6, #8e44ad);
+        .overlay-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            font-weight: 600;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            margin: 20px auto;
-            text-decoration: none;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
-        .open-all-btn:hover {
-            background: linear-gradient(to right, #8e44ad, #7d3c98);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+        .overlay-page-info {
+            color: white;
+            margin-top: 15px;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
         
-        .no-pdf-message {
-            text-align: center;
-            padding: 60px;
-            color: #666;
-            font-style: italic;
-            grid-column: 1 / -1;
-        }
-        
-        .footer-note {
-            text-align: center;
+        /* Информация о тестах */
+        .literature-info {
+            background: #f8f9fa;
             padding: 20px;
-            color: #666;
-            font-size: 14px;
-            border-top: 1px solid #eee;
-            margin-top: 20px;
-            background: #f9f9f9;
-            border-radius: 0 0 15px 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
         }
         
-        .popup-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            color: #856404;
-            text-align: center;
-            display: none;
+        .literature-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .popup-warning.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .literature-info ul {
+            list-style: none;
+            padding-left: 20px;
         }
         
+        .literature-info li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .literature-info li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Адаптивность */
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                margin-bottom: 5px;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            
+            .header-content {
+                padding-bottom: 15px;
+            }
+            
             .container {
                 padding: 15px;
             }
             
-            .pdf-files-grid {
-                grid-template-columns: 1fr;
-                padding: 20px;
-                gap: 20px;
+            .page-item {
+                padding: 20px 15px;
             }
             
-            .pdf-header {
-                padding: 20px;
+            .page-image {
+                width: 100%;
+                height: auto;
             }
             
-            .pdf-title {
+            .zoom-controls {
+                bottom: 10px;
+                left: 10px;
+                flex-direction: column;
+            }
+            
+            .progress-indicator {
+                bottom: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .zoom-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .pages-title {
+                font-size: 20px;
+            }
+            
+            .logo {
                 font-size: 24px;
             }
             
-            .pdf-actions {
-                flex-direction: column;
-            }
-            
-            .navigation-buttons {
-                flex-direction: column;
-            }
-            
-            .nav-button {
+            .back-btn {
                 width: 100%;
                 justify-content: center;
                 padding: 15px;
             }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
             
-            .open-all-btn {
-                width: 100%;
-                justify-content: center;
+            .pages-title {
+                font-size: 18px;
+            }
+            
+            .page-item {
+                padding: 15px 10px;
+            }
+            
+            .back-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .page-number {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-item {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Стиль для загрузки */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Улучшенное отображение на мобильных устройствах */
+        @media (hover: none) and (pointer: coarse) {
+            .zoom-btn:hover {
+                transform: none;
+            }
+            
+            .back-btn:hover {
+                transform: none;
+            }
+            
+            .page-image {
+                cursor: pointer;
             }
         }
     </style>
@@ -374,243 +503,387 @@
 <body>
     <header>
         <div class="container header-content">
-            <div class="logo">Электро<span>Техника</span></div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
             <div class="subject">Раздел 3: Трансформаторы Машины переменного тока</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
+            <nav id="mainNav">
+                <a href="index.html" class="nav-btn">Главная</a>
+                <a href="prosl-razdely.html" class="nav-btn active">Разделы</a>
+                <a href="tests.html" class="nav-btn">Тесты</a>
+                <a href="apps.html" class="nav-btn">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
+                <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                <a href="literature.html" class="nav-btn">Литература</a>
+            </nav>
         </div>
     </header>
     
     <div class="container">
-        <div class="navigation-buttons">
-            <a href="prosl-razdely.html" class="nav-button back-btn">
-                <i class="fas fa-arrow-left"></i> Назад к разделам
-            </a>
-            <button class="nav-button test-questions-btn" id="openAllTestsBtn">
-                <i class="fas fa-question-circle"></i> Вопросы к тестам
+        <!-- Кнопка "Назад к разделам" -->
+        <a href="prosl-razdely.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад к разделам
+        </a>
+        
+        <!-- Информация о тестах -->
+        <div class="literature-info">
+            <h3><i class="fas fa-info-circle"></i> Вопросы для тестирования</h3>
+            <p>На этой странице представлены задания для тестирования по разделу 3. Все файлы открываются автоматически в новых вкладках.</p>
+            <ul>
+                <li>Генераторы переменного тока - дополнить соответствие</li>
+                <li>Генераторы переменного тока - дополнить утверждение</li>
+                <li>Генераторы переменного тока - установить соответствие</li>
+                <li>Генераторы постоянного тока - дополнить утверждение</li>
+                <li>Генераторы постоянного тока - задачи</li>
+            </ul>
+        </div>
+        
+        <div class="pages-container">
+            <div class="pages-header">
+                <h1 class="pages-title">Задания для тестирования</h1>
+                <p class="pages-subtitle">Раздел 3: Генераторы постоянного и переменного тока</p>
+            </div>
+            
+            <div class="pages-content" id="pagesContent">
+                <!-- Задания будут добавлены через JavaScript -->
+                <div class="loading" id="loadingText">Загрузка заданий...</div>
+            </div>
+        </div>
+        
+        <!-- Оверлей для увеличенного просмотра -->
+        <div class="overlay" id="imageOverlay">
+            <button class="overlay-close" id="closeOverlay">
+                <i class="fas fa-times"></i>
             </button>
+            <img class="overlay-img" id="overlayImage" src="" alt="">
+            <div class="overlay-page-info" id="overlayPageInfo">Задание 1 из 5</div>
         </div>
         
-        <div class="popup-warning" id="popupWarning">
-            <i class="fas fa-exclamation-triangle"></i>
-            <strong>Важно:</strong> Браузер может блокировать всплывающие окна. 
-            Нажмите на ссылки ниже или разрешите всплывающие окна для этого сайта.
+        <!-- Индикатор прогресса -->
+        <div class="progress-indicator" id="progressIndicator">
+            Задание 1 из 5
         </div>
         
-        <div class="pdf-files-container" id="pdfFiles">
-            <div class="pdf-header">
-                <h2 class="pdf-title">Вопросы для тестирования</h2>
-                <p class="pdf-subtitle">Все доступные PDF файлы по теме</p>
-                <div class="pdf-count" id="pdfCount">Загрузка...</div>
-                <button class="open-all-btn" id="openAllPDFsBtn">
-                    <i class="fas fa-external-link-alt"></i> Открыть все PDF в новых вкладках
-                </button>
-            </div>
-            <div class="pdf-files-grid" id="pdfFilesGrid">
-                <!-- PDF файлы будут добавлены через JavaScript -->
-            </div>
+        <!-- Кнопки управления масштабом -->
+        <div class="zoom-controls">
+            <button class="zoom-btn" id="zoomIn" title="Увеличить">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="zoom-btn" id="zoomOut" title="Уменьшить">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="zoom-btn" id="resetZoom" title="Сбросить масштаб">
+                <i class="fas fa-sync-alt"></i>
+            </button>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Точные названия файлов с опечатками (как вы указали)
-            const pdfFiles = [
+            // Задания из предоставленного контента
+            const assignments = [
                 {
-                    path: 'razdelpdf/Двигатели постояного тока.pdf',
-                    name: 'Двигатели постоянного тока',
-                    description: 'Теория и принципы работы двигателей постоянного тока'
+                    title: "Генераторы переменного тока - дополнить соответствие",
+                    description: "Установи соответствие между определениями и формулами",
+                    content: `Задание. Установи соответствие
+
+1. Ток якоря в генераторах с параллельным возбуждением. - А. E = U + Rя·Iя
+2. Ток нагрузки в генераторах с параллельным возбуждением - Б. E = f(Iв), Iн = 0
+3. ЭДС на зажимах генератора в режиме магнитного насыщения при нагрузке - В. Iя = Iв = Iн
+4. Ток, созданный ЭДС остаточного магнетизма - Г. Iв = f(Iн), U = const
+5. Характеристика холостого хода генератора с параллельным возбуждением - Д. I = Eост/Rв
+6. Внешняя характеристика генератора с параллельным возбуждением - Е. Iя = Iн + Iв
+7. Ток якоря в генераторах с последовательным возбуждением - Ж. U = f(Iп), Rв = const
+8. ЭДС якоря генератора постоянного тока - З. e = Blv
+9. Регулировочная характеристика генератора с параллельным возбуждением - И. Iн = E - RяIя/Rн
+10. ЭДС в проводнике якоря генератора постоянного тока - К. E = CЕnФ
+
+Ответы: 1-Е, 2-И, 3-А, 4-Д, 5-Б, 6-Ж, 7-В, 8-К, 9-Г, 10-З`
                 },
                 {
-                    path: 'razdelpdf/Двигатели_постоянного_ток_азадачи.pdf',
-                    name: 'Двигатели постоянного тока: задачи',
-                    description: 'Практические задачи по двигателям постоянного тока'
+                    title: "Генераторы переменного тока - дополнить утверждение",
+                    description: "Дополните утверждения правильными ответами",
+                    content: `1. Синхронной называется электрическая машина, у которой частота вращения ротора равна… (частоте вращающегося магнитного поля статора)
+2. Сердечник синхронного генератора, в пазах которого помещается трехфазная обмотка, размещается в… (станине статора)
+3. Для создания магнитного поля синхронного генератора служит ротор, который представляет собой… (электромагнит)
+4. Последовательно соединенные обмотки полюсов электромагнита образуют… (обмотку возбуждения)
+5. Постоянный ток для питания обмотки электромагнита создает… (возбудитель)
+6. Выводы обмотки возбуждения ротора подключаются к … (контактным кольцам)
+7. Постоянный ток в обмотку электромагнита поступает… (контактные кольца и щётки)
+8. Контактные кольца ротора с помощью щеток и изолированных проводов соединяются с … (коллектором возбудителя)
+9. ЭДС генератора переменного тока при постоянной частоте вращения ротора пропорциональна… (магнитному потоку)
+10. Воздействие магнитного поля статора на магнитное поле ротора называется … (реакцией статора)`
                 },
                 {
-                    path: 'razdelpdf/МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf',
-                    name: 'Машины переменного тока',
-                    description: 'Изучение машин переменного тока и их характеристик'
+                    title: "Генераторы переменного тока - установить соответствие",
+                    description: "Установите соответствие между определениями и понятиями",
+                    content: `Задание. Установить соответствие
+
+1. Концы фазных обмоток статора выведены ... - А. Характеристикой холостого хода
+2. Сердечник ротора с явно выраженными полюсами содержит... - Б. продольной размагничивающей реакцией статора
+3. Ротор с неявно выраженными полюсами содержит... - В. к колодке зажимов на наружной части станины
+4. При вращении ротора его магнитное поле пересекает... - Г. обмотку, уложенную в продольные пазы цилиндрического сердечника
+5. Зависимость ЭДС генератора от тока возбуждения при номинальной частоте вращения ротора называется... - Д. продольной и увеличивающей магнитное поле реакцией статора
+6. При отсутствии тока возбуждения (Iв=0) ЭДС генератора возбуждается... - Е. поперечной реакцией статора
+7. Воздействие магнитного поля статора на магнитное поле ротора при активной нагрузке называется ... - Ж. внешней характеристикой генератора
+8. Воздействие магнитного поля статора на магнитное поле ротора при индуктивной нагрузке называется ... - З. чередующиеся северные и южные полюсы с обмотками возбуждения
+9. Воздействие магнитного поля статора на магнитное поле ротора при емкостной нагрузке называется ... - И. магнитным потоком остаточного намагничивания ротора
+10. Зависимость напряжения генератора от тока нагрузки при номинальных скорости вращения ротора и токе возбуждения называется ... - К. обмотку статора, в которой возбуждаются переменные ЭДС
+
+Ответы: 1-В, 2-З, 3-Г, 4-К, 5-А, 6-И, 7-Е, 8-Б, 9-Д, 10-Ж`
                 },
                 {
-                    path: 'razdelpdf/ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf',
-                    name: 'Электродвигатели переменного тока',
-                    description: 'Типы и применение электродвигателей переменного тока'
+                    title: "Генераторы постоянного тока - дополнить утверждение",
+                    description: "Дополните утверждения правильными терминами",
+                    content: `1. Электромагнит с ярко выраженными полюсами для создания магнитного поля машины постоянного тока служит… (индуктором)
+2. Подвижная часть машины постоянного тока, состоящая из сердечника и обмотки, называется … (якорем)
+3. Сердечник якоря набирается из изолированных листов электротехнической стали для того, чтобы… (уменьшить потери на вихревые токи)
+4. Для выпрямления переменной ЭДС, индуктированной в обмотке якоря в генераторах постоянного тока, служит … (коллектор)
+5. Опорой для якоря служат…….. , которые крепятся болтами к станине машины. (подшипниковые щиты)
+6. Для снятия напряжения с якоря служат …., скользящие по поверхности коллектора. (щетки)
+7. Принцип работы генератора постоянного тока основан на явлении …. (электромагнитной индукции)
+8. Если обмотка возбуждения питается от постоянного источника постоянного тока, то генератор включен по схеме ……. (с независимым возбуждением)
+9. Появление ЭДС индукции в обмотке якоря при его вращении основано на явлении ……. (остаточного магнетизма)
+10. В генераторах постоянного тока с самовозбуждением питание обмотки возбуждения осуществляется от ……. (самого генератора)`
+                },
+                {
+                    title: "Генераторы постоянного тока - задачи",
+                    description: "Решите практические задачи по генераторам",
+                    content: `Задание 3. Решить задачу.
+
+1. Найти полезную мощность генератора, если при напряжении на выводах 110 В ток нагрузки равен 50 А.
+   Ответ: 5,5 кВт.
+
+2. Обмотка четырехполюсного генератора (р=2) постоянного тока состоит из 690 проводников, разбитых на две пары параллельных ветвей (а=2). Определить постоянную генератора СЕ и ЭДС при скорости вращения якоря 1000 об/мин, если магнитный поток составляет 0,02 Вб.
+   Ответ: CE = 11,5; E = 230 B.
+
+3. Определить ЭДС шестиполюсного генератора, если якорь с волновой обмоткой, имеющей 720 активных проводников, вращается со скоростью 500 об/мин. Полезный магнитный поток одного полюса составляет 0,018 Вб.
+   Ответ: 324 В.
+
+4. Найти сопротивление нагрузки генератора с независимым возбуждением, если ток якоря равен 40 А при ЭДС 240 В и сопротивлении обмотки якоря 0,5 Ом.
+   Ответ: 5,5 Ом.
+
+5. Определить ток якоря генератора с независимым возбуждением с сопротивлением цепи якоря 1 Ом и напряжением холостого хода 230 В, если сопротивление нагрузки составляет 50 Ом.
+   Ответ: 4,5 А.
+
+6. При полезной мощности генератора 100 кВт его КПД равен 90%. Найти суммарные потери мощности в генераторе.
+   Ответ: 11,1 кВт.
+
+7. Определить скорость вращения якоря четырехполюсного генератора постоянного тока, если напряжение на зажимах 120 В, ток якоря 48 А, сопротивление обмотки якоря 0,5 Ом, число витков обмотки якоря 480, число параллельных ветвей обмотки якоря 4, полезный магнитный поток одного полюса 0,014 Вб.
+   Ответ: 643 об/мин.
+
+8. ЭДС генератора параллельного возбуждения составляет 140 В, сопротивление якоря 0,065 Ом, сопротивление обмотки возбуждения 60 Ом, сопротивление нагрузки 2 Ом. Определить напряжение на зажимах генератора.
+   Ответ: 135,5 В.
+
+9. Напряжение на зажимах генератора параллельного возбуждения 120 В. Сопротивление внешней цепи 4 Ом, сопротивление якоря 0,25 Ом, сопротивление обмотки возбуждения 60 Ом. Определить мощность первичного двигателя, который вращает генератор, если КПД генератора 80%.
+   Ответ: 5,12 кВт.
+
+10. Определить КПД генератора, если напряжение на его зажимах 230 В, сопротивление внешней цепи 11,5 Ом, мощность первичного двигателя 5,75 кВт.
+    Ответ: 0,8.`
                 }
             ];
             
-            // Функция для обновления счетчика файлов
-            function updatePDFCount() {
-                const pdfCountElement = document.getElementById('pdfCount');
-                if (pdfCountElement) {
-                    pdfCountElement.textContent = `${pdfFiles.length} PDF файлов доступно`;
-                }
-            }
+            // DOM элементы
+            const pagesContent = document.getElementById('pagesContent');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const resetZoomBtn = document.getElementById('resetZoom');
+            const loadingText = document.getElementById('loadingText');
+            const imageOverlay = document.getElementById('imageOverlay');
+            const overlayImage = document.getElementById('overlayImage');
+            const overlayPageInfo = document.getElementById('overlayPageInfo');
+            const closeOverlayBtn = document.getElementById('closeOverlay');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
             
-            // Отображение PDF файлов
-            function displayPDFFiles() {
-                const pdfFilesGrid = document.getElementById('pdfFilesGrid');
+            // Загрузка всех заданий на страницу
+            function loadAllAssignments() {
+                pagesContent.innerHTML = '';
                 
-                if (!pdfFilesGrid) return;
-                
-                pdfFilesGrid.innerHTML = '';
-                
-                if (pdfFiles.length === 0) {
-                    pdfFilesGrid.innerHTML = `
-                        <div class="no-pdf-message">
-                            <i class="fas fa-file-pdf" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
-                            <h3>PDF файлы не найдены</h3>
-                            <p>В папке razdelpdf нет доступных PDF файлов</p>
+                for (let i = 0; i < assignments.length; i++) {
+                    const assignment = assignments[i];
+                    
+                    const pageItem = document.createElement('div');
+                    pageItem.className = 'page-item';
+                    pageItem.id = `assignment-${i}`;
+                    
+                    // Номер задания
+                    const pageNumber = document.createElement('div');
+                    pageNumber.className = 'page-number';
+                    pageNumber.textContent = `Задание ${i + 1}`;
+                    
+                    // Контейнер для текста задания
+                    const textContainer = document.createElement('div');
+                    textContainer.className = 'page-image';
+                    textContainer.style.backgroundColor = '#f8f9fa';
+                    textContainer.style.padding = '30px';
+                    textContainer.style.textAlign = 'left';
+                    textContainer.style.fontSize = '16px';
+                    textContainer.style.lineHeight = '1.6';
+                    textContainer.style.whiteSpace = 'pre-line';
+                    textContainer.style.overflow = 'auto';
+                    textContainer.style.maxHeight = '500px';
+                    textContainer.style.border = '2px solid #3498db';
+                    textContainer.innerHTML = `
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 15px; text-align: center;">
+                            ${assignment.title}
+                        </div>
+                        <div style="color: #666; margin-bottom: 20px; font-style: italic; text-align: center;">
+                            ${assignment.description}
+                        </div>
+                        <div style="color: #333;">
+                            ${assignment.content}
                         </div>
                     `;
-                    return;
+                    
+                    // Описание задания
+                    const assignmentDesc = document.createElement('p');
+                    assignmentDesc.style.color = '#666';
+                    assignmentDesc.style.marginTop = '15px';
+                    assignmentDesc.style.fontSize = '14px';
+                    assignmentDesc.innerHTML = `<i class="fas fa-file-alt" style="color: #3498db;"></i> ${assignment.description}`;
+                    
+                    pageItem.appendChild(pageNumber);
+                    pageItem.appendChild(textContainer);
+                    pageItem.appendChild(assignmentDesc);
+                    pagesContent.appendChild(pageItem);
                 }
                 
-                pdfFiles.forEach(pdfFile => {
-                    const pdfCard = document.createElement('div');
-                    pdfCard.className = 'pdf-file-card';
-                    pdfCard.innerHTML = `
-                        <div class="pdf-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="pdf-file-name">${pdfFile.name}</div>
-                        <div class="pdf-file-info">${pdfFile.description}</div>
-                        <div class="pdf-actions">
-                            <a href="${pdfFile.path}" target="_blank" class="pdf-btn view-pdf" data-pdf-path="${pdfFile.path}">
-                                <i class="fas fa-eye"></i> Просмотр
-                            </a>
-                            <a href="${pdfFile.path}" download="${pdfFile.name}.pdf" class="pdf-btn download-pdf">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                        </div>
-                    `;
-                    pdfFilesGrid.appendChild(pdfCard);
+                loadingText.style.display = 'none';
+            }
+            
+            // Функция открытия оверлея
+            function openOverlay(content, assignmentNumber) {
+                overlayPageInfo.textContent = assignments[assignmentNumber-1].title;
+                imageOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Функция закрытия оверлея
+            function closeOverlay() {
+                imageOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Обновление индикатора прогресса при скролле
+            function updateProgressIndicator() {
+                const pageItems = document.querySelectorAll('.page-item');
+                const scrollPosition = window.scrollY + (window.innerHeight / 2);
+                
+                let currentVisiblePage = 1;
+                
+                for (let i = 0; i < pageItems.length; i++) {
+                    const item = pageItems[i];
+                    const rect = item.getBoundingClientRect();
+                    const itemTop = rect.top + window.scrollY;
+                    const itemBottom = itemTop + rect.height;
+                    
+                    if (scrollPosition >= itemTop && scrollPosition <= itemBottom) {
+                        currentVisiblePage = i + 1;
+                        break;
+                    }
+                }
+                
+                progressIndicator.textContent = `Задание ${currentVisiblePage} из ${assignments.length}`;
+            }
+            
+            // Обработчики событий для кнопок масштабирования
+            zoomInBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.page-image');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    container.style.fontSize = `${currentFontSize + 2}px`;
                 });
-                
-                // Добавляем нижнюю заметку
-                const footerNote = document.createElement('div');
-                footerNote.className = 'footer-note';
-                footerNote.innerHTML = `
-                    <p><i class="fas fa-info-circle"></i> Все файлы находятся в папке razdelpdf/</p>
-                `;
-                pdfFilesGrid.parentNode.appendChild(footerNote);
-            }
+            });
             
-            // Функция для открытия ВСЕХ PDF файлов в новых вкладках
-            function openAllPDFs() {
-                if (pdfFiles.length === 0) {
-                    alert('Нет доступных PDF файлов для открытия');
-                    return;
-                }
-                
-                // Показываем предупреждение о всплывающих окнах
-                const warning = document.getElementById('popupWarning');
-                if (warning) {
-                    warning.classList.add('show');
-                }
-                
-                // Открываем первый файл сразу
-                window.open(pdfFiles[0].path, '_blank');
-                
-                // Остальные файлы открываем с задержкой
-                let openedCount = 1;
-                for (let i = 1; i < pdfFiles.length; i++) {
-                    setTimeout(() => {
-                        const newWindow = window.open(pdfFiles[i].path, '_blank');
-                        openedCount++;
-                        
-                        // Если последний файл открыт, показываем сообщение
-                        if (openedCount === pdfFiles.length) {
-                            setTimeout(() => {
-                                alert(`Открыто ${openedCount} из ${pdfFiles.length} PDF файлов. Если некоторые не открылись, нажмите на ссылки в списке ниже.`);
-                            }, 1000);
-                        }
-                    }, 1000 * i); // Задержка 1 секунда между открытием
-                }
-            }
-            
-            // Функция для показа контейнера с PDF файлами
-            function showPDFFiles() {
-                const pdfContainer = document.getElementById('pdfFiles');
-                if (pdfContainer) {
-                    pdfContainer.classList.add('show');
-                    
-                    // Прокручиваем к контейнеру
-                    pdfContainer.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-            
-            // Инициализация
-            updatePDFCount();
-            displayPDFFiles();
-            
-            // Обработчик для кнопки "Вопросы к тестам"
-            const openAllTestsBtn = document.getElementById('openAllTestsBtn');
-            if (openAllTestsBtn) {
-                openAllTestsBtn.addEventListener('click', function() {
-                    showPDFFiles(); // Показываем контейнер
-                    
-                    // Сначала спрашиваем пользователя
-                    if (confirm(`Открыть все ${pdfFiles.length} PDF файлов в новых вкладках?`)) {
-                        openAllPDFs(); // Открываем все PDF
+            zoomOutBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.page-image');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    if (currentFontSize > 12) {
+                        container.style.fontSize = `${currentFontSize - 2}px`;
                     }
                 });
-            }
+            });
             
-            // Обработчик для кнопки "Открыть все PDF в новых вкладках"
-            const openAllPDFsBtn = document.getElementById('openAllPDFsBtn');
-            if (openAllPDFsBtn) {
-                openAllPDFsBtn.addEventListener('click', function() {
-                    if (confirm(`Открыть все ${pdfFiles.length} PDF файлов в новых вкладках?`)) {
-                        openAllPDFs();
-                    }
+            resetZoomBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.page-image');
+                textContainers.forEach(container => {
+                    container.style.fontSize = '16px';
                 });
-            }
+            });
             
-            // Обработчик для кнопки "Назад к разделам"
-            const backButton = document.querySelector('.back-btn');
-            if (backButton) {
-                backButton.addEventListener('click', function(e) {
-                    if (!this.getAttribute('href')) {
-                        e.preventDefault();
-                        window.history.back();
-                    }
-                });
-            }
-            
-            // Добавляем обработчики для ссылок "Просмотр" для ручного открытия
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.view-pdf')) {
-                    const link = e.target.closest('.view-pdf');
-                    const pdfPath = link.getAttribute('href');
-                    
-                    // Открываем в новой вкладке
-                    window.open(pdfPath, '_blank');
+            // Обработчики для оверлея
+            closeOverlayBtn.addEventListener('click', closeOverlay);
+            imageOverlay.addEventListener('click', function(e) {
+                if (e.target === imageOverlay) {
+                    closeOverlay();
                 }
             });
             
-            // Проверяем доступность файлов
-            async function checkPDFAvailability() {
-                const unavailableFiles = [];
-                
-                for (const pdfFile of pdfFiles) {
-                    try {
-                        const response = await fetch(pdfFile.path, { method: 'HEAD' });
-                        if (!response.ok) {
-                            unavailableFiles.push(pdfFile.name);
-                        }
-                    } catch (error) {
-                        unavailableFiles.push(pdfFile.name);
-                    }
+            // Горячие клавиши
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeOverlay();
                 }
-                
-                if (unavailableFiles.length > 0) {
-                    console.warn('Недоступные файлы:', unavailableFiles);
-                }
-            }
+            });
             
-            // Запускаем проверку
-            setTimeout(checkPDFAvailability, 1000);
+            // Навигация - исправлено: активная кнопка "Разделы"
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Устанавливаем активную кнопку "Разделы"
+            document.querySelector('a[href="prosl-razdely.html"]').classList.add('active');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            // Логотип ведет на главную
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Отслеживание скролла для обновления индикатора
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateProgressIndicator, 100);
+            });
+            
+            window.addEventListener('resize', updateProgressIndicator);
+            
+            // Инициализация
+            loadAllAssignments();
+            updateProgressIndicator();
+            
+            // Плавная прокрутка к верху при загрузке
+            window.scrollTo(0, 0);
+            
+            // Улучшенная обработка касаний для мобильных устройств
+            document.addEventListener('touchstart', function() {}, {passive: true});
         });
     </script>
 </body>
