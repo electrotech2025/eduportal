@@ -6,7 +6,6 @@
     <title>Видеоматериалы - Электротехника</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Существующие стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -63,6 +62,15 @@
             margin-top: -15px;
             margin-bottom: 20px;
             opacity: 0.9;
+        }
+        
+        .college-info {
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
         }
         
         nav {
@@ -154,7 +162,6 @@
             border-bottom: 2px solid #e9ecef;
         }
         
-        /* Видео-грид */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -253,7 +260,6 @@
             border-radius: 15px;
         }
         
-        /* Новые категории цветов для видео */
         .category-demo {
             background: #ffeaa7;
             color: #d35400;
@@ -269,7 +275,11 @@
             color: #00b894;
         }
         
-        /* Видео плеер */
+        .category-magnetism {
+            background: #fd79a8;
+            color: #e84393;
+        }
+        
         .video-player-modal {
             display: none;
             position: fixed;
@@ -342,7 +352,6 @@
             line-height: 1.5;
         }
         
-        /* Фильтры видео - обновлены для новых категорий */
         .video-filters {
             display: flex;
             flex-wrap: wrap;
@@ -372,7 +381,6 @@
             border-color: #3498db;
         }
         
-        /* Папка films */
         .folder-info {
             background: #e8f4fc;
             padding: 15px;
@@ -394,7 +402,6 @@
             font-size: 14px;
         }
         
-        /* Предупреждение о видео */
         .video-warning {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -423,6 +430,24 @@
             padding: 25px 0;
             margin-top: 50px;
             border-radius: 15px 15px 0 0;
+        }
+        
+        .college-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .college-footer h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+        
+        .college-footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.5;
         }
         
         @keyframes fadeIn {
@@ -523,8 +548,11 @@
     <header>
         <div class="container header-content">
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-            <a href="index.html" class="logo">Электро<span>Техника</span></a>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
             <div class="subject">Видеоматериалы по электротехнике</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
             <nav id="mainNav">
                 <a href="index.html" class="nav-btn">Главная</a>
                 <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
@@ -532,7 +560,7 @@
                 <a href="apps.html" class="nav-btn">Приложения</a>
                 <a href="video.html" class="nav-btn active">Видео</a>
                 <a href="glossary.html" class="nav-btn">Глоссарий</a>
-                <a href="literature.html" class="nav-btn">Литература</a>
+                <a href="lit.html" class="nav-btn">Литература</a>
             </nav>
         </div>
     </header>
@@ -560,6 +588,7 @@
                 <button class="filter-btn" data-filter="law">Законы</button>
                 <button class="filter-btn" data-filter="motors">Двигатели</button>
                 <button class="filter-btn" data-filter="generators">Генераторы</button>
+                <button class="filter-btn" data-filter="magnetism">Магнетизм</button>
             </div>
             
             <div class="video-grid" id="videoGrid">
@@ -621,8 +650,6 @@
                     </div>
                     <div class="video-link" data-video="films/Демонстрация переменного электрического тока.mp4" data-title="Демонстрация переменного электрического тока" data-description="Визуализация синусоидального тока. Показ изменения направления и величины тока со временем. Демонстрация работы устройств на переменном токе, сравнение с постоянным током. Осциллограммы различных форм сигнала."></div>
                 </div>
-                
-                <!-- Оригинальные видео -->
                 
                 <!-- Видео 4: 6.3 Переменный ток.mp4 -->
                 <div class="video-card" data-category="theory ac">
@@ -701,7 +728,7 @@
                 </div>
                 
                 <!-- Видео 8: Действие_магнитного_поля_на_проводник_с_током.mp4 -->
-                <div class="video-card" data-category="theory">
+                <div class="video-card" data-category="theory magnetism">
                     <div class="video-thumbnail">
                         <i class="fas fa-magnet"></i>
                         <div class="video-play-btn">
@@ -712,7 +739,7 @@
                         <h4>Действие магнитного поля на проводник с током</h4>
                         <p>Взаимодействие магнитного поля с проводником, по которому протекает электрический ток.</p>
                         <div class="video-meta">
-                            <span class="video-category">Теория</span>
+                            <span class="video-category category-magnetism">Магнетизм</span>
                             <span><i class="far fa-eye"></i> 760 просмотров</span>
                         </div>
                     </div>
@@ -775,10 +802,126 @@
                     </div>
                     <div class="video-link" data-video="films/Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4" data-title="Двигатель постоянного тока: устройство и принцип работы" data-description="Устройство двигателя постоянного тока. Принцип работы и основные характеристики. Области применения и особенности эксплуатации."></div>
                 </div>
+                
+                <!-- Видео 12: Сила Лоренца -->
+                <div class="video-card" data-category="theory magnetism">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-magnet"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Сила Лоренца</h4>
+                        <p>Действие силы Лоренца на движущийся заряд в магнитном поле. Определение направления силы по правилу левой руки.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-magnetism">Магнетизм</span>
+                            <span><i class="far fa-eye"></i> 920 просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Сила Лоренца - Lorentz force.mp4" data-title="Сила Лоренца" data-description="Сила Лоренца - сила, действующая на движущуюся заряженную частицу со стороны магнитного поля. Определение направления силы по правилу левой руки. Практическое применение в масс-спектрографах, циклотронах и электродвигателях. Формула F = q[v×B] и ее физический смысл."></div>
+                </div>
+                
+                <!-- НОВЫЕ ВИДЕО 13-17 -->
+                
+                <!-- Видео 13: Правило левой руки -->
+                <div class="video-card" data-category="theory magnetism demo">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-hand-point-left"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Правило левой руки</h4>
+                        <p>Определение направления силы, действующей на проводник с током в магнитном поле. Практическое применение правила.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-magnetism">Магнетизм</span>
+                            <span><i class="far fa-eye"></i> 1.1K просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Правило левой руки (1).mp4" data-title="Правило левой руки" data-description="Правило левой руки для определения направления силы, действующей на проводник с током в магнитном поле. Расположение пальцев: большой палец - направление силы, указательный - направление магнитных линий, средний - направление тока. Применение в электродвигателях и других устройствах."></div>
+                </div>
+                
+                <!-- Видео 14: Явление самоиндукции -->
+                <div class="video-card" data-category="theory ac">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-sync-alt"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Явление самоиндукции</h4>
+                        <p>Возникновение ЭДС индукции в проводнике при изменении тока в нем самом. Индуктивность и ее свойства.</p>
+                        <div class="video-meta">
+                            <span class="video-category">Теория</span>
+                            <span><i class="far fa-eye"></i> 850 просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Явление самоиндукции.mp4" data-title="Явление самоиндукции" data-description="Явление самоиндукции - возникновение ЭДС индукции в проводящем контуре при изменении силы тока в этом же контуре. Физическая природа явления, понятие индуктивности. Практическое значение в цепях переменного тока, применение в дросселях и трансформаторах."></div>
+                </div>
+                
+                <!-- Видео 15: Закон электромагнитной индукции -->
+                <div class="video-card" data-category="law magnetism">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Закон электромагнитной индукции</h4>
+                        <p>Основной закон, описывающий возникновение ЭДС индукции при изменении магнитного потока через контур.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-magnetism">Магнетизм</span>
+                            <span><i class="far fa-eye"></i> 1.3K просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Закон электромагнитной индукции.mp4" data-title="Закон электромагнитной индукции" data-description="Закон электромагнитной индукции Фарадея: ЭДС индукции в замкнутом контуре пропорциональна скорости изменения магнитного потока через этот контур. Формулировка закона, формула ε = -dΦ/dt. Правило Ленца для определения направления индукционного тока. Практическое применение в генераторах и трансформаторах."></div>
+                </div>
+                
+                <!-- Видео 16: Магнитный поток -->
+                <div class="video-card" data-category="theory magnetism">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Магнитный поток</h4>
+                        <p>Понятие магнитного потока через поверхность. Зависимость потока от индукции магнитного поля и площади.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-magnetism">Магнетизм</span>
+                            <span><i class="far fa-eye"></i> 780 просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/4.1 Магнитный поток.mp4" data-title="Магнитный поток" data-description="Магнитный поток - физическая величина, равная произведению модуля вектора магнитной индукции на площадь поверхности и косинус угла между вектором и нормалью к поверхности. Формула Φ = B·S·cosα. Единица измерения - вебер (Вб). Роль магнитного потока в явлении электромагнитной индукции."></div>
+                </div>
+                
+                <!-- Видео 17: Правило правой руки -->
+                <div class="video-card" data-category="theory magnetism demo">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-hand-point-right"></i>
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Правило правой руки</h4>
+                        <p>Определение направления магнитных линий вокруг проводника с током. Применение для соленоидов и прямых проводников.</p>
+                        <div class="video-meta">
+                            <span class="video-category category-magnetism">Магнетизм</span>
+                            <span><i class="far fa-eye"></i> 950 просмотров</span>
+                        </div>
+                    </div>
+                    <div class="video-link" data-video="films/Правило правой руки.mp4" data-title="Правило правой руки" data-description="Правило правой руки для определения направления магнитных линий вокруг проводника с током. Для прямого проводника: если обхватить проводник правой рукой так, чтобы большой палец показывал направление тока, то остальные пальцы покажут направление магнитных линий. Применение для соленоидов и катушек индуктивности."></div>
+                </div>
             </div>
             
             <div class="folder-info" style="margin-top: 30px;">
-                <h4><i class="fas fa-info-circle"></i> Список видеофайлов в папке films (11 файлов):</h4>
+                <h4><i class="fas fa-info-circle"></i> Список видеофайлов в папке films (17 файлов):</h4>
                 <p style="font-family: monospace; font-size: 13px; background: #f8f9fa; padding: 10px; border-radius: 5px;">
                     1. Демонстрация постоянного электрического тока.mp4<br>
                     2. Электрическая цепь с индуктивностью и емкостью.mp4<br>
@@ -790,7 +933,13 @@
                     8. Действие_магнитного_поля_на_проводник_с_током.mp4<br>
                     9. Закон Ома для участка цепи.mp4<br>
                     10. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4<br>
-                    11. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4
+                    11. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4<br>
+                    12. Сила Лоренца - Lorentz force.mp4<br>
+                    13. Правило левой руки (1).mp4<br>
+                    14. Явление самоиндукции.mp4<br>
+                    15. Закон электромагнитной индукции.mp4<br>
+                    16. 4.1 Магнитный поток.mp4<br>
+                    17. Правило правой руки.mp4
                 </p>
             </div>
         </div>
@@ -816,14 +965,23 @@
         <div class="container">
             <p>© 2025 Электронный учебно-методический комплекс по электротехнике</p>
             <p style="margin-top: 10px; font-size: 14px; opacity: 0.8;">
-                <i class="fas fa-video"></i> Всего видеофайлов: 11
+                <i class="fas fa-video"></i> Всего видеофайлов: 17
             </p>
+            
+            <div class="college-footer">
+                <h4>УО «Солигорский государственный колледж»</h4>
+                <p>Профессиональная подготовка специалистов в области электротехники и энергетики</p>
+                <p style="margin-top: 10px; font-size: 13px; opacity: 0.7;">
+                    <i class="fas fa-link"></i> Все разделы доступны с главной страницы
+                </p>
+            </div>
         </div>
     </footer>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navButtons = document.querySelectorAll('.nav-btn');
+            const mainLogo = document.getElementById('mainLogo');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
             const videoCards = document.querySelectorAll('.video-card');
@@ -834,31 +992,24 @@
             const videoPlayerDescription = document.getElementById('videoPlayerDescription');
             const filterButtons = document.querySelectorAll('.filter-btn');
             
-            // Обработчики для кнопок навигации
             navButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    if (this.classList.contains('active')) {
-                        e.preventDefault();
-                        return;
-                    }
-                    
-                    // Обновляем активную кнопку
-                    navButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Закрываем мобильное меню
-                    if (window.innerWidth <= 768) {
-                        mainNav.classList.remove('active');
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
                     }
                 });
             });
             
-            // Обработчик для кнопки мобильного меню
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
             mobileMenuBtn.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
             });
             
-            // Закрытие меню при клике вне его области
             document.addEventListener('click', function(event) {
                 if (window.innerWidth <= 768 && 
                     !event.target.closest('#mainNav') && 
@@ -868,16 +1019,13 @@
                 }
             });
             
-            // Фильтрация видео (обновленная логика для нескольких категорий)
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Обновляем активную кнопку фильтра
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
                     
                     const filter = this.getAttribute('data-filter');
                     
-                    // Показываем/скрываем видео в зависимости от фильтра
                     videoCards.forEach(card => {
                         const categories = card.getAttribute('data-category').split(' ');
                         
@@ -890,10 +1038,8 @@
                 });
             });
             
-            // Открытие видео
             videoCards.forEach(card => {
                 card.addEventListener('click', function(e) {
-                    // Проверяем, не нажали ли на кнопку фильтра
                     if (e.target.closest('.filter-btn')) return;
                     
                     const videoLink = this.querySelector('.video-link');
@@ -901,15 +1047,12 @@
                     const videoTitle = videoLink.getAttribute('data-title');
                     const videoDescription = videoLink.getAttribute('data-description');
                     
-                    // Устанавливаем данные в плеер
                     mainVideoPlayer.src = videoSrc;
                     videoPlayerTitle.textContent = videoTitle;
                     videoPlayerDescription.textContent = videoDescription;
                     
-                    // Показываем модальное окно
                     videoPlayerModal.style.display = 'flex';
                     
-                    // Начинаем воспроизведение
                     setTimeout(() => {
                         mainVideoPlayer.play().catch(e => {
                             console.log("Автовоспроизведение заблокировано браузером");
@@ -918,14 +1061,12 @@
                 });
             });
             
-            // Закрытие видео плеера
             closeVideoBtn.addEventListener('click', function() {
                 mainVideoPlayer.pause();
                 videoPlayerModal.style.display = 'none';
                 mainVideoPlayer.src = '';
             });
             
-            // Закрытие по клику вне области плеера
             videoPlayerModal.addEventListener('click', function(e) {
                 if (e.target === videoPlayerModal) {
                     mainVideoPlayer.pause();
@@ -934,7 +1075,6 @@
                 }
             });
             
-            // Закрытие по клавише Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && videoPlayerModal.style.display === 'flex') {
                     mainVideoPlayer.pause();
@@ -943,9 +1083,8 @@
                 }
             });
             
-            // Проверка наличия папки films
             function checkFilmsFolder() {
-                console.log("Для корректной работы создайте папку 'films' и добавьте в нее 11 видеофайлов:");
+                console.log("Для корректной работы создайте папку 'films' и добавьте в нее 17 видеофайлов:");
                 console.log("1. Демонстрация постоянного электрического тока.mp4");
                 console.log("2. Электрическая цепь с индуктивностью и емкостью.mp4");
                 console.log("3. Демонстрация переменного электрического тока.mp4");
@@ -957,10 +1096,25 @@
                 console.log("9. Закон Ома для участка цепи.mp4");
                 console.log("10. Как_работают_ЭЛЕКТРОДВИГАТЕЛИ_переменного_тока_АСИНХРОННЫЙ_и_СИНХРОННЫЙ.mp4");
                 console.log("11. Схема_двигателя_постоянного_тока_Устройство_и_принцип_работы_—_сделано.mp4");
+                console.log("12. Сила Лоренца - Lorentz force.mp4");
+                console.log("13. Правило левой руки (1).mp4");
+                console.log("14. Явление самоиндукции.mp4");
+                console.log("15. Закон электромагнитной индукции.mp4");
+                console.log("16. 4.1 Магнитный поток.mp4");
+                console.log("17. Правило правой руки.mp4");
             }
             
-            // Инициализация при загрузке
             checkFilmsFolder();
+            
+            const currentPage = window.location.pathname.split('/').pop();
+            navButtons.forEach(button => {
+                const buttonHref = button.getAttribute('href');
+                if (buttonHref === currentPage || (currentPage === '' && buttonHref === 'index.html')) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
