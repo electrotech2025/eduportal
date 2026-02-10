@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздел 3: Трансформаторы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 16px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            text-align: center;
+        }
+        
+        .college-info {
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 15px 0 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Контейнер для всех страниц */
+        .pages-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .pages-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .pages-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .pages-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* Область с страницами */
+        .pages-content {
+            padding: 0;
+        }
+        
+        .page-item {
+            padding: 30px;
+            border-bottom: 1px solid #f1f1f1;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .page-item:last-child {
+            border-bottom: none;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .page-image {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .page-image.zoomed {
+            transform: scale(1.8);
+            z-index: 10;
+            position: relative;
+            max-width: 90vw;
+        }
+        
+        /* Индикатор прогресса */
+        .progress-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        /* Кнопки управления масштабом */
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .zoom-btn {
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .zoom-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        /* Оверлей для увеличенного просмотра */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .overlay.active {
+            display: flex;
+        }
+        
+        .overlay-img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .overlay-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .overlay-page-info {
+            color: white;
+            margin-top: 15px;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        /* Информация о тестах */
+        .literature-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .literature-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .literature-info ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .literature-info li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .literature-info li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                margin-bottom: 5px;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            
+            .header-content {
+                padding-bottom: 15px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .page-item {
+                padding: 20px 15px;
+            }
+            
+            .page-image {
+                width: 100%;
+                height: auto;
+            }
+            
+            .zoom-controls {
+                bottom: 10px;
+                left: 10px;
+                flex-direction: column;
+            }
+            
+            .progress-indicator {
+                bottom: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .zoom-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .pages-title {
+                font-size: 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .pages-title {
+                font-size: 18px;
+            }
+            
+            .page-item {
+                padding: 15px 10px;
+            }
+            
+            .back-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .page-number {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-item {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Стиль для загрузки */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Улучшенное отображение на мобильных устройствах */
+        @media (hover: none) and (pointer: coarse) {
+            .zoom-btn:hover {
+                transform: none;
+            }
+            
+            .back-btn:hover {
+                transform: none;
+            }
+            
+            .page-image {
+                cursor: pointer;
+            }
+        }
+        
+        /* Стили для контейнера с текстом задания */
+        .assignment-text {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-line;
+            overflow: auto;
+            max-height: 500px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .assignment-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .assignment-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
+            <div class="subject">Раздел 3: Трансформаторы Машины переменного тока</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
+            <nav id="mainNav">
+                <a href="index.html" class="nav-btn">Главная</a>
+                <a href="prosl-razdely.html" class="nav-btn active">Разделы</a>
+                <a href="tests.html" class="nav-btn">Тесты</a>
+                <a href="apps.html" class="nav-btn">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
+                <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                <a href="literature.html" class="nav-btn">Литература</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Кнопка "Назад к разделам" -->
+        <a href="prosl-razdely.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад к разделам
+        </a>
+        
+        <!-- Информация о тестах -->
+        <div class="literature-info">
+            <h3><i class="fas fa-info-circle"></i> Вопросы для тестирования по трансформаторам</h3>
+            <p>На этой странице представлены задания для тестирования по разделу 3. Все задания отображаются прямо на странице.</p>
+            <ul>
+                <li>Трансформаторы: дополнить утверждения</li>
+                <li>Трансформаторы: выбрать ответ</li>
+                <li>Трансформаторы: решить задачу</li>
+                <li>Трансформаторы: установить соответствие</li>
+            </ul>
+        </div>
+        
+        <div class="pages-container">
+            <div class="pages-header">
+                <h1 class="pages-title">Задания по трансформаторам</h1>
+                <p class="pages-subtitle">Раздел 3: Трансформаторы</p>
+            </div>
+            
+            <div class="pages-content" id="pagesContent">
+                <!-- Задания будут добавлены через JavaScript -->
+                <div class="loading" id="loadingText">Загрузка заданий...</div>
+            </div>
+        </div>
+        
+        <!-- Оверлей для увеличенного просмотра -->
+        <div class="overlay" id="imageOverlay">
+            <button class="overlay-close" id="closeOverlay">
+                <i class="fas fa-times"></i>
+            </button>
+            <img class="overlay-img" id="overlayImage" src="" alt="">
+            <div class="overlay-page-info" id="overlayPageInfo">Задание 1 из 4</div>
+        </div>
+        
+        <!-- Индикатор прогресса -->
+        <div class="progress-indicator" id="progressIndicator">
+            Задание 1 из 4
+        </div>
+        
+        <!-- Кнопки управления масштабом -->
+        <div class="zoom-controls">
+            <button class="zoom-btn" id="zoomIn" title="Увеличить">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="zoom-btn" id="zoomOut" title="Уменьшить">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="zoom-btn" id="resetZoom" title="Сбросить масштаб">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Задания из предоставленных PDF файлов
+            const assignments = [
+                {
+                    title: "Трансформаторы: дополнить утверждения",
+                    description: "Дополните утверждения правильными терминами",
+                    content: `1. Трансформатором называют ... (электротехническое устройство, служащее для преобразования переменного тока одного напряжения в переменный ток другого напряжения при неизменной частоте)
+
+2. Однофазный трансформатор состоит из ... (магнитопровода, выполненного из изолированных листов электротехнической стали, и двух обмоток изолированного провода, размещенных на магнитопроводе.)
+
+3. Расположение обмоток на сердечнике следующее ... (обмотка низшего напряжения (НН) размещается ближе к стержню магнитопровода, поверх нее наматывается обмотка высшего напряжения (ВН).)
+
+4. Работа трансформатора состоит в следующем… (при подключении первичной обмотки трансформатора в сеть переменного тока в магнитопроводе возникает переменный магнитный поток, который возбуждает во вторичной обмотке ЭДС индукции, под действием которой во вторичной обмотке протекает ток.)
+
+5. Принцип саморегулирования трансформатора заключается в том, что ... (с увеличением тока вторичной обмотки возрастает размагничивающий магнитный поток этой обмотки, и одновременно увеличиваются ток и магнитный поток первичной обмотки, поэтому результирующий магнитный поток в сердечнике оказывается неизменным.)
+
+6. Потери мощности трансформатора складываются из ... (потерь мощности на нагрев проводников обмоток трансформатора и потерь в стали сердечника на гистерезис и вихревые токи.)
+
+7. Холостым ходом трансформатора называется... (режим работы трансформатора, при котором на первичную обмотку подается номинальное напряжение от источника электроэнергии, а его вторичная обмотка разомкнута.)
+
+8. Опыт короткого замыкания предназначен для ... (определения напряжения короткого замыкания трансформатора и мощности потерь на нагрев обмоток трансформатора при номинальной нагрузке.)
+
+9. Трехфазный силовой трансформатор состоит из… (стержневого магнитопровода, на каждом из трех стержней которого размещены первичная и вторичная обмотки одной фазы.)
+
+10. Фазы первичной и вторичной обмоток трехфазного трансформатора могут соединяться ..., сдвиг по фазе указывается… (по схеме «звезда» или «треугольник», соединения обмоток.)`
+                },
+                {
+                    title: "Трансформаторы: выбрать ответ",
+                    description: "Выберите правильный ответ из предложенных вариантов",
+                    content: `Задание. Выбрать правильный ответ.
+
+1. Однофазный трансформатор подключен к сети напряжением 220 В. Потребляемая мощность 2,2 кВт. Ток вторичной обмотки 2,5 А. Найти коэффициент трансформации:
+a) k = 2;
+б) k = 4;
+в) k = 0,25;
+г) k = 5.
+
+2. При холостом ходе трансформатора несправедливо равенство:
+a) E₂ = U₂;
+б) k = U₁/U₂;
+в) k = E₁/E₂;
+г) k = W₁/W₂.
+
+3. Для опыта холостого хода трансформатора необходимы приборы:
+a) два амперметра, вольтметр, ваттметр;
+б) амперметр, два вольтметра, ваттметр;
+в) два вольтметра и ваттметр;
+г) амперметр и ваттметр.
+
+4. Напряжение на входе однофазного трансформатора U=100 В, ток цепи I₂=10 А. Вольтметр вторичной цепи показывает U₂=500 В. Амперметр вторичной цепи покажет:
+a) 50 А;
+б) 2 А;
+в) 0,5 А;
+г) 1 А.
+
+5. Ваттметр, включенный в цепь первичной обмотки трансформатора в опыте короткого замыкания, показывает:
+a) потери в сердечнике;
+б) потребляемую мощность;
+в) полезную мощность;
+г) потери в обмотках.
+
+6. ЭДС первичной обмотки Е₁=10 В, вторичной Е₂=130 В. Число витков первичной обмотки 20. Число витков вторичной обмотки:
+a) 2;
+б) 130;
+в) 260;
+г) 200.
+
+7. При активной нагрузке трансформатор потребляет мощность Р₁=500 Вт, напряжение сети U₁ = 100 В, коэффициент трансформации равен 10. Ток нагрузки:
+a) 10 А;
+б) 5 А;
+в) 2 А;
+г) 1 А.
+
+8. Для опыта короткого замыкания трансформатора необходимы приборы:
+a) два амперметра, вольтметр и ваттметр;
+б) амперметр, два вольтметра и ваттметр;
+в) два вольтметра и ваттметр;
+г) амперметр и вольтметр.
+
+9. Во вторичную обмотку трансформатора в режиме короткого замыкания включают прибор:
+a) омметр;
+б) вольтметр;
+в) ваттметр;
+г) амперметр.
+
+10. Потери мощности в меди вызваны:
+a) гистерезисом;
+б) вихревыми токами;
+в) нагреванием проводников;
+г) взаимоиндукцией.
+
+Правильные ответы: 1-б, 2-а, 3-б, 4-б, 5-г, 6-в, 7-б, 8-а, 9-г, 10-в`
+                },
+                {
+                    title: "Трансформаторы: решить задачу",
+                    description: "Решите практические задачи по трансформаторам",
+                    content: `Задание. Решить задачи.
+
+1. Найти число витков вторичной обмотки трансформатора, если при максимальном магнитном потоке в магнитопроводе 0,001 Вб и частоте тока в сети 50 Гц в обмотке наводится ЭДС, равная 220 В.
+   Ответ: 990 витков.
+
+2. Определить коэффициент трансформации однофазного трансформатора, если амплитуда магнитной индукции в нем 0,8 Тл; сечение магнитопровода 11,5 см³; витков вторичной обмотки 18. Трансформатор включен в сеть напряжением 220 В и частотой 50 Гц.
+   Ответ: 6.
+
+3. Трансформатор с номинальной мощностью 10 кВА имеет номинальное вторичное напряжение 400 В. Найти полезную мощность, если при коэффициенте мощности 0,86 вторичный ток составил 24 А. Потерями в трансформаторе пренебречь.
+   Ответ: 8,256 кВт.
+
+4. Число витков первичной обмотки 100, вторичной 500. Определить напряжение холостого хода вторичной обмотки, если трансформатор включен в сеть напряжением 220 В. Потерями в трансформаторе пренебречь.
+   Ответ: 1100 В.
+
+5. Определить КПД трехфазного трансформатора номинальной мощностью 630 кВА, работающего с номинальной нагрузкой при коэффициенте мощности потребителя 0,85. Потери в стали 1,56 кВт, потери в обмотках 12,2 кВт.
+   Ответ: 97,5 %.
+
+6. Максимальный магнитный поток в сердечнике однофазного трансформатора равен 0,002 Вб. При холостом ходе напряжение на вторичной обмотке 127 В. Число витков первичной обмотки 495. Частота сети 50 Гц. Рассчитать коэффициент трансформации и напряжение питающей сети.
+   Ответ: 1,73 и 220 В.
+
+7. При холостом ходе напряжения на входе однофазного трансформатора 6 кВ и на выходе 400 В. При номинальной нагрузке трансформатор потребляет из сети полную мощность 25 кВА. Определить ток нагрузки. Потерями в трансформаторе пренебречь.
+   Ответ: 62,5 А.
+
+8. Однофазный трансформатор имеет активное сопротивление первичной обмотки 1,875 Ом. В опыте короткого замыкания трансформатора токи в первичной обмотке 2 А и вторичной обмотке 10 А. Ваттметр показал 15 Вт. Определить активное сопротивление вторичной обмотки.
+   Ответ: 0,075 Ом.
+
+9. Показания приборов, включенных в цепь первичной обмотки при холостом ходе трансформатора: вольтметр показал 200 В; амперметр 1,0 А; ваттметр 120 Вт. Определить коэффициент мощности трансформатора.
+   Ответ: 0,6.
+
+10. В опыте короткого замыкания трансформатора измерены: потребляемая мощность 50 Вт, ток первичной цепи 10 А. В опыте холостого хода того же трансформатора измерены: потребляемая мощность 15 Вт, напряжение питания 100 В. Определить коэффициент полезного действия.
+    Ответ: 0,94.`
+                },
+                {
+                    title: "Трансформаторы: установить соответствие",
+                    description: "Установите соответствие между определениями и формулами",
+                    content: `Задание. Установить соответствие.
+
+1. ЭДС самоиндукции трансформатора - А. E₂ = 4.44W₂fΦₜ
+2. ЭДС взаимоиндукции трансформатора - Б. S = I₁нU₁н
+3. Коэффициент трансформации однофазного трансформатора - В. η = P₂/(P₂ + Pₘ + Pₛₜ)
+4. КПД трансформатора - Г. k = U₁/U₂ = √3U₁Φ₁/U₂Φ₂ = √3W₁/W₂
+5. Полезная мощность трансформатора - Д. k = U₁/U₂ = U₁Φ₁/√3U₂Φ₂ = W₁/√3W₂
+6. Потери мощности в меди трансформатора - Е. E₁ = 4.44W₁fΦₜ
+7. Номинальная мощность трансформатора - Ж. k = E₁/E₂ = W₁/W₂ = U₁/U₂
+8. Коэффициент трансформации трехфазного трансформатора при соединении фаз обмоток по схеме Y/Δ - З. Pₘ = R₁I₁² + R₂I₂²
+9. Коэффициент трансформации трехфазного трансформатора при соединении фаз обмоток по схеме Δ/Y - И. P₂ = I₂U₂cos φ₂
+
+Правильные соответствия:
+1-Е, 2-А, 3-Ж, 4-В, 5-И, 6-З, 7-Б, 8-Г, 9-Д`
+                }
+            ];
+            
+            // DOM элементы
+            const pagesContent = document.getElementById('pagesContent');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const resetZoomBtn = document.getElementById('resetZoom');
+            const loadingText = document.getElementById('loadingText');
+            const imageOverlay = document.getElementById('imageOverlay');
+            const overlayImage = document.getElementById('overlayImage');
+            const overlayPageInfo = document.getElementById('overlayPageInfo');
+            const closeOverlayBtn = document.getElementById('closeOverlay');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
+            
+            // Загрузка всех заданий на страницу
+            function loadAllAssignments() {
+                pagesContent.innerHTML = '';
+                
+                for (let i = 0; i < assignments.length; i++) {
+                    const assignment = assignments[i];
+                    
+                    const pageItem = document.createElement('div');
+                    pageItem.className = 'page-item';
+                    pageItem.id = `assignment-${i}`;
+                    
+                    // Номер задания
+                    const pageNumber = document.createElement('div');
+                    pageNumber.className = 'page-number';
+                    pageNumber.textContent = `Задание ${i + 1}`;
+                    
+                    // Контейнер для текста задания
+                    const textContainer = document.createElement('div');
+                    textContainer.className = 'assignment-text';
+                    textContainer.innerHTML = `
+                        <div class="assignment-title">${assignment.title}</div>
+                        <div class="assignment-desc">${assignment.description}</div>
+                        <div style="color: #333;">${assignment.content}</div>
+                    `;
+                    
+                    // Описание задания
+                    const assignmentDesc = document.createElement('p');
+                    assignmentDesc.style.color = '#666';
+                    assignmentDesc.style.marginTop = '15px';
+                    assignmentDesc.style.fontSize = '14px';
+                    assignmentDesc.innerHTML = `<i class="fas fa-file-alt" style="color: #3498db;"></i> ${assignment.description}`;
+                    
+                    pageItem.appendChild(pageNumber);
+                    pageItem.appendChild(textContainer);
+                    pageItem.appendChild(assignmentDesc);
+                    pagesContent.appendChild(pageItem);
+                }
+                
+                loadingText.style.display = 'none';
+            }
+            
+            // Функция открытия оверлея
+            function openOverlay(content, assignmentNumber) {
+                overlayPageInfo.textContent = assignments[assignmentNumber-1].title;
+                imageOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Функция закрытия оверлея
+            function closeOverlay() {
+                imageOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Обновление индикатора прогресса при скролле
+            function updateProgressIndicator() {
+                const pageItems = document.querySelectorAll('.page-item');
+                const scrollPosition = window.scrollY + (window.innerHeight / 2);
+                
+                let currentVisiblePage = 1;
+                
+                for (let i = 0; i < pageItems.length; i++) {
+                    const item = pageItems[i];
+                    const rect = item.getBoundingClientRect();
+                    const itemTop = rect.top + window.scrollY;
+                    const itemBottom = itemTop + rect.height;
+                    
+                    if (scrollPosition >= itemTop && scrollPosition <= itemBottom) {
+                        currentVisiblePage = i + 1;
+                        break;
+                    }
+                }
+                
+                progressIndicator.textContent = `Задание ${currentVisiblePage} из ${assignments.length}`;
+            }
+            
+            // Обработчики событий для кнопок масштабирования
+            zoomInBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    container.style.fontSize = `${currentFontSize + 2}px`;
+                });
+            });
+            
+            zoomOutBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    if (currentFontSize > 12) {
+                        container.style.fontSize = `${currentFontSize - 2}px`;
+                    }
+                });
+            });
+            
+            resetZoomBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    container.style.fontSize = '16px';
+                });
+            });
+            
+            // Обработчики для оверлея
+            closeOverlayBtn.addEventListener('click', closeOverlay);
+            imageOverlay.addEventListener('click', function(e) {
+                if (e.target === imageOverlay) {
+                    closeOverlay();
+                }
+            });
+            
+            // Горячие клавиши
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeOverlay();
+                }
+            });
+            
+            // Навигация - исправлено: активная кнопка "Разделы"
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Устанавливаем активную кнопку "Разделы"
+            document.querySelector('a[href="prosl-razdely.html"]').classList.add('active');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            // Логотип ведет на главную
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Отслеживание скролла для обновления индикатора
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateProgressIndicator, 100);
+            });
+            
+            window.addEventListener('resize', updateProgressIndicator);
+            
+            // Инициализация
+            loadAllAssignments();
+            updateProgressIndicator();
+            
+            // Плавная прокрутка к верху при загрузке
+            window.scrollTo(0, 0);
+            
+            // Улучшенная обработка касаний для мобильных устройств
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        });
+    </script>
+</body>
+</html>
