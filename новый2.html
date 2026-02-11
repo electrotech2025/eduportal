@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздел 2: Машины постоянного тока - Задания</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .logo span {
+            color: #ffdd59;
+        }
+        
+        .subject {
+            font-size: 16px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            text-align: center;
+        }
+        
+        .college-info {
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
+        }
+        
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 15px 0 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pages-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .pages-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .pages-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .pages-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .pages-content {
+            padding: 0;
+        }
+        
+        .page-item {
+            padding: 30px;
+            border-bottom: 1px solid #f1f1f1;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .page-item:last-child {
+            border-bottom: none;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .assignment-text {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-line;
+            overflow: auto;
+            max-height: 600px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .assignment-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .assignment-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .answer-table {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .zoom-btn {
+            background: rgba(52, 152, 219, 0.9);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .zoom-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .literature-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .literature-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .literature-info ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .literature-info li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .literature-info li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                margin-bottom: 5px;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            
+            .header-content {
+                padding-bottom: 15px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .page-item {
+                padding: 20px 15px;
+            }
+            
+            .zoom-controls {
+                bottom: 10px;
+                left: 10px;
+                flex-direction: column;
+            }
+            
+            .progress-indicator {
+                bottom: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .zoom-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .pages-title {
+                font-size: 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .pages-title {
+                font-size: 18px;
+            }
+            
+            .page-item {
+                padding: 15px 10px;
+            }
+            
+            .back-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .page-number {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-item {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .zoom-btn:hover {
+                transform: none;
+            }
+            .back-btn:hover {
+                transform: none;
+            }
+        }
+        
+        .task-section {
+            margin-bottom: 30px;
+            border-bottom: 2px dashed #3498db;
+            padding-bottom: 20px;
+        }
+        .task-section:last-child {
+            border-bottom: none;
+        }
+        .task-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
+            <div class="subject">Раздел 2: Машины постоянного тока</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
+            <nav id="mainNav">
+                <a href="index.html" class="nav-btn">Главная</a>
+                <a href="prosl-razdely.html" class="nav-btn active">Разделы</a>
+                <a href="tests.html" class="nav-btn">Тесты</a>
+                <a href="apps.html" class="nav-btn">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
+                <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                <a href="lit.html" class="nav-btn">Литература</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <a href="prosl-razdely.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад к разделам
+        </a>
+        
+        <div class="literature-info">
+            <h3><i class="fas fa-info-circle"></i> Раздел 2: Машины постоянного тока</h3>
+            <p>Все задания из 4 файлов в одной странице:</p>
+            <ul>
+                <li>Двигатели постоянного тока - тесты</li>
+                <li>Двигатели постоянного тока - задачи</li>
+                <li>Электродвигатели переменного тока - тесты (ошибочно попали сюда, но оставляем)</li>
+                <li>Машины переменного тока - задачи (ошибочно попали сюда, но оставляем)</li>
+            </ul>
+        </div>
+        
+        <div class="pages-container">
+            <div class="pages-header">
+                <h1 class="pages-title">Машины постоянного тока</h1>
+                <p class="pages-subtitle">Тесты и задачи (все 4 файла вместе)</p>
+            </div>
+            
+            <div class="pages-content" id="pagesContent">
+                <div class="loading" id="loadingText">Загрузка заданий...</div>
+            </div>
+        </div>
+        
+        <div class="progress-indicator" id="progressIndicator">
+            Задание 1 из 4
+        </div>
+        
+        <div class="zoom-controls">
+            <button class="zoom-btn" id="zoomIn" title="Увеличить">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="zoom-btn" id="zoomOut" title="Уменьшить">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="zoom-btn" id="resetZoom" title="Сбросить масштаб">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ВСЕ 4 ФАЙЛА В ОДНОЙ СТРАНИЦЕ - новый2.html
+            const assignments = [
+                {
+                    title: "Файл 1: Двигатели постоянного тока - ТЕСТЫ",
+                    description: "Двигатели постояного тока.pdf - выбрать правильный ответ",
+                    content: `**Задание. Выбрать правильный ответ.**
+
+1. На сердечники главных полюсов машины постоянного тока надеты катушки, которые представляют собой обмотку:
+   а) якоря;
+   б) возбуждения;
+   в) ротора.
+
+2. Полый цилиндр, пластины которого соединены с витками обмотки якоря, это:
+   а) станина;
+   б) сердечник;
+   в) коллектор.
+
+3. Вращающий момент двигателя постоянного тока возникает в результате:
+   а) взаимодействия тока якоря с главным магнитным полем;
+   б) движения проводника в магнитном поле;
+   в) воздействия на проводник вращающегося магнитного поля.
+
+4. Реостат, включенный последовательно с якорем двигателя, служит:
+   а) для улучшения коммутации;
+   б) ограничения пускового тока;
+   в) ослабления реакции якоря.
+
+5. Напряжение на зажимах якоря не влияет на ток возбуждения при включении обмотки возбуждения по схеме:
+   а) независимого возбуждения;
+   б) параллельного возбуждения;
+   в) последовательного возбуждения.
+
+6. Схема, по которой цепь обмотки возбуждения включается параллельно с цепью якоря, называется:
+   а) зависимой;
+   б) независимой;
+   в) шунтовой.
+
+7. Электромагнитная мощность, развиваемая двигателем, определяется по формуле:
+   а) UIя;
+   б) I²rя;
+   в) EIя.
+
+8. Реверсирование двигателя можно осуществить изменением:
+   а) числа пар полюсов;
+   б) силы тока в якоре;
+   в) направления тока в якоре.
+
+9. Частоту вращения двигателя можно регулировать изменением:
+   а) тока возбуждения;
+   б) направления тока якоря;
+   в) напряжения питания.
+
+10. Зависимость частоты вращения двигателя от тока возбуждения называется:
+    а) механической характеристикой;
+    б) скоростной характеристикой;
+    в) внешней характеристикой.
+
+<div class="answer-table">
+    <strong>Таблица правильных ответов:</strong><br>
+    1 - б, 2 - в, 3 - а, 4 - б, 5 - а, 6 - в, 7 - в, 8 - в, 9 - а, 10 - б
+</div>`
+                },
+                {
+                    title: "Файл 2: Двигатели постоянного тока - ЗАДАЧИ",
+                    description: "Двигатели_постоянного_ток_азадачи.pdf - решить задачи",
+                    content: `**Задание. Решить задачи.**
+
+1. Вычислить вращающий момент на валу электродвигателя постоянного тока, если по обмотке якоря течет ток 12,4 А, а магнитное поле машины характеризуется потоком 0,04 Вб. Якорь имеет 4 пары полюсов и 420 активных проводников обмотки, имеющей две параллельные ветви.
+   <br><strong>Ответ: 66,5 Н·м.</strong>
+
+2. На щитке двигателя постоянного тока приведены следующие данные: Р = 3,2 кВт; U = 110 В; I = 38,2 А; n = 3000 об/мин. Найти вращающий момент и КПД двигателя.
+   <br><strong>Ответ: М = 10,19 Н·м; η = 0,76.</strong>
+
+3. Определить число оборотов электродвигателя, рассчитанного на напряжение 220 В, если сопротивление обмотки якоря, по которой течет ток 113 А, составляет 1,635 Ом, а магнитный поток полюсов равен 0,001 Вб. Коэффициент Се машины равен 36.
+   <br><strong>Ответ: 980 об/мин.</strong>
+
+4. Двигатель постоянного тока параллельного возбуждения включен в сеть с напряжением 440 В. Сопротивление обмотки якоря 0,2 Ом, сопротивление цепи возбуждения 200 Ом. В установившемся режиме работы в обмотке якоря двигателя индуцируется противо-ЭДС, равная 430 В. Определить ток, потребляемый двигателем из сети.
+   <br><strong>Ответ: 52,2 А.</strong>
+
+5. Якорь двигателя постоянного тока вращается с частотой 1500 об/мин. Магнитный поток полюса равен 0,01 Вб. Противо-ЭДС двигателя составляет 220 В. Определить число полюсов, если отношение числа активных проводников на якоре к числу пар параллельных ветвей обмотки равно 440.
+   <br><strong>Ответ: 8.</strong>
+
+6. К двигателю с параллельным возбуждением подведено напряжение 220 В. Чему равна подводимая мощность, если ток якоря равен 25 А, а сопротивление обмотки возбуждения 80 Ом.
+   <br><strong>Ответ: 6,1 кВт.</strong>
+
+7. Найти сопротивление обмотки якоря двигателя с параллельным возбуждением, если наибольшее сопротивление пускового реостата равно 5 Ом, а ток в момент пуска составил 20 А при напряжении сети 110 В.
+   <br><strong>Ответ: 0,5 Ом.</strong>
+
+8. Определить ток, потребляемый двигателем при номинальном режиме, противо-ЭДС, если номинальное напряжение 220 В, потребляемая мощность 6,6 кВт, сопротивление обмотки якоря 0,15 Ом и параллельной обмотки возбуждения 110 Ом.
+   <br><strong>Ответ: 30 А; 215,8 В.</strong>
+
+9. Двигатель параллельного возбуждения включен в сеть постоянного тока напряжением 220 В и потребляет ток 40 А. Сопротивление обмотки якоря 0,2 Ом, обмотки возбуждения 100 Ом, КПД двигателя 0,87. Определить потери мощности в цепи возбуждения и в цепи якоря.
+   <br><strong>Ответ: 484 Вт; 286 Вт.</strong>
+
+10. Электродвигатель постоянного тока с параллельным возбуждением при напряжении 110 В и скорости вращения 1000 об/мин рассчитан на номинальную мощность 5 кВт при КПД, равном 0,85. Оценить значение пускового вращающего момента, если пусковой ток равен 160 А.
+    <br><strong>Ответ: 143 Н·м.</strong>
+
+<div class="answer-table">
+    <strong>Все ответы:</strong> 1. 66,5 Н·м; 2. 10,19 Н·м; 0,76; 3. 980 об/мин; 4. 52,2 А; 5. 8; 6. 6,1 кВт; 7. 0,5 Ом; 8. 30 А; 215,8 В; 9. 484 Вт; 286 Вт; 10. 143 Н·м.
+</div>`
+                },
+                {
+                    title: "Файл 3: Электродвигатели ПЕРЕМЕННОГО тока - ТЕСТЫ",
+                    description: "ЭЛЕКТРОДВИГАТЕЛИ_ПЕРЕМЕННОГО_ТОКА.pdf - выбрать правильный ответ",
+                    content: `**ЭЛЕКТРОДВИГАТЕЛИ ПЕРЕМЕННОГО ТОКА**
+
+**Задание. Выбрать правильный вариант ответа**
+
+1. Для создания вращающегося магнитного поля в асинхронных электродвигателях служит:
+   а) статор;
+   б) ротор;
+   в) главный полюс.
+
+2. Начала и концы фазных обмоток статора подключаются:
+   а) к зажимам колодки на корпусе;
+   б) контактным кольцам;
+   в) пластинам коллектора.
+
+3. Обмотка ротора, выполненная по типу беличьего колеса, называется:
+   а) фазной;
+   б) якорной;
+   в) короткозамкнутой.
+
+4. Частота вращения магнитного поля зависит:
+   а) от частоты вращения ротора;
+   б) частоты тока в сети;
+   в) числа витков обмотки статора.
+
+5. Электрические потери мощности вызваны влиянием:
+   а) гистерезиса;
+   б) трения в опорах;
+   в) нагрева обмоток.
+
+6. Зависимость частоты вращения ротора от нагрузки двигателя называется:
+   а) рабочей характеристикой;
+   б) механической характеристикой;
+   в) скоростной характеристикой.
+
+7. Реверсирование асинхронного двигателя осуществляется:
+   а) изменением порядка чередования фаз;
+   б) включением пускового реостата;
+   в) изменением числа пар полюсов магнитного поля статора.
+
+8. Частота вращения ротора асинхронного двигателя определяется по формуле:
+   а) n₁ = 60f/p;
+   б) n₂ = n₁(1 - S);
+   в) n = (U - IR)/CФ.
+
+9. Для получения вращающегося магнитного поля в цепь статора однофазного асинхронного двигателя включают:
+   а) пусковой реостат и конденсатор;
+   б) автотрансформатор и конденсатор;
+
+10. Электрическое торможение двигателя осуществляется:
+    а) противовключением;
+    б) переключением со «звезды» на «треугольник»;
+    в) включением реостатов.
+
+<div class="answer-table">
+    <strong>Таблица правильных ответов:</strong><br>
+    1 - а, 2 - а, 3 - в, 4 - б, 5 - в, 6 - б, 7 - а, 8 - б, 9 - ? (не указано), 10 - а
+    <br>По данным из PDF: 1а,2а,3в,4б,5в,6б,7а,8б,9а,10а
+</div>`
+                },
+                {
+                    title: "Файл 4: Машины ПЕРЕМЕННОГО тока - ЗАДАЧИ",
+                    description: "МАШИНЫ ПЕРЕМЕННОГО ТОКА.pdf - решить задачи",
+                    content: `**Задание. Решить задачи.**
+
+1. Какое число пар полюсов должен иметь асинхронный двигатель, если частота тока в сети 50 Гц, а частота вращения магнитного поля статора 600 об/мин?
+   <br><strong>Ответ: 5.</strong>
+
+2. Номинальная частота вращения ротора 735 об/мин. Чему равно скольжение ротора, если частота тока в сети 50 Гц?
+   <br><strong>Ответ: 2%.</strong>
+
+3. На паспорте двигателя указано, что его скорость вращения равна 1410 об/мин. Вычислить величину скольжения.
+   <br><strong>Ответ: 6%.</strong>
+
+4. Трехфазный синхронный двигатель, включенный в сеть напряжением 380 В, развивает мощность 75 кВт. КПД двигателя 92%, коэффициент мощности 0,8. Определить реактивный ток, потребляемый двигателем из сети.
+   <br><strong>Ответ: 92,9 А.</strong>
+
+5. Трехфазный двигатель потребляет из сети мощность 45 кВА. Коэффициент мощности 0,89. Суммарная мощность потерь в двигателе 4 кВт. Определить КПД двигателя.
+   <br><strong>Ответ: 90%.</strong>
+
+6. Трехфазный синхронный двигатель включен в сеть напряжением 660 В. Мощность на валу 25 кВт; линейный ток, потребляемый из сети, 60 А; КПД двигателя 0,9. Определить реактивную мощность, потребляемую двигателем из сети.
+   <br><strong>Ответ: 62,5 квар.</strong>
+
+7. Асинхронный электродвигатель с короткозамкнутым ротором имеет следующие паспортные данные: мощность Рном = 11 кВт, напряжение Uном = 380 В, коэффициент мощности cos φ = 0,83, частота вращения ротора n₂ = 975 об/мин, КПД ηном = 0,855. Определить потребляемую мощность, номинальное скольжение, номинальный и пусковой токи.
+   <br><strong>Ответ: 12865 Вт, 2,5%, 23,6 А, 165 А.</strong>
+
+8. Асинхронный электродвигатель с короткозамкнутым ротором имеет следующие паспортные данные: мощность Рном = 1,5 кВт, напряжение Uном = 380 В, частота вращения ротора n₂ = 2725 об/мин, коэффициент мощности cos φ = 0,65, КПД ηном = 0,74. Определить потребляемую мощность, номинальное скольжение, номинальный и пусковой токи.
+   <br><strong>Ответ: 2027 Вт, 3%, 4,74 А, 33,18 А.</strong>
+
+9. Трехфазный асинхронный двигатель мощностью 10 кВт с КПД 0,875, коэффициентом мощности 0,88 и частотой вращения 1450 об/мин, имеющий две пары полюсов, подключен к сети напряжением 380 В и частотой 50 Гц. Определить величину скольжения при номинальной нагрузке, потребляемый ток, потребляемую мощность и полезный вращающий момент.
+   <br><strong>Ответ: 3,33%, 19,7 А, 11400 Вт, 6,7 кг·м.</strong>
+
+10. Определить сопротивление реостата в цепи ротора асинхронного трехфазного двигателя с фазным ротором, питающегося от сети переменного тока частотой 50 Гц и вращающегося со скоростью 960 об/мин, чтобы снизить скорость ротора до 800 об/мин. Сопротивление обмотки ротора 0,05 Ом. Число пар полюсов двигателя равно 3.
+    <br><strong>Ответ: 0,2 Ом.</strong>
+
+<div class="answer-table">
+    <strong>Ответы:</strong> 1. 5; 2. 2%; 3. 6%; 4. 92,9 А; 5. 90%; 6. 62,5 квар; 7. 12865 Вт, 2,5%, 23,6 А, 165 А; 8. 2027 Вт, 3%, 4,74 А, 33,18 А; 9. 3,33%, 19,7 А, 11400 Вт, 6,7 кг·м; 10. 0,2 Ом.
+</div>`
+                }
+            ];
+            
+            // DOM элементы
+            const pagesContent = document.getElementById('pagesContent');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const resetZoomBtn = document.getElementById('resetZoom');
+            const loadingText = document.getElementById('loadingText');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
+            
+            function loadAllAssignments() {
+                pagesContent.innerHTML = '';
+                
+                for (let i = 0; i < assignments.length; i++) {
+                    const assignment = assignments[i];
+                    
+                    const pageItem = document.createElement('div');
+                    pageItem.className = 'page-item';
+                    pageItem.id = `assignment-${i}`;
+                    
+                    const pageNumber = document.createElement('div');
+                    pageNumber.className = 'page-number';
+                    pageNumber.textContent = `Задание ${i + 1} из ${assignments.length}`;
+                    
+                    const textContainer = document.createElement('div');
+                    textContainer.className = 'assignment-text';
+                    textContainer.innerHTML = `
+                        <div class="assignment-title">${assignment.title}</div>
+                        <div class="assignment-desc">${assignment.description}</div>
+                        <div style="color: #333;">${assignment.content}</div>
+                    `;
+                    
+                    pageItem.appendChild(pageNumber);
+                    pageItem.appendChild(textContainer);
+                    pagesContent.appendChild(pageItem);
+                }
+                
+                loadingText.style.display = 'none';
+            }
+            
+            function updateProgressIndicator() {
+                const pageItems = document.querySelectorAll('.page-item');
+                const scrollPosition = window.scrollY + (window.innerHeight / 2);
+                
+                let currentVisiblePage = 1;
+                
+                for (let i = 0; i < pageItems.length; i++) {
+                    const item = pageItems[i];
+                    const rect = item.getBoundingClientRect();
+                    const itemTop = rect.top + window.scrollY;
+                    const itemBottom = itemTop + rect.height;
+                    
+                    if (scrollPosition >= itemTop && scrollPosition <= itemBottom) {
+                        currentVisiblePage = i + 1;
+                        break;
+                    }
+                }
+                
+                progressIndicator.textContent = `Задание ${currentVisiblePage} из ${assignments.length}`;
+            }
+            
+            zoomInBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    container.style.fontSize = `${currentFontSize + 2}px`;
+                });
+            });
+            
+            zoomOutBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    const currentFontSize = parseInt(window.getComputedStyle(container).fontSize);
+                    if (currentFontSize > 12) {
+                        container.style.fontSize = `${currentFontSize - 2}px`;
+                    }
+                });
+            });
+            
+            resetZoomBtn.addEventListener('click', function() {
+                const textContainers = document.querySelectorAll('.assignment-text');
+                textContainers.forEach(container => {
+                    container.style.fontSize = '16px';
+                });
+            });
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            document.querySelector('a[href="prosl-razdely.html"]').classList.add('active');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateProgressIndicator, 100);
+            });
+            
+            window.addEventListener('resize', updateProgressIndicator);
+            
+            loadAllAssignments();
+            updateProgressIndicator();
+            window.scrollTo(0, 0);
+            
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        });
+    </script>
+</body>
+</html>
