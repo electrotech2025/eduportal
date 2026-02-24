@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Литература - Электротехника | Солигорский колледж</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Литература - Электротехника</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -364,34 +364,30 @@
             left: 0;
         }
         
-        /* Стили для блока ВАЖНО ЗНАТЬ (ВИДЕО) */
-        .important-block {
+        /* Стили для блока ССЫЛКИ НА ИСПОЛЬЗУЕМЫЕ ВИДЕО - в стиле исходного дизайна */
+        .video-block {
             background: #f8f9fa;
             border-left: 6px solid #3498db;
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 25px;
             margin: 40px 0 30px 0;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        .important-header {
+        .video-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
         
-        .important-header i {
+        .video-header i {
             font-size: 32px;
             color: #3498db;
-            background: white;
-            padding: 12px;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
         }
         
-        .important-header h2 {
-            font-size: 26px;
+        .video-header h2 {
+            font-size: 24px;
             font-weight: 700;
             color: #2c3e50;
             margin: 0;
@@ -406,18 +402,17 @@
         
         .video-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 18px 20px;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             border: 1px solid #e9ecef;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
         }
         
         .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(52, 152, 219, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.1);
             border-color: #3498db;
         }
         
@@ -433,7 +428,6 @@
         
         .video-title i {
             color: #3498db;
-            font-size: 22px;
         }
         
         .channel-name {
@@ -444,8 +438,8 @@
             color: #2980b9;
             margin-bottom: 15px;
             background: #eef2f6;
-            padding: 5px 14px;
-            border-radius: 30px;
+            padding: 4px 12px;
+            border-radius: 20px;
             width: fit-content;
         }
         
@@ -458,29 +452,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             background: #3498db;
             color: white;
-            padding: 12px 20px;
-            border-radius: 40px;
+            padding: 10px 18px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
             width: fit-content;
-        }
-        
-        .video-link i {
-            font-size: 18px;
         }
         
         .video-link:hover {
             background: #2980b9;
-            gap: 16px;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            gap: 15px;
         }
         
         /* Адаптивность */
@@ -560,8 +547,8 @@
                 padding: 15px;
             }
             
-            .important-header h2 {
-                font-size: 22px;
+            .video-header h2 {
+                font-size: 20px;
             }
             
             .video-grid {
@@ -592,7 +579,7 @@
                 padding: 6px 12px;
             }
             
-            .important-header {
+            .video-header {
                 flex-direction: column;
                 text-align: center;
             }
@@ -614,21 +601,6 @@
             padding: 40px;
             color: #666;
             font-style: italic;
-        }
-        
-        /* Улучшенное отображение на мобильных устройствах */
-        @media (hover: none) and (pointer: coarse) {
-            .zoom-btn:hover {
-                transform: none;
-            }
-            
-            .back-btn:hover {
-                transform: none;
-            }
-            
-            .page-image {
-                cursor: pointer;
-            }
         }
     </style>
 </head>
@@ -683,16 +655,16 @@
             </div>
         </div>
 
-        <!-- БЛОК ВАЖНО ЗНАТЬ (ВИДЕО) - РАСПОЛОЖЕН СНИЗУ -->
-        <div class="important-block" id="vazhno-znat">
-            <div class="important-header">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h2>⚡ ВАЖНО ЗНАТЬ! Видео по электротехнике</h2>
+        <!-- БЛОК ССЫЛКИ НА ИСПОЛЬЗУЕМЫЕ ВИДЕО - расположен снизу -->
+        <div class="video-block" id="video-links">
+            <div class="video-header">
+                <i class="fas fa-video"></i>
+                <h2>📺 ССЫЛКИ НА ИСПОЛЬЗУЕМЫЕ ВИДЕО</h2>
             </div>
             <p style="margin-bottom: 20px; font-size: 16px; color: #2c3e50;">Кликните на любую ссылку, чтобы открыть видео на YouTube (откроется в новой вкладке).</p>
 
             <div class="video-grid">
-                <!-- 8 видео согласно списку -->
+                <!-- 8 видео согласно PDF -->
                 <div class="video-card">
                     <div class="video-title"><i class="fas fa-bolt"></i> Закон Ома для цепи переменного тока</div>
                     <div class="channel-name"><i class="fab fa-youtube"></i> ВЕБ ШКОЛА</div>
@@ -739,13 +711,6 @@
                     <div class="video-title"><i class="fas fa-atom"></i> Сила Лоренца</div>
                     <div class="channel-name"><i class="fab fa-youtube"></i> Palsan Technology</div>
                     <a class="video-link" href="https://www.youtube.com/watch?v=HVH68bOTHdM&t=73s" target="_blank" rel="noopener noreferrer"><i class="fas fa-play"></i> Смотреть видео</a>
-                </div>
-
-                <!-- НОВАЯ КАРТОЧКА: канал MIK (физика, математика) -->
-                <div class="video-card">
-                    <div class="video-title"><i class="fas fa-graduation-cap"></i> Физика (7-11 классы) и другие предметы</div>
-                    <div class="channel-name"><i class="fab fa-youtube"></i> MIK</div>
-                    <a class="video-link" href="https://www.youtube.com/channel/UCDKufJOTpYLXusSrBJDccEw/playlists?view=50&sort=dd&shelf_id=2" target="_blank" rel="noopener noreferrer"><i class="fas fa-play"></i> Смотреть плейлисты канала</a>
                 </div>
             </div>
         </div>
