@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Закрепление - Электротехника | Солигорский колледж</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Шапка (как в документе) */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: #ffdd59;
+        }
+
+        .subject {
+            font-size: 16px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .college-info {
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            opacity: 0.8;
+            color: #ecf0f1;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
+            max-width: 140px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 15px 0 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .page-header h1 i {
+            color: #3498db;
+            font-size: 40px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Стили для карточек */
+        .reinforcement-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            flex-wrap: wrap;
+        }
+
+        .section-title i {
+            font-size: 32px;
+            color: #3498db;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        }
+
+        .section-title h2 {
+            font-size: 26px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .section-title span {
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .reinforcement-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reinforcement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #3498db;
+            transition: 0.3s;
+        }
+
+        .reinforcement-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+        }
+
+        .reinforcement-card:hover::before {
+            width: 10px;
+            background: #2980b9;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .card-icon i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .reinforcement-card h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eef2f6;
+            padding: 8px 16px;
+            border-radius: 30px;
+            width: fit-content;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2980b9;
+        }
+
+        .platform-badge i {
+            font-size: 16px;
+        }
+
+        .platform-badge.learningapps i {
+            color: #ff6b6b;
+        }
+
+        .platform-badge.genially i {
+            color: #4a90e2;
+        }
+
+        .card-footer {
+            margin-top: auto;
+        }
+
+        .test-type {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .test-type i {
+            color: #3498db;
+        }
+
+        .open-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .open-link i {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .open-link:hover {
+            background: #2980b9;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .open-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Счетчик */
+        .counter-badge {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-top: 15px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .nav-btn {
+                width: 100%;
+                max-width: none;
+                min-width: auto;
+                margin-bottom: 5px;
+                padding: 12px;
+                border-radius: 5px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 22px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .section-title i {
+                margin: 0 auto;
+            }
+
+            .reinforcement-card h3 {
+                font-size: 18px;
+            }
+        }
+
+        /* Анимации */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .reinforcement-card {
+            animation: slideIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <div class="logo" id="mainLogo">Электро<span>Техника</span></div>
+            <div class="subject">Закрепление пройденного материала</div>
+            <div class="college-info">
+                <i class="fas fa-university"></i> УО «Солигорский государственный колледж»
+            </div>
+            <nav id="mainNav">
+                <a href="index.html" class="nav-btn">Главная</a>
+                <a href="prosl-razdely.html" class="nav-btn">Разделы</a>
+                <a href="tests.html" class="nav-btn">Тесты</a>
+                <a href="apps.html" class="nav-btn">Приложения</a>
+                <a href="video.html" class="nav-btn">Видео</a>
+                <a href="glossary.html" class="nav-btn">Глоссарий</a>
+                <a href="literature.html" class="nav-btn">Литература</a>
+                <a href="zakreplenie.html" class="nav-btn active">Закрепление</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Кнопка назад -->
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад на главную
+        </a>
+
+        <!-- Заголовок страницы -->
+        <div class="page-header">
+            <h1>
+                <i class="fas fa-lock"></i>
+                ЗАКРЕПЛЕНИЕ МАТЕРИАЛА
+                <i class="fas fa-lock-open"></i>
+            </h1>
+            <p>Полная коллекция интерактивных тестов и презентаций для проверки знаний</p>
+        </div>
+
+        <!-- Секция Learning Apps (старые ссылки) -->
+        <div class="reinforcement-section">
+            <div class="section-title">
+                <i class="fas fa-puzzle-piece"></i>
+                <h2>LearningApps.org <span>12 тестов</span></h2>
+            </div>
+            <div class="cards-grid">
+                <!-- 1. Асинхронные электродвигатели -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h3>ТЕСТ «АСИНХРОННЫЕ ЭЛЕКТРОДВИГАТЕЛИ»</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Тест на знание темы
+                    </div>
+                    <a href="https://learningapps.org/watch?v=p6ikypc6a22" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 2. Устройство асинхронного двигателя -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Устройство асинхронного двигателя</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-puzzle-piece"></i> Интерактивное задание
+                    </div>
+                    <a href="https://learningapps.org/view47705542" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 3. Паспортные данные двигателя -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Паспортные данные двигателя</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-chart-bar"></i> Тест на соответствие
+                    </div>
+                    <a href="https://learningapps.org/view47703749" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 4. Асинхронный двигатель с КЗ ротором -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Асинхронный двигатель с короткозамкнутым ротором</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-microchip"></i> Специализированный тест
+                    </div>
+                    <a href="https://learningapps.org/view47709856" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 5. Пуск и регулирование скорости -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-play-circle"></i></div>
+                    <h3>Пуск и регулирование скорости асинхронного двигателя</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-tachometer-alt"></i> Тест на управление
+                    </div>
+                    <a href="https://learningapps.org/view47709311" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 6. Схемы пуска асинхронных двигателей -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Схемы пуска асинхронных двигателей</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-sitemap"></i> Работа со схемами
+                    </div>
+                    <a href="https://learningapps.org/view47707956" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 7. Однофазный асинхронный двигатель -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Однофазный асинхронный двигатель</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-home"></i> Бытовые двигатели
+                    </div>
+                    <a href="https://learningapps.org/view47707693" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 8. Способы пуска асинхронного двигателя -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-power-off"></i></div>
+                    <h3>Способы пуска асинхронного двигателя</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-rocket"></i> Методы запуска
+                    </div>
+                    <a href="https://learningapps.org/view47706836" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 9. Общие сведения об электродвигателях -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                    <h3>Общие сведения об электродвигателях</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-book-open"></i> Базовая теория
+                    </div>
+                    <a href="https://learningapps.org/view47704310" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 10. Виды электродвигателей -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-th-large"></i></div>
+                    <h3>Виды электродвигателей</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-tags"></i> Классификация
+                    </div>
+                    <a href="https://learningapps.org/view47700818" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 11. Синхронный двигатель -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Синхронный двигатель</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-clock"></i> Синхронные машины
+                    </div>
+                    <a href="https://learningapps.org/view47696337" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 12. Двигатель постоянного тока -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-battery-full"></i></div>
+                    <h3>Двигатель постоянного тока</h3>
+                    <div class="platform-badge learningapps">
+                        <i class="fas fa-cube"></i> LearningApps.org
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-car-battery"></i> Машины постоянного тока
+                    </div>
+                    <a href="https://learningapps.org/view47710210" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция Genially (первые 4 из старых ссылок) -->
+        <div class="reinforcement-section">
+            <div class="section-title">
+                <i class="fas fa-chart-pie"></i>
+                <h2>Genially (первые материалы) <span>4 материала</span></h2>
+            </div>
+            <div class="cards-grid">
+                <!-- 1. Асинхронные двигатели тест -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h3>Асинхронные двигатели — интерактивный тест</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Тест с обратной связью
+                    </div>
+                    <a href="https://view.genially.com/699eb208f68c1cb06cebbed1/interactive-content-asinhronnye-dvigateli-test" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 2. Трансформатор тест -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Трансформатор — интерактивный тест</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Проверка знаний
+                    </div>
+                    <a href="https://view.genially.com/699ea6dfcf6f08ba8a126958/interactive-content-transformator-test" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 3. Электродвигатели постоянного тока тест -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-battery-full"></i></div>
+                    <h3>Электродвигатели постоянного тока — тест</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/699ee83f5c2ad768d2d25cea/presentation-elektrodvigateli-postoyannogo-toka-test" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 4. Трансформатор презентация -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Трансформатор — интерактивная презентация</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация с тестами
+                    </div>
+                    <a href="https://view.genially.com/699f331c4b8cd229cfc9e7d9/interactive-content-transformator-test" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция Genially (новые ссылки) -->
+        <div class="reinforcement-section">
+            <div class="section-title">
+                <i class="fas fa-chart-pie"></i>
+                <h2>Genially (новые материалы) <span>12 материалов</span></h2>
+            </div>
+            <div class="cards-grid">
+                <!-- 1. Тест: Асинхронные двигатели -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h3>Тест: Асинхронные двигатели</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/699f3c91cf6f08ba8a6fc557/interactive-content-test-asinhronnye-dvigateli" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 2. Двигатели постоянного тока (презентация) -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-battery-full"></i></div>
+                    <h3>Двигатели постоянного тока</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация
+                    </div>
+                    <a href="https://view.genially.com/699f4872cf6f08ba8a74c5dd/presentation-dvigateli-postoyannogo-toka" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+
+                <!-- 3. Асинхронные двигатели (интерактив) -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Асинхронные двигатели</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-puzzle-piece"></i> Интерактивное задание
+                    </div>
+                    <a href="https://view.genially.com/699f4c6bf68c1cb06c45e9ae/interactive-content-asinhronnye-dvigateli" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть материал
+                    </a>
+                </div>
+
+                <!-- 4. Трансформаторы (тест) -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Трансформаторы</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/699f5063518c1c4e3ebdf9e3/interactive-content-transformatory" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 5. Генераторы по постоянному току -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Генераторы по постоянному току</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация
+                    </div>
+                    <a href="https://view.genially.com/699f5465449831e5a83e8dc5/presentation-generatory-po-postoyannomu-toku" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+
+                <!-- 6. Синхронный генератор -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Синхронный генератор</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/699f600af6ea8d4d2bad1588/interactive-content-sinhronnyj-generator" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 7. Электрические машины (общее) -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-industry"></i></div>
+                    <h3>Электрические машины</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация
+                    </div>
+                    <a href="https://view.genially.com/699fd327c7109a2c1c79fcf2/presentation-elektricheskie-mashiny" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+
+                <!-- 8. Измерительные трансформаторы -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-ruler"></i></div>
+                    <h3>Измерительные трансформаторы</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-play-circle"></i> Интерактивный материал
+                    </div>
+                    <a href="https://view.genially.com/699fe648e03373498d53e280/play-izmeritelnye-transformatory" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть
+                    </a>
+                </div>
+
+                <!-- 9. Электрические машины переменного тока -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-wave-square"></i></div>
+                    <h3>Электрические машины переменного тока</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/699fe92acf6f08ba8a90a512/interactive-content-elektricheskie-mashiny-peremennogo-toka" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 10. Специальные трансформаторы -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-cubes"></i></div>
+                    <h3>Специальные трансформаторы</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-question-circle"></i> Интерактивный тест
+                    </div>
+                    <a href="https://view.genially.com/69a0013d52f01768061de283/interactive-content-specialnye-transformatory" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть тест
+                    </a>
+                </div>
+
+                <!-- 11. Режимы работы трансформатора -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Режимы работы трансформатора</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация
+                    </div>
+                    <a href="https://view.genially.com/69a003c5da5a16f66f5d45d2/presentation-rezhimy-raboty-transformatora" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+
+                <!-- 12. Электрические машины (финальная презентация) -->
+                <div class="reinforcement-card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Электрические машины (обзор)</h3>
+                    <div class="platform-badge genially">
+                        <i class="fas fa-star"></i> Genially
+                    </div>
+                    <div class="test-type">
+                        <i class="fas fa-presentation"></i> Презентация
+                    </div>
+                    <a href="https://view.genially.com/69a0107ff2304690ad6e1f28/presentation-elektricheskie-mashiny" class="open-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Открыть презентацию
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Общий счетчик -->
+        <div style="margin-top: 20px; padding: 20px; background: #e8f4fd; border-radius: 15px; text-align: center;">
+            <p style="font-size: 18px; color: #2c3e50; margin: 0;">
+                <i class="fas fa-calculator" style="color: #3498db; margin-right: 10px;"></i>
+                <strong>Всего материалов на странице:</strong> 12 (LearningApps) + 4 (Genially первые) + 12 (Genially новые) = <strong>28 интерактивных заданий</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы для мобильного меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            const mainLogo = document.getElementById('mainLogo');
+            
+            // Мобильное меню
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('#mainNav') && 
+                    !event.target.closest('#mobileMenuBtn') &&
+                    mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            // Логотип ведет на главную
+            mainLogo.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Навигация
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.classList.contains('active')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
