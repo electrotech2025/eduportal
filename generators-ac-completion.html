@@ -501,53 +501,43 @@
         const allQuestions = [
             {
                 question: "Синхронной называется электрическая машина, у которой частота вращения ротора равна…",
-                correctAnswer: "частоте вращающегося магнитного поля статора",
-                hint: "Частота вращения совпадает с частотой магнитного поля..."
+                correctAnswer: "частоте вращающегося магнитного поля статора"
             },
             {
                 question: "Сердечник синхронного генератора, в пазах которого помещается трехфазная обмотка, размещается в…",
-                correctAnswer: "станине статора",
-                hint: "Неподвижная часть генератора..."
+                correctAnswer: "станине статора"
             },
             {
                 question: "Для создания магнитного поля синхронного генератора служит ротор, который представляет собой…",
-                correctAnswer: "электромагнит",
-                hint: "Устройство, создающее магнитное поле при протекании тока..."
+                correctAnswer: "электромагнит"
             },
             {
                 question: "Последовательно соединенные обмотки полюсов электромагнита образуют…",
-                correctAnswer: "обмотку возбуждения",
-                hint: "Обмотка, создающая магнитное поле..."
+                correctAnswer: "обмотку возбуждения"
             },
             {
                 question: "Постоянный ток для питания обмотки электромагнита создает…",
-                correctAnswer: "возбудитель",
-                hint: "Источник постоянного тока для создания магнитного поля..."
+                correctAnswer: "возбудитель"
             },
             {
-                question: "Выводы обмотки возбуждения ротора подключаются к ...",
-                correctAnswer: "контактным кольцам",
-                hint: "Вращающиеся контакты для передачи тока на ротор..."
+                question: "Выводы обмотки возбуждения ротора подключаются к …",
+                correctAnswer: "контактным кольцам"
             },
             {
                 question: "Постоянный ток в обмотку электромагнита поступает…",
-                correctAnswer: "контактные кольца и щётки",
-                hint: "Через вращающиеся и неподвижные контакты..."
+                correctAnswer: "контактные кольца и щётки"
             },
             {
-                question: "Контактные кольца ротора с помощью щеток и изолированных проводов соединяются с ...",
-                correctAnswer: "коллектором возбудителя",
-                hint: "Часть возбудителя для передачи тока..."
+                question: "Контактные кольца ротора с помощью щеток и изолированных проводов соединяются с …",
+                correctAnswer: "коллектором возбудителя"
             },
             {
                 question: "ЭДС генератора переменного тока при постоянной частоте вращения ротора пропорциональна…",
-                correctAnswer: "магнитному потоку",
-                hint: "Потоку магнитной индукции через контур..."
+                correctAnswer: "магнитному потоку"
             },
             {
-                question: "Воздействие магнитного поля статора на магнитное поле ротора называется ...",
-                correctAnswer: "реакцией статора",
-                hint: "Взаимодействие магнитных полей..."
+                question: "Воздействие магнитного поля статора на магнитное поле ротора называется …",
+                correctAnswer: "реакцией статора"
             }
         ];
 
@@ -653,7 +643,7 @@
             }
         }
 
-        // Нормализация ответа для сравнения (учитывает возможные опечатки)
+        // Нормализация ответа для сравнения
         function normalizeAnswer(answer) {
             if (!answer) return '';
             
@@ -665,34 +655,13 @@
                 .replace(/[.,;:!?]/g, ''); // Удаляем знаки препинания
         }
 
-        // Проверка ответа с учетом возможных опечаток
+        // Проверка ответа - ТОЛЬКО ТОЧНОЕ СОВПАДЕНИЕ
         function checkAnswer(userAnswer, correctAnswer) {
             const normalizedUser = normalizeAnswer(userAnswer);
             const normalizedCorrect = normalizeAnswer(correctAnswer);
             
-            // Точное совпадение
-            if (normalizedUser === normalizedCorrect) {
-                return true;
-            }
-            
-            // Проверяем на частичное совпадение (если ответ содержит ключевые слова)
-            const correctWords = normalizedCorrect.split(' ');
-            const userWords = normalizedUser.split(' ');
-            
-            let matchedWords = 0;
-            for (const correctWord of correctWords) {
-                if (correctWord.length > 3) { // Игнорируем короткие слова
-                    for (const userWord of userWords) {
-                        if (userWord.includes(correctWord) || correctWord.includes(userWord)) {
-                            matchedWords++;
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            // Если совпало больше половины ключевых слов
-            return matchedWords >= Math.floor(correctWords.length / 2);
+            // Требуем точного совпадения
+            return normalizedUser === normalizedCorrect;
         }
 
         // Завершение теста
@@ -711,8 +680,7 @@
                     question: question.question,
                     userAnswer: userAnswers[index] || "(нет ответа)",
                     correctAnswer: question.correctAnswer,
-                    isCorrect: isCorrect,
-                    hint: question.hint
+                    isCorrect: isCorrect
                 });
             });
             
